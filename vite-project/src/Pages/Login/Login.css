@@ -1,0 +1,25 @@
+.logo {
+  width: 200px;
+  height: 200px;
+}
+
+.box {
+  box-shadow: none;
+}
+
+.loginLabel {
+  text-align: left;
+}
+
+.formDiv {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  width: 400px;
+}
+
+button {
+  width: 400px;
+}
+p.text {
+  margin-top: 3%;
+}
