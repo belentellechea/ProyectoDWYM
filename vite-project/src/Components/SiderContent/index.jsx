@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout, Sider } from "antd";
 import { Tabs } from "antd";
 
 import { HomeFilled, HeartOutlined, PlusSquareOutlined, QqOutlined } from '@ant-design/icons';
