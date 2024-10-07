@@ -6,10 +6,10 @@ import { HomeFilled, HeartOutlined, PlusSquareOutlined, QqOutlined } from '@ant-
 
 const { TabPane } = Tabs;
 
-export function Sider() {
+export function SiderContent() {
 
     return (
-        <Sider>
+        <>
             <Tabs tabPosition="left" >
                 <TabPane tab={
                     <span>
@@ -44,6 +44,6 @@ export function Sider() {
                 </TabPane>
             </Tabs>
 
-        </Sider>
+        </>
     );
 }
