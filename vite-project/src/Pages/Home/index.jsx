@@ -2,7 +2,6 @@ import React from "react";
 import { Layout } from "antd";
 import { SiderContent } from "../../Components/SiderContent";
 import { Post } from "../../Components/Post";
-
 const { Header, Footer, Sider, Content } = Layout;
 
 export function Home() {
