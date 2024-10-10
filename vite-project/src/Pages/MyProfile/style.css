@@ -1,0 +1,52 @@
+.layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sider {
+    width: 25%; 
+    minHeight: 100vh; 
+}
+
+.content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+    backgroundColor: white; 
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.rightInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userEdit {
+    display: flex;
+    flex-direction: row;
+}
+
+.postsFriends {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.button.editProfile {
+    margin: 20px;
+    background-color: pink;
+    border-color: grey; 
+    width: auto;
+}
+

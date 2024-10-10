@@ -3,7 +3,7 @@ import "./App.css";
 import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/MyProfile";
-import { FriendProfile } from "./Pages/FriendProfile"
+// import { FriendProfile } from "./Pages/FriendProfile"
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<MyProfile />} />
-          <Route path="/friendProfile/:id" element={<FriendProfile />} />
+          {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
         </Routes>
         </div>
       </Router>
