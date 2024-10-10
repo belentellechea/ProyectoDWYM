@@ -1,0 +1,16 @@
+.avatarYNombre {
+  display: flex;
+  display: left;
+}
+
+.divPostTop {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 50px;
+  padding: 10px;
+}
+
+.avatarIcon {
+  margin-right: 15px;
+}

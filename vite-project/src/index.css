@@ -4,6 +4,7 @@
   padding: 2rem;
   text-align: center;
   align-items: center;
+  background-color: white;
 }
 
 body {
@@ -11,4 +12,5 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url(/Users/jbevc/Desktop/ProyectoDWYM/vite-project/src/assets/fondo.png);
 }

@@ -1,0 +1,20 @@
+.Likes {
+  display: flex;
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.Iconos {
+  display: flex;
+  margin-top: 12px;
+}
+
+.divPostBottom {
+  padding: 5px;
+}
+
+.Comentarios {
+  display: flex;
+  justify-content: left;
+}
