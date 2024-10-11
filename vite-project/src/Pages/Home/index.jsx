@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { SiderContent } from "../../Components/SiderContent";
+import { Post } from "../../Components/Post";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
 //import "./Home.module.css";
 import { ProfilePreView } from "../../Components/ProfilePreView";
@@ -9,8 +10,8 @@ const { Header, Footer, Sider, Content } = Layout;
 
 export function Home() {
     return (
-        <Layout style={{minHeight: '1400px', minWidth: '1500px'}}>
-            <Sider theme={"light"}>
+        <Layout>
+            <Sider theme={"light"} width="25%">
                 <SiderContent></SiderContent>
             </Sider>
             <Layout>
@@ -20,10 +21,8 @@ export function Home() {
                 <Content>
                     Home
                     <ProfilePreView picture={"https://bulma.io/assets/images/placeholders/32x32.png"} userName={"pepeymarta"} />
+                    <Post></Post>
                 </Content>
-                <Footer>
-                    footer
-                </Footer>
             </Layout>
         </Layout>
     );

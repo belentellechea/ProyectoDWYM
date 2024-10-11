@@ -1,12 +1,18 @@
 import { useState } from "react";
 import "./App.css";
 import { Login } from "./Pages/Login";
-import { Home } from "./Pages/Home"
+import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/MyProfile";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+// import { FriendProfile } from "./Pages/FriendProfile"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Post } from "./Components/Post";
 
 function App() {
-
   return (
     <>
       <Router> 
@@ -16,9 +22,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<MyProfile />} />
+          {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
         </Routes>
         </div>
       </Router>
+      {/* <Post></Post> */}
     </>
   );
 }
