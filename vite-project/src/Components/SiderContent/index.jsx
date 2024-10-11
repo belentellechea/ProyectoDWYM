@@ -1,48 +1,57 @@
 import React from "react";
 import { Tabs } from "antd";
 
-import { HomeFilled, HeartOutlined, PlusSquareOutlined, QqOutlined } from '@ant-design/icons';
-
-const { TabPane } = Tabs;
+import { HomeFilled, HeartOutlined, PlusSquareOutlined, QqOutlined, UserOutlined } from '@ant-design/icons';
 
 export function SiderContent() {
 
+    const itemsArray = [
+        {
+            label: (
+              <span>
+                <HomeFilled />
+                <span> Home </span>
+              </span>
+            ),
+            key: 'HomeTab'
+          },
+          {
+            label: (
+              <span>
+                <HeartOutlined style={{ color: '#ff69b4' }} />
+                <span> Notifications </span>
+              </span>
+            ),
+            key: 'NotificationsTab'
+          },
+          {
+            label: (
+              <span>
+                <PlusSquareOutlined />
+                <span> Create </span>
+              </span>
+            ),
+            key: 'CreateTab'
+          },
+          {
+            label: (
+              <span>
+                <UserOutlined />
+                <span> Profile </span>
+              </span>
+            ),
+            key: 'ProfileTab'
+          }
+    ];
+
     return (
-        <>
-            <Tabs tabPosition="left" >
-                <TabPane tab={
-                    <span>
-                        <HomeFilled/>
-                        Home
-                    </span>
-                } >
-                </TabPane>
-
-                <TabPane tab={
-                    <span>
-                        <HeartOutlined/>
-                        Notifications
-                    </span>
-                } >
-                </TabPane>
-
-                <TabPane tab={
-                    <span>
-                        <PlusSquareOutlined/>
-                        Create
-                    </span>
-                } >
-                </TabPane>
-
-                <TabPane tab={
-                    <span>
-                        <QqOutlined />
-                        Profile
-                    </span>
-                } >
-                </TabPane>
+        <div>
+            <h2 className="title">
+                fakestagram
+            </h2>
+            <Tabs tabPosition="left" items={itemsArray} >
             </Tabs>
 
-        </>
+        </div>
     );
 }
