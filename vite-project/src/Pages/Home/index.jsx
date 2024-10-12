@@ -9,21 +9,24 @@ import { ProfilePreView } from "../../Components/ProfilePreView";
 const { Header, Footer, Sider, Content } = Layout;
 
 export function Home() {
-    return (
-        <Layout>
-            <Sider theme={"light"} width="25%">
-                <SiderContent></SiderContent>
-            </Sider>
-            <Layout>
-                <Header theme={"light"}>
-                    <ViewProfileSuggestions/>
-                </Header>
-                <Content>
-                    Home
-                    <ProfilePreView picture={"https://bulma.io/assets/images/placeholders/32x32.png"} userName={"pepeymarta"} />
-                    <Post></Post>
-                </Content>
-            </Layout>
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Sider theme={"light"} width="20%" className="sider">
+        <SiderContent></SiderContent>
+      </Sider>
+      <Layout>
+        <Header theme={"light"}>
+          <ViewProfileSuggestions />
+        </Header>
+        <Content className="content">
+          Home
+          <ProfilePreView
+            picture={"https://bulma.io/assets/images/placeholders/32x32.png"}
+            userName={"pepeymarta"}
+          />
+          <Post></Post>
+        </Content>
+      </Layout>
+    </Layout>
+  );
 }
