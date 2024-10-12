@@ -1,6 +1,6 @@
 .logo {
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  rotate: 14deg;
 }
 
 .box {
@@ -23,4 +23,18 @@ button {
 
 p.text {
   margin-top: 3%;
+}
+
+.loginDiv {
+  padding: 4rem;
+  background-color: rgb(255, 255, 255, 0.18);
+  border-radius: 3%;
+}
+
+.loginBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url(../../assets/fondo.png);
 }
