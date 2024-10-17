@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { Tabs } from "antd";
 
 import {
@@ -9,7 +9,31 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
+import { useNavigate, useLocation } from "react-router-dom"
+
 export function SiderContent() {
+  const navigate = useNavigate(); 
+  const location = useLocation(); 
+  const [activeTabKey, setActiveTabKey] = useState("HomeTab"); 
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setActiveTabKey("HomeTab");
+    } else if (location.pathname === "/profile") {
+      setActiveTabKey("ProfileTab");
+    }
+  }, [location.pathname]) ; 
+
+  const handleTabChange = (key) => {
+    setActiveTabKey(key); 
+
+    if (key === "ProfileTab") {
+      navigate("/profile");
+    } else if (key === "HomeTab") {
+      navigate("/"); 
+    }
+  }; 
+
   const itemsArray = [
     {
       label: (
@@ -52,7 +76,12 @@ export function SiderContent() {
   return (
     <div>
       <h2 className="title siderTitle">fakestagram</h2>
-      <Tabs tabPosition="left" items={itemsArray}></Tabs>
+      <Tabs 
+        tabPosition="left" 
+        items={itemsArray} 
+        onChange={handleTabChange} //maneja cambio de pestaña
+        activeKey={activeTabKey} //vincula la pestaña activa al estado
+      />
     </div>
   );
 }
