@@ -14,7 +14,7 @@ h2.title.siderTitle {
 
 .sider {
   height: 100vh;
-  background-color: pink;
+  background-color: aliceblue;
   position: fixed;
 }
 
@@ -23,6 +23,7 @@ h2.title.siderTitle {
   align-items: center;
   flex-direction: column;
   margin-left: 20%;
+  max-width: 80%;
   padding: 3rem;
   background-color: white;
   overflow: "auto";

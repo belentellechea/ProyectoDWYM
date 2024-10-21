@@ -75,7 +75,7 @@ export function SiderContent() {
 
   return (
     <div>
-      <h2 className="title siderTitle">fakestagram</h2>
+      <h2 className="title siderTitle"> fakestagram </h2>
       <Tabs 
         tabPosition="left" 
         items={itemsArray} 
