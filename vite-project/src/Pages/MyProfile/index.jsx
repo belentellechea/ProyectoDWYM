@@ -28,10 +28,10 @@ export function MyProfile() {
               </div>
               <div className="postsFriends">
                 <p>
-                  <strong>11</strong>posts
+                  <strong>11</strong> posts
                 </p>
                 <p>
-                  <strong>17</strong>friends
+                  <strong>17</strong> friends
                 </p>
               </div>
               <div className="description">
