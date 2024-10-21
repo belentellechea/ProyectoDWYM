@@ -4,15 +4,30 @@
 // para scroller import { DataScroller } from 'primereact/datascroller';
 
 import React from "react";
-import { DataScroller } from 'primereact/datascroller';
+import { ProfilePreView } from '../ProfilePreView';
+import styles from './ViewProfileSuggestions.module.css';
 
+export function ViewProfileSuggestions({ profiles }) {
 
-export function ViewProfileSuggestions() {
-
+    const handleScroll = (event) => {
+        const container = event.target;
+        const scrollAmount = event.deltaY;
+        container.scrollTo({
+          top: 0,
+          left: container.scrollLeft + scrollAmount,
+          behavior: 'smooth'
+        });
+    };
+    
     return (
         <div >
-            <span> View your friends profile </span>
-            <DataScroller inline scrolldirection="horizontal" />
+            <span className={styles.viewTitle}> View your friends profile </span>
+            <div className={`${styles.container}`} onWheel={handleScroll}>
+                    {profiles.map((profile) => (
+                        <ProfilePreView className={`scroller-item ${styles.item}`} userName={profile.userName} picture={profile.picture}>
+                        </ProfilePreView>
+                    ))}
+            </div>
         </div>
         
     );
