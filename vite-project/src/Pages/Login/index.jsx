@@ -58,15 +58,9 @@ export function Login({setUser}) {
         <img src={logo} className="logo" alt="Logo fakestagram" />
         <h1 className="title is-1"> Fakestagram </h1>
 
-<<<<<<< HEAD
-        <div className="formDiv">
-          <div className="field loginLabel">
-            <label className="label"> Email </label>
-=======
         <form className="formDiv">
           <div className="field loginLabel">
             <label className="label">Email</label>
->>>>>>> ea09a087d2e4f5dc653dd65d2708f43795536604
             <div className="control">
               <input
                 className="input"
