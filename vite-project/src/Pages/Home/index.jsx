@@ -32,26 +32,6 @@ const profilesPreView = [
     userName: "usuario5",
     picture: "https://bulma.io/assets/images/placeholders/32x32.png",
   },
-  {
-    userName: "usuario6",
-    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
-  },
-  {
-    userName: "usuario7",
-    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
-  },
-  {
-    userName: "usuario8",
-    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
-  },
-  {
-    userName: "usuario9",
-    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
-  },
-  {
-    userName: "usuario10",
-    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
-  },
 ];
 
 export function Home() {
