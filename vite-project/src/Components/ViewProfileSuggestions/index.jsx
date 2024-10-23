@@ -1,8 +1,3 @@
-//para cada perfil  import { Card } from 'primereact/card';
-// las cards tienen que tener display: 'inline-block'
-
-// para scroller import { DataScroller } from 'primereact/datascroller';
-
 import React from "react";
 import { ProfilePreView } from "../ProfilePreView";
 import styles from "./ViewProfileSuggestions.module.css";

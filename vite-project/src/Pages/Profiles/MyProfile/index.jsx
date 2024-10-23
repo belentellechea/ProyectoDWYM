@@ -1,10 +1,10 @@
 import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
 import { Layout } from "antd";
-import { SiderContent } from "../../Components/SiderContent";
+import { SiderContent } from "../../../Components/SiderContent";
 import "./style.css";
 import image from "../../../assets/image.png";
-import { NotificationsModal } from "../../Components/NotificationsModal";
+import { NotificationsModal } from "../../../Components/NotificationsModal";
 
 const { Sider, Content } = Layout;
 
