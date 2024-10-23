@@ -1,10 +1,35 @@
-.custom-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+/* .custom-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-button {
-    font-weight: bold;
-    background-color: rgb(0, 136, 255);
+  font-weight: bold;
+  background-color: rgb(0, 136, 255);
+} */
+
+.profileBox {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
+
+button.button_viewProfile {
+  margin-top: 2rem;
+  width: 100%;
+  background-color: rgb(0, 136, 255);
+}
+
+.userName {
+  margin-top: 1rem;
+}
+
+.deleteSuggestion {
+  display: flex;
+  justify-content: flex-end;
+  color: cadetblue;
+}
+
+.deletebutton {
 }

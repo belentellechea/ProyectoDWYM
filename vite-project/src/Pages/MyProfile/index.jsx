@@ -34,12 +34,6 @@ export function MyProfile() {
                   <strong>17</strong> friends
                 </p>
               </div>
-              <div className="description">
-                <p>
-                  <strong>name - surname</strong>
-                </p>
-                <p>my profile description</p>
-              </div>
             </div>
           </div>
           <div className="photos">

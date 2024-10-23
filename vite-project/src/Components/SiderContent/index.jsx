@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 
 import {
@@ -7,14 +7,19 @@ import {
   PlusSquareOutlined,
   QqOutlined,
   UserOutlined,
+  CreditCardFilled,
 } from "@ant-design/icons";
 
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom";
 
-export function SiderContent() {
-  const navigate = useNavigate(); 
-  const location = useLocation(); 
-  const [activeTabKey, setActiveTabKey] = useState("HomeTab"); 
+export function SiderContent({ setVisible }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeTabKey, setActiveTabKey] = useState("HomeTab");
+
+  function openModal() {
+    setVisible("block");
+  }
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -22,17 +27,19 @@ export function SiderContent() {
     } else if (location.pathname === "/profile") {
       setActiveTabKey("ProfileTab");
     }
-  }, [location.pathname]) ; 
+  }, [location.pathname]);
 
   const handleTabChange = (key) => {
-    setActiveTabKey(key); 
+    setActiveTabKey(key);
 
     if (key === "ProfileTab") {
       navigate("/profile");
     } else if (key === "HomeTab") {
-      navigate("/"); 
+      navigate("/");
+    } else if (key === "CreateTab") {
+      openModal();
     }
-  }; 
+  };
 
   const itemsArray = [
     {
@@ -76,9 +83,9 @@ export function SiderContent() {
   return (
     <div>
       <h2 className="title siderTitle">fakestagram</h2>
-      <Tabs 
-        tabPosition="left" 
-        items={itemsArray} 
+      <Tabs
+        tabPosition="left"
+        items={itemsArray}
         onChange={handleTabChange} //maneja cambio de pestaña
         activeKey={activeTabKey} //vincula la pestaña activa al estado
       />

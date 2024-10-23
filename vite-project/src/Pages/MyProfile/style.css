@@ -14,8 +14,10 @@ h2.title.siderTitle {
 
 .sider {
   height: 100vh;
-  background-color: pink;
+  background-color: whitesmoke;
   position: fixed;
+  border: 1cm;
+  border-color: grey;
 }
 
 .content {
