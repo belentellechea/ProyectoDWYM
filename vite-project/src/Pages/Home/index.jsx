@@ -6,6 +6,8 @@ import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions"
 //import "./Home.module.css";
 import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css";
+import { useState } from "react";
+import { Modal } from "../../Components/Modal";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -32,6 +34,22 @@ const profilesPreView = [
   },
   {
     userName: "usuario6",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario7",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario8",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario9",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario10",
     picture: "https://bulma.io/assets/images/placeholders/32x32.png",
   },
 ];
