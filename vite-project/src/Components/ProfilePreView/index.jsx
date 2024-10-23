@@ -5,17 +5,6 @@ import "./ProfilePreView.css";
 import { Avatar } from "antd";
 
 export function ProfilePreView({ picture, userName }) {
-  const header = (
-    <div>
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginBottom: "1rem",
-      }}
-      <figure className="image is-32x32">
-        <img className="is-rounded" src={picture} />
-      </figure>
-
   return (
     <div className="box profileBox">
       <div className="deleteSuggestion">
