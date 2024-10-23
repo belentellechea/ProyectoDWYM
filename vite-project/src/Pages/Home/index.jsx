@@ -3,7 +3,6 @@ import { Layout } from "antd";
 import { SiderContent } from "../../Components/SiderContent";
 import { Post } from "../../Components/Post";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
-import styles from "./Home.module.css"
 import { NotificationsModal } from "../../Components/NotificationsModal";
 import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css";
