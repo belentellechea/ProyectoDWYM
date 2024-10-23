@@ -6,6 +6,8 @@ import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions"
 //import "./Home.module.css";
 import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css";
+import { useState } from "react";
+import { Modal } from "../../Components/Modal"; 
 
 const { Header, Footer, Sider, Content } = Layout;
 
