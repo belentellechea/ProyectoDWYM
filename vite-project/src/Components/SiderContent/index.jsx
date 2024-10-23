@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 
 import {
@@ -7,16 +7,21 @@ import {
   PlusSquareOutlined,
   QqOutlined,
   UserOutlined,
+  CreditCardFilled,
 } from "@ant-design/icons";
 
 import { useNavigate, useLocation } from "react-router-dom"
 import { NotificationsModal } from "../NotificationsModal";
 
-export function SiderContent({ openNotifications, closeNotifications }) {
+export function SiderContent({ openNotifications, closeNotifications, setVisible }) {
 
   const navigate = useNavigate(); 
   const location = useLocation(); 
   const [activeTabKey, setActiveTabKey] = useState("HomeTab"); 
+
+  function openModal() {
+    setVisible("block");
+  }
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -36,7 +41,7 @@ export function SiderContent({ openNotifications, closeNotifications }) {
   }
 
   const handleTabChange = (key) => {
-    setActiveTabKey(key); 
+    setActiveTabKey(key);
 
     if (key === "ProfileTab") {
       navigate("/profile");
@@ -49,8 +54,10 @@ export function SiderContent({ openNotifications, closeNotifications }) {
     } else if (key === "NotificationsTab") {
       //navigate("/notifications"); 
       openNotifications();
+    } else if (key === "CreateTab") {
+      openModal();
     }
-  }; 
+  };
 
   const itemsArray = [
     {

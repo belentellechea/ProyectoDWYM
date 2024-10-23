@@ -5,7 +5,6 @@ import "./ProfilePreView.css";
 import { Avatar } from "antd";
 
 export function ProfilePreView({ picture, userName }) {
-
   return (
     <div className="box profileBox">
       <div className="deleteSuggestion">
