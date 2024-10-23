@@ -16,6 +16,8 @@ h2.title.siderTitle {
   height: 100vh;
   background-color: aliceblue;
   position: fixed;
+  border: 1cm;
+  border-color: grey;
 }
 
 .content {
