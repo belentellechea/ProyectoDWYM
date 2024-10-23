@@ -38,14 +38,14 @@ export function Login() {
     <div className="loginBackground">
       <div className="loginDiv">
         <img src={logo} className="logo" alt="Logo fakestagram" />
-        <h1 className="title is-1">Fakestagram</h1>
+        <h1 className="title is-1"> Fakestagram </h1>
 
-        <div class="formDiv">
+        <div className="formDiv">
           <div className="field loginLabel">
-            <label class="label">Email</label>
-            <div class="control">
+            <label className="label"> Email </label>
+            <div className="control">
               <input
-                class="input"
+                className="input"
                 type="email"
                 placeholder="e.g. alex@example.com"
                 value={email}
@@ -54,11 +54,11 @@ export function Login() {
             </div>
           </div>
 
-          <div class="field  loginLabel">
-            <label class="label">Password</label>
-            <div class="control">
+          <div className="field  loginLabel">
+            <label className="label">Password</label>
+            <div className="control">
               <input 
-                class="input" 
+                className="input" 
                 type="password" 
                 placeholder="********"
                 value={password}

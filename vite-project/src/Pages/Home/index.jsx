@@ -3,11 +3,10 @@ import { Layout } from "antd";
 import { SiderContent } from "../../Components/SiderContent";
 import { Post } from "../../Components/Post";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
-//import "./Home.module.css";
-import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css"
+import { NotificationsModal } from "../../Components/NotificationsModal";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const profilesPreView = [ {
   userName: "usuario1",
@@ -32,23 +31,43 @@ const profilesPreView = [ {
 {
   userName: "usuario6",
   picture: "https://bulma.io/assets/images/placeholders/32x32.png"
+},
+{
+  userName: "usuario7",
+  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
+},
+{
+  userName: "usuario8",
+  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
+},
+{
+  userName: "usuario9",
+  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
+},
+{
+  userName: "usuario10",
+  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
+},
+{
+  userName: "usuario11",
+  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
 }];
 
-export function Home() {
+export function Home({ openNotifications, closeNotifications, isNotificationsActive }) {
   return (
     <Layout>
       <Sider theme={"light"} width="20%" className="sider">
-        <SiderContent></SiderContent>
+        <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
       </Sider>
       <Layout>
-        {/* <Header theme={"light"} className={`${styles.header}`} style={{ backgroundColor: '#fff' }}>
-        </Header> */}
-        <Content className="content" style={{ maxWidth: "80%" }}>
+        <Content className="content" onClick={closeNotifications} style={{ maxWidth: "80%", zIndex: "1", position: "relative"}}>
           <ViewProfileSuggestions profiles={profilesPreView}/>
           <Post></Post>
-          <span style={{justifySelf:'flex-start', alignSelf:'self-start'}}>hola</span>
         </Content>
+
+        <NotificationsModal isActive={isNotificationsActive} />
       </Layout>
+
     </Layout>
   );
 }
