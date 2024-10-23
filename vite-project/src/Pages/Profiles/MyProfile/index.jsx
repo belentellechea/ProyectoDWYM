@@ -1,24 +1,15 @@
 import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
 import { Layout } from "antd";
-<<<<<<< HEAD:vite-project/src/Pages/MyProfile/index.jsx
 import { SiderContent } from "../../Components/SiderContent";
 import "./style.css";
-import image from "../../assets/image.png";
+import image from "../../../assets/image.png";
 import { NotificationsModal } from "../../Components/NotificationsModal";
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({ openNotifications, closeNotifications, isNotificationsActive }) {
-=======
-import { SiderContent } from "../../../Components/SiderContent";
-import "../style.css";
-import image from "../../../assets/image.png";
+export function MyProfile({ user, openNotifications, closeNotifications, isNotificationsActive }) {
 
-const { Sider, Content } = Layout;
-
-export function MyProfile({user}) {
->>>>>>> ea09a087d2e4f5dc653dd65d2708f43795536604:vite-project/src/Pages/Profiles/MyProfile/index.jsx
   return (
     <>
       <Layout className="layout">
