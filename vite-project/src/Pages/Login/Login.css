@@ -38,3 +38,8 @@ p.text {
   height: 100vh;
   background-image: url(../../assets/fondo.png);
 }
+
+.orText {
+  margin-top: 15px;
+  font-size: 14px;
+}
