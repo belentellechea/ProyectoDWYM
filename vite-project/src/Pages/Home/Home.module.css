@@ -1,4 +1,9 @@
-Header {
-  padding-bottom: 30px;
-  margin-bottom: 50px;
+header {
+  /* padding-bottom: 30px;
+  margin-bottom: 50px; */
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
 }

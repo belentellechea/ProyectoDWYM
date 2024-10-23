@@ -14,10 +14,8 @@ h2.title.siderTitle {
 
 .sider {
   height: 100vh;
-  background-color: aliceblue;
+  background-color: pink;
   position: fixed;
-  border: 1cm;
-  border-color: grey;
 }
 
 .content {
@@ -25,7 +23,6 @@ h2.title.siderTitle {
   align-items: center;
   flex-direction: column;
   margin-left: 20%;
-  max-width: 80%;
   padding: 3rem;
   background-color: white;
   overflow: "auto";
