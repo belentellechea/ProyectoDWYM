@@ -56,7 +56,7 @@ export function Login({setUser}) {
     <div className="loginBackground">
       <div className="loginDiv">
         <img src={logo} className="logo" alt="Logo fakestagram" />
-        <h1 className="title is-1">Fakestagram</h1>
+        <h1 className="title is-1"> Fakestagram </h1>
 
         <form className="formDiv">
           <div className="field loginLabel">

@@ -2,19 +2,21 @@ import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
 import { Layout } from "antd";
 import { SiderContent } from "../../../Components/SiderContent";
-import "../style.css";
+import "./style.css";
 import image from "../../../assets/image.png";
+import { NotificationsModal } from "../../../Components/NotificationsModal";
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({user}) {
+export function MyProfile({ user, openNotifications, closeNotifications, isNotificationsActive }) {
+
   return (
     <>
       <Layout className="layout">
         <Sider className="sider" width="20%">
-          <SiderContent></SiderContent>
+          <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
         </Sider>
-        <Content className="content">
+        <Content className="content" onClick={closeNotifications}>
           <div className="profileInfo">
             <div className="leftInfo">
               <ProfilePhoto size={160} url={image} />
@@ -39,8 +41,12 @@ export function MyProfile({user}) {
           <div className="photos">
             <Grid photos={[]} />
           </div>
+
+          <NotificationsModal isActive={isNotificationsActive} />
         </Content>
+        
       </Layout>
+      
     </>
   );
 }
