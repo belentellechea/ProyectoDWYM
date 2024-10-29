@@ -19,7 +19,7 @@ export function CreateAccount({setUser}) {
             username: document.getElementById('usernameInput').value,
             password: document.getElementById('passwordInput').value, 
         }
-
+        console.log(account);
         postAccount(account); 
     }
 
@@ -60,34 +60,44 @@ export function CreateAccount({setUser}) {
     return (
         <div className="registerBackground">
             <div className="formBackground is-mobile">
-                <h2 className="title">Creación de cuenta</h2>
+                <h2 className="title registerTitle">Creación de cuenta</h2>
                 <form id="registerForm" onSumbit={handleSubmit}>
-                    <div className="box">
-                        <label><strong>Correo electrónico</strong></label>
-                        <br></br>
-                        <input 
-                            type="email"
-                            id="emailInput"
-                        />
+                    <div className="inputDiv">
+                        <div className="field registerLabel">
+                            <label className="label"><strong>Correo electrónico</strong></label>
+                            <div>
+                                <input 
+                                    className="input"
+                                    type="email"
+                                    id="emailInput"
+                                />
+                            </div>
+                        </div>
+                        
+                        <div className="field registerLabel">
+                            <label className="label"><strong>Nombre de usuario</strong></label>
+                            <div>
+                                <input 
+                                    className="input"
+                                    type="text"
+                                    id="usernameInput"
+                                />
+                            </div> 
+                        </div>
+                
+                        <div className="field registerLabel">
+                            <label className="label"><strong>Contraseña</strong></label>
+                            <div>
+                                <input
+                                    className="input"
+                                    type="password"
+                                    id="passwordInput"
+                                />
+                            </div>
+                        </div>
                     </div>
                     
-                    <div className="box">
-                        <label><strong>Nombre de usuario</strong></label>
-                        <br></br>
-                        <input 
-                            type="text"
-                            id="usernameInput"
-                        />
-                    </div>
-            
-                    <div className="box">
-                        <label><strong>Contraseña</strong></label>
-                        <br></br>
-                        <input 
-                            type="password"
-                            id="passwordInput"
-                        />
-                    </div>
+                    
 
                     <div className="buttonDiv">
                         <button className="button is-danger" type="submit">Crear</button>
