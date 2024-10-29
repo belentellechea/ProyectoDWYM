@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const url = "http://localhost:5001/api/auth/login"; 
+const url = "http://localhost:3001/api/auth/login"; 
 
 export function Login({setUser}) {
   const navigate = useNavigate(); 
@@ -48,7 +48,7 @@ export function Login({setUser}) {
         console.log("Error al inciar sesión"); 
       }
     } catch (error) {
-      console.log("Error del servidor");
+      console.log("Error del servidor", error);
     }
   };
 
