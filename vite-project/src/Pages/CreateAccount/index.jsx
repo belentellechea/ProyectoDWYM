@@ -19,13 +19,12 @@ export function CreateAccount({setUser}) {
             username: document.getElementById('usernameInput').value,
             password: document.getElementById('passwordInput').value, 
         }
-        console.log(account);
         postAccount(account); 
     }
 
     async function postAccount(account) {
         try {
-            const response = ( url, {
+            const response = await fetch( url, {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -61,7 +60,7 @@ export function CreateAccount({setUser}) {
         <div className="registerBackground">
             <div className="formBackground is-mobile">
                 <h2 className="title registerTitle">Creación de cuenta</h2>
-                <form id="registerForm" onSumbit={handleSubmit}>
+                <form id="registerForm" onSubmit={handleSubmit}>
                     <div className="inputDiv">
                         <div className="field registerLabel">
                             <label className="label"><strong>Correo electrónico</strong></label>
