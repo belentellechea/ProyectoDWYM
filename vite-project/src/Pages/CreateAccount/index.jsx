@@ -39,6 +39,7 @@ export function CreateAccount({setUser}) {
 
                 if (userData.token) {
                     localStorage.setItem("token", userData.token);
+                    localStorage.setItem("user", JSON.stringify(userData))
                     navigate("/");
                 } else {
                     console.log("Token no recibido");
