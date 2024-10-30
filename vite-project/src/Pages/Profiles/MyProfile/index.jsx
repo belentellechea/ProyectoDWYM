@@ -5,10 +5,47 @@ import { SiderContent } from "../../../Components/SiderContent";
 import "./style.css";
 import image from "../../../assets/image.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
+import { useState, useEffect } from "react";
 
 const { Sider, Content } = Layout;
 
 export function MyProfile({ user, openNotifications, closeNotifications, isNotificationsActive }) {
+
+  const [userData, setUserData] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null; // Inicializa con el usuario del localStorage
+  });
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await fetch(`http://localhost:3001/api/user/profile/${user._id}`, {
+          method: "GET",
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }); 
+        const data = await response.json();
+        console.log(data)
+        setUserData(data.user)
+        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
+      } catch (error) {
+        console.log("Error fetching data: ", error);
+      }
+    }
+  getData(); 
+  }, [user]);
+
+  async function getPosts() {
+    try {
+      const response = await fetch( `http://localhost:3001/api/posts/feed`, {
+        method: "GET"});
+      setPosts(response); 
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
 
   return (
     <>
@@ -24,7 +61,7 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
             <div className="rightInfo">
               <div className="userEdit">
                 <h4 className="subtitle is-4">
-                  <strong>{user.username}</strong>
+                  <strong>{userData.username}</strong>
                 </h4>
                 <button className="button editProfile">edit profile</button>
               </div>
@@ -33,13 +70,13 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
                   <strong>11</strong> posts
                 </p>
                 <p>
-                  <strong>17</strong> friends
+                  <strong>{userData.friends.length}</strong> friends
                 </p>
               </div>
             </div>
           </div>
           <div className="photos">
-            <Grid photos={[]} />
+            <Grid photos={posts} />
           </div>
 
           <NotificationsModal isActive={isNotificationsActive} />

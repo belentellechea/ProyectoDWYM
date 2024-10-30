@@ -40,7 +40,7 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser}/>} />
           <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
-          <Route path="/profile" element={<MyProfile openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
+          <Route path="/profile" element={<MyProfile user={user} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
           <Route path="/register" element={ <CreateAccount setUser={setUser}/> }/>
         </Routes>
