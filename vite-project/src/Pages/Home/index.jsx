@@ -11,62 +11,76 @@ import { Modal } from "../../Components/Modal";
 
 const { Sider, Content } = Layout;
 
-const profilesPreView = [ {
-  userName: "usuario1",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario2",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario3",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario4",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario5",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario6",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario7",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario8",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario9",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario10",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-},
-{
-  userName: "usuario11",
-  picture: "https://bulma.io/assets/images/placeholders/32x32.png"
-}];
+const profilesPreView = [
+  {
+    userName: "usuario1",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario2",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario3",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario4",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario5",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario6",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario7",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario8",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario9",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario10",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+  {
+    userName: "usuario11",
+    picture: "https://bulma.io/assets/images/placeholders/32x32.png",
+  },
+];
 
-export function Home({ openNotifications, closeNotifications, isNotificationsActive }) {
+export function Home({
+  openNotifications,
+  closeNotifications,
+  isNotificationsActive,
+}) {
   const [visible, setVisible] = useState("none");
 
   return (
     <Layout>
       <Sider theme={"light"} width="20%" className="sider">
-        <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
+        <SiderContent
+          openNotifications={openNotifications}
+          closeNotifications={closeNotifications}
+          setVisible={setVisible}
+        ></SiderContent>
       </Sider>
       <Layout>
-        <Content className="content" onClick={closeNotifications} style={{ maxWidth: "80%", zIndex: "1", position: "relative"}}>
-          <ViewProfileSuggestions profiles={profilesPreView}/>
+        <Content
+          className="content"
+          onClick={closeNotifications}
+          style={{ maxWidth: "80%", zIndex: "1", position: "relative" }}
+        >
+          <ViewProfileSuggestions profiles={profilesPreView} />
           <Post></Post>
         </Content>
 
