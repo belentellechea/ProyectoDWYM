@@ -7,7 +7,7 @@ import { NotificationsModal } from "../../Components/NotificationsModal";
 import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css";
 import { useState } from "react";
-import { Modal } from "../../Components/Modal";
+import { ModalCreate } from "../../Components/ModalCreate";
 
 const { Sider, Content } = Layout;
 
@@ -64,6 +64,7 @@ export function Home({
   isNotificationsActive,
 }) {
   const [visible, setVisible] = useState("none");
+  const [files, setFiles] = useState([]);
 
   return (
     <Layout>
@@ -87,7 +88,11 @@ export function Home({
         <NotificationsModal isActive={isNotificationsActive} />
       </Layout>
 
-      <Modal visible={visible} setVisible={setVisible} />
+      <ModalCreate
+        visible={visible}
+        setVisible={setVisible}
+        onFilesSelected={setFiles}
+      />
     </Layout>
   );
 }
