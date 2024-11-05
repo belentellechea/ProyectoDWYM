@@ -10,55 +10,61 @@ import { EditModal } from "../../../Components/EditModal"
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({ user, openNotifications, closeNotifications, isNotificationsActive }) {
+export function MyProfile({ getData, user, openNotifications, closeNotifications, isNotificationsActive }) {
 
-  const [userData, setUserData] = useState(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null; // Inicializa con el usuario del localStorage
-  });
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await fetch(`http://localhost:3001/api/user/profile/${user._id}`, {
-          method: "GET",
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        }); 
-        const data = await response.json();
-        console.log(data)
-        setUserData(data.user)
-        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
-    }
-  getData(); 
-  }, [user]);
+  const [userData, setUserData] = useState(localStorage.getItem('user'));
+  const [posts, setPosts] = useState([]); 
+  const [visible, setVisible] = useState("none"); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const token = localStorage.getItem('token'); 
 
   useEffect(() => {
-    async function getPosts() {
-      try {
-        const response = await fetch(`http://localhost:3001/api/posts/feed`, {
-          method: "GET",
-          headers: {
-            'Authorization': `Bearer ${user.token}`
+    if (user && token) {
+      setIsLoading(true);
+      getData(user._id, token)
+        .then((data) => {
+          if (data) {
+            setUserData(data);
+            localStorage.setItem('user', JSON.stringify(data)); // Guarda los datos en localStorage
           }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error fetching user data:", error);
+          setIsLoading(false);
         });
-        const data = await response.json(); 
-        console.log(data.posts); 
-        setPosts(data.posts); 
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
     }
-    getPosts(); 
-  }, []); 
+  }, [user, token]);
+
+  async function getPosts() {
+    try {
+      const response = await fetch(`http://localhost:3001/api/posts/feed`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json(); 
+      console.log(data.posts); 
+      setPosts(data.posts); 
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+  
+  useEffect(() => {
+    if (user && token) {  
+      getPosts();
+    } 
+  }, [user]); 
+
+  function openModal() {
+    setVisible("block")
+  }
 
   return (
     <>
+    { !isLoading && userData ? (
       <Layout className="layout">
         <Sider className="sider" width="20%">
           <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
@@ -73,7 +79,7 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
                 <h4 className="subtitle is-4">
                   <strong>{userData.username}</strong>
                 </h4>
-                <button className="button editProfile">edit profile</button>
+                <button className="button editProfile" onClick={openModal}>edit profile</button>
               </div>
               <div className="postsFriends">
                 <p>
@@ -95,8 +101,8 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
           setVisible={setVisible}
           userData={userData}
         />
-      </Layout>
-      
+      </Layout>)
+     :  (<p>Loading...</p>)} 
     </>
   );
 }
