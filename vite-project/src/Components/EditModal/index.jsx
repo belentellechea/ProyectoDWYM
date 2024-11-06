@@ -58,7 +58,7 @@ export function EditModal({visible, setVisible, userData}){
                             className="input"
                             type="text"
                             id="user"
-                            defaultValue={formData.username}
+                            defaultValue={formData?.username}
                             onChange={handleInputChange}
                         />
                     </div>
