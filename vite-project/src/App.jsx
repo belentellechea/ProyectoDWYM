@@ -73,7 +73,6 @@ function App() {
         </Routes>
         </div>
       </Router>
-      {/* <Post></Post> */}
     </>
   );
 }

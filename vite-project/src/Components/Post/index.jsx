@@ -2,12 +2,13 @@ import { PostBottom } from "../Post_Bottom";
 import { PostCarousel } from "../Post_Carousel";
 import { PostTop } from "../Post_Top";
 
-export function Post() {
+export function Post({ post }) {
+
   return (
     <div className="postDiv">
-      <PostTop></PostTop>
+      <PostTop user={post?.user} ></PostTop>
       <PostCarousel></PostCarousel>
-      <PostBottom></PostBottom>
+      <PostBottom post={post}></PostBottom>
     </div>
   );
 }
