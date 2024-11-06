@@ -6,36 +6,43 @@ import "./style.css";
 import image from "../../../assets/user.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
-import { EditModal } from "../../../Components/EditModal"
+// import { EditModal } from "../../../Components/EditModal"
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({ user, openNotifications, closeNotifications, isNotificationsActive }) {
-
+export function MyProfile({
+  user,
+  openNotifications,
+  closeNotifications,
+  isNotificationsActive,
+}) {
   const [userData, setUserData] = useState(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null; // Inicializa con el usuario del localStorage
   });
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch(`http://localhost:3001/api/user/profile/${user._id}`, {
-          method: "GET",
-          headers: {
-            'Authorization': `Bearer ${user.token}`
+        const response = await fetch(
+          `http://localhost:3001/api/user/profile/${user._id}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
           }
-        }); 
+        );
         const data = await response.json();
-        console.log(data)
-        setUserData(data.user)
-        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
+        console.log(data);
+        setUserData(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user)); // Actualiza el localStorage
       } catch (error) {
         console.log("Error fetching data: ", error);
       }
     }
-  getData(); 
+    getData();
   }, [user]);
 
   useEffect(() => {
@@ -44,24 +51,27 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
         const response = await fetch(`http://localhost:3001/api/posts/feed`, {
           method: "GET",
           headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
+            Authorization: `Bearer ${user.token}`,
+          },
         });
-        const data = await response.json(); 
-        console.log(data.posts); 
-        setPosts(data.posts); 
+        const data = await response.json();
+        console.log(data.posts);
+        setPosts(data.posts);
       } catch (error) {
         console.log("Error fetching data: ", error);
       }
     }
-    getPosts(); 
-  }, []); 
+    getPosts();
+  }, []);
 
   return (
     <>
       <Layout className="layout">
         <Sider className="sider" width="20%">
-          <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
+          <SiderContent
+            openNotifications={openNotifications}
+            closeNotifications={closeNotifications}
+          ></SiderContent>
         </Sider>
         <Content className="content" onClick={closeNotifications}>
           <div className="profileInfo">
@@ -96,7 +106,6 @@ export function MyProfile({ user, openNotifications, closeNotifications, isNotif
           userData={userData}
         />
       </Layout>
-      
     </>
   );
 }

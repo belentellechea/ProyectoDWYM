@@ -1,17 +1,27 @@
+import { useEffect, useState } from "react";
+import foto from "../../../assets/create.png";
+import { ModalPreview } from "../ModalPreview";
 import "./Modal.css";
-import foto from "../../assets/create.png";
-import { useState, useEffect } from "react";
 
-export function ModalCreate({ onFilesSelected, visible, setVisible }) {
+export function ModalCreate({
+  onFilesSelected,
+  visible,
+  setVisible,
+  setSiguiente,
+}) {
   const [files, setFiles] = useState([]);
-  const [sigiente, setSiguiente] = useState("none");
 
   function closeModal() {
     setVisible("none");
   }
+  function cancel() {
+    setVisible("none");
+    setFiles([]);
+  }
 
   function openModalPreview() {
     setSiguiente("block");
+    closeModal();
   }
 
   const handleFileChange = (event) => {
@@ -70,10 +80,7 @@ export function ModalCreate({ onFilesSelected, visible, setVisible }) {
               accept=".jpg,.png,.jpeg"
               multiple
             />
-            <label
-              htmlFor="browse"
-              className="button subirFoto is-danger is-rounded"
-            >
+            <label htmlFor="browse" className="button subirFoto is-danger">
               Seleccionar del ordenador
             </label>
             <div className="previewList">
@@ -98,7 +105,7 @@ export function ModalCreate({ onFilesSelected, visible, setVisible }) {
             {files.length > 0 && (
               <button
                 className="button botonSiguiente is-link is-rounded"
-                onClick={() => l}
+                onClick={() => openModalPreview()}
               >
                 {" "}
                 siguiente ➜{" "}
@@ -110,7 +117,7 @@ export function ModalCreate({ onFilesSelected, visible, setVisible }) {
       <button
         className="modal-close is-large"
         aria-label="close"
-        onClick={closeModal}
+        onClick={cancel}
       ></button>
     </div>
   );

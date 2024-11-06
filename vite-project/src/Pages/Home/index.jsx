@@ -1,13 +1,11 @@
-import React from "react";
 import { Layout } from "antd";
-import { SiderContent } from "../../Components/SiderContent";
-import { Post } from "../../Components/Post";
-import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
+import React, { useState } from "react";
+import { ModalCreate } from "../../Components/ModalesCreate/ModalCreate";
 import { NotificationsModal } from "../../Components/NotificationsModal";
-import { ProfilePreView } from "../../Components/ProfilePreView";
-import styles from "./Home.module.css";
-import { useState } from "react";
-import { ModalCreate } from "../../Components/ModalCreate";
+import { Post } from "../../Components/Post";
+import { SiderContent } from "../../Components/SiderContent";
+import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
+import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
 
 const { Sider, Content } = Layout;
 
@@ -84,11 +82,10 @@ export function Home({
           <ViewProfileSuggestions profiles={profilesPreView} />
           <Post></Post>
         </Content>
-
         <NotificationsModal isActive={isNotificationsActive} />
       </Layout>
-
-      <ModalCreate
+      <ParentModalCreate
+        files={files}
         visible={visible}
         setVisible={setVisible}
         onFilesSelected={setFiles}

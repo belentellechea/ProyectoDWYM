@@ -1,5 +1,3 @@
+// import function EditModal({visible, setVisible}){
 
-
-import function EditModal({visible, setVisible}){
-
-}
+// }
