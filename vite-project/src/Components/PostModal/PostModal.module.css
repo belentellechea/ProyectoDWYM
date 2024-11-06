@@ -1,0 +1,16 @@
+.modalContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.postInfo {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modalBackground {
+    background-color: rgba(10, 10, 10, 0.86); /* Opacidad de fondo */
+  }

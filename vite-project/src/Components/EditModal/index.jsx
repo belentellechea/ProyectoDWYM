@@ -1,5 +1,5 @@
 
 
-import function EditModal({visible, setVisible}){
-
+export function EditModal({visible, setVisible}){
+    return (<></>);
 }
