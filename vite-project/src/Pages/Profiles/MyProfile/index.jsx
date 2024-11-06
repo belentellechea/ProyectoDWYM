@@ -6,7 +6,7 @@ import "./style.css";
 import image from "../../../assets/user.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
-import { EditModal } from "../../../Components/EditModal"
+// import { EditModal } from "../../../Components/EditModal"
 
 const { Sider, Content } = Layout;
 
@@ -94,12 +94,16 @@ export function MyProfile({ userI, posts, setUser, openNotifications, closeNotif
     setVisible("block");
   }
 
+
   return (
     <>
     { !isLoading ? (
       <Layout className="layout">
         <Sider className="sider" width="20%">
-          <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
+          <SiderContent
+            openNotifications={openNotifications}
+            closeNotifications={closeNotifications}
+          ></SiderContent>
         </Sider>
 
         <Content className="content" onClick={closeNotifications}>

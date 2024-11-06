@@ -1,12 +1,12 @@
 .notifications {
-    z-index: 3;
-    background-color: white;
-    height: 100%;
-    width: 25%;
-    position: fixed;
-    top: 0px;
-    left: 20%;
-    /* border: 0.3px solid rgb(229, 228, 226); */
-    padding: 20px;
-    box-shadow: 2px 1px 8px rgb(229, 228, 226);
+  z-index: 3;
+  background-color: white;
+  height: 100%;
+  width: 25%;
+  position: fixed;
+  top: 0px;
+  left: 20%;
+  /* border: 0.3px solid rgb(229, 228, 226); */
+  padding: 20px;
+  box-shadow: 2px 1px 8px rgb(229, 228, 226);
 }

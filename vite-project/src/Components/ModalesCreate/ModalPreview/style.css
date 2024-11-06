@@ -1,0 +1,76 @@
+div.modal-content {
+  margin-top: 8rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+
+div.card.preview {
+  width: 100%;
+}
+
+div.card-header.preview {
+  height: 50px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+
+div.card-content.preview {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+div.commentArea.help {
+  /* border: 0.5px solid rgba(121, 121, 121, 0.493); */
+  /* border-top-width: 0;
+  border-bottom-width: 0; */
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+div.column {
+  padding: 0;
+}
+
+img.uploadedPhoto {
+  border-bottom-left-radius: 20px;
+}
+
+p.userNameComment {
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+textarea.textarea.comment {
+  box-shadow: none;
+  border: none;
+}
+
+div.profileNameComment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  padding: 1rem;
+  padding-left: 0.5rem;
+}
+
+button.is-link.is-inverted.compartir {
+  width: 110px;
+  background-color: white;
+}
+
+button.atras {
+  width: 20px;
+  background-color: white;
+  border: 0;
+  box-shadow: none;
+}
