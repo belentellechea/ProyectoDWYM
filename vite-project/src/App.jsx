@@ -3,7 +3,7 @@ import "./App.css";
 import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/Profiles/MyProfile";
-// import { FriendProfile } from "./Pages/FriendProfile"
+import { FriendProfile } from "./Pages/Profiles/FriendProfile";
 import { CreateAccount } from "./Pages/CreateAccount";
 
 import {
@@ -68,7 +68,7 @@ function App() {
           <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
           <Route path="/profile" element={<MyProfile user={user} getData={getUserData} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-          {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
+          <Route path="/friendProfile/:id" element={<FriendProfile friends={user.friends}/>} />
           <Route path="/register" element={ <CreateAccount setUser={setUser}/> }/>
         </Routes>
         </div>
