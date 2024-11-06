@@ -6,6 +6,12 @@ import { Post } from "../../Components/Post";
 import { SiderContent } from "../../Components/SiderContent";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
 import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
+import { NotificationsModal } from "../../Components/NotificationsModal";
+import { ProfilePreView } from "../../Components/ProfilePreView";
+import styles from "./Home.module.css";
+import { useState } from "react";
+import { ModalCreate } from "../../Components/ModalCreate";
+import { Feed } from "../../Components/Feed";
 
 const { Sider, Content } = Layout;
 
@@ -64,6 +70,8 @@ export function Home({
   const [visible, setVisible] = useState("none");
   const [files, setFiles] = useState([]);
 
+  
+
   return (
     <Layout>
       <Sider theme={"light"} width="20%" className="sider">
@@ -80,7 +88,9 @@ export function Home({
           style={{ maxWidth: "80%", zIndex: "1", position: "relative" }}
         >
           <ViewProfileSuggestions profiles={profilesPreView} />
+
           <Post></Post>
+          <Feed></Feed>
         </Content>
         <NotificationsModal isActive={isNotificationsActive} />
       </Layout>

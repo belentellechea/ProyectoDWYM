@@ -10,62 +10,94 @@ import { useState, useEffect } from "react";
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({
-  user,
-  openNotifications,
-  closeNotifications,
-  isNotificationsActive,
-}) {
-  const [userData, setUserData] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null; // Inicializa con el usuario del localStorage
-  });
-  const [posts, setPosts] = useState([]);
+export function MyProfile({ userI, posts, setUser, openNotifications, closeNotifications, isNotificationsActive }) {
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await fetch(
-          `http://localhost:3001/api/user/profile/${user._id}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        const data = await response.json();
+  const userLocalStorage = localStorage.getItem('user');
+  const [user, setUserData] = useState(JSON.parse(userLocalStorage));
+  //const [posts, setPosts] = useState([]); 
+  const [visible, setVisible] = useState("none"); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const token = localStorage.getItem('token'); 
+
+  async function getUserData(id,token) {
+    try {
+      const response = await fetch(`http://localhost:3001/api/user/profile/${user._id}`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+
+      if (!response.ok) throw new Error("Error en la respuesta");
+
+      // Updates user and userPosts data.
+      //setUserPosts(data?.posts);
+      
+      if (data.user) {
         console.log(data);
-        setUserData(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user)); // Actualiza el localStorage
-      } catch (error) {
-        console.log("Error fetching data: ", error);
+        //setUserData(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
+      } else {
+        console.log("No se encontró el usuario en los datos recibidos.");
       }
+    } catch (error) {
+      console.log("Error fetching data: ", error);
     }
-    getData();
-  }, [user]);
+  }
 
   useEffect(() => {
-    async function getPosts() {
-      try {
-        const response = await fetch(`http://localhost:3001/api/posts/feed`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const data = await response.json();
-        console.log(data.posts);
-        setPosts(data.posts);
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
+    if (user && token) {
+      setIsLoading(false);
+      console.log(user);
+      getUserData(user._id, token);
+      // comenté esto, porque el método useEffect if(user) en app ya se encarga de actualizar el localStorage bajo cambios en el user.
+      
+      // getData(user._id, token)
+      //   .then((data) => {
+      //     if (data) {
+      //       setUserData(data);
+      //       localStorage.setItem('user', JSON.stringify(data)); // Guarda los datos en localStorage
+      //     }
+      //     setIsLoading(false);
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error fetching user data:", error);
+      //     setIsLoading(false);
+      //   });
     }
-    getPosts();
-  }, []);
+  }, [user, token]);
+
+  // async function getPosts() {
+  //   try {
+  //     const response = await fetch(`http://localhost:3001/api/posts/feed`, {
+  //       method: "GET",
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     });
+  //     const data = await response.json(); 
+  //     console.log(data.posts); 
+  //     setPosts(data.posts); 
+  //   } catch (error) {
+  //     console.log("Error fetching data: ", error);
+  //   }
+  // }
+  
+  // useEffect(() => {
+  //   if (user && token) {  
+  //     getPosts();
+  //   } 
+  // }, [user]); 
+
+  function openModal() {
+    setVisible("block");
+  }
+
 
   return (
     <>
+    { !isLoading ? (
       <Layout className="layout">
         <Sider className="sider" width="20%">
           <SiderContent
@@ -73,24 +105,25 @@ export function MyProfile({
             closeNotifications={closeNotifications}
           ></SiderContent>
         </Sider>
+
         <Content className="content" onClick={closeNotifications}>
           <div className="profileInfo">
             <div className="leftInfo">
-              <ProfilePhoto size={160} url={image} />
+              <ProfilePhoto size={160} url={user?.profilePicture ? user.profilePicture : image} />
             </div>
             <div className="rightInfo">
               <div className="userEdit">
                 <h4 className="subtitle is-4">
-                  <strong>{userData.username}</strong>
+                  <strong>{user?.username}</strong>
                 </h4>
-                <button className="button editProfile">edit profile</button>
+                <button className="button editProfile" onClick={openModal}>edit profile</button>
               </div>
               <div className="postsFriends">
                 <p>
-                  <strong>{posts.length}</strong> posts
+                  <strong>{posts?.length}</strong> posts
                 </p>
                 <p>
-                  <strong>{userData.friends?.length || 0}</strong> friends
+                  <strong>{user?.friends?.length || 0}</strong> friends
                 </p>
               </div>
             </div>
@@ -100,12 +133,14 @@ export function MyProfile({
           </div>
           <NotificationsModal isActive={isNotificationsActive} />
         </Content>
+
         <EditModal
           visible={visible}
           setVisible={setVisible}
-          userData={userData}
+          userData={user}
         />
-      </Layout>
+      </Layout>)
+     :  (<p>Loading...</p>)} 
     </>
   );
 }

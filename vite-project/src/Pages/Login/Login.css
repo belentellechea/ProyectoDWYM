@@ -42,6 +42,14 @@ p.text {
 }
 
 .orText {
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.passwordEye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+ transform: translateY(-70%);
+  cursor: pointer;
 }

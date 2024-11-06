@@ -2,10 +2,13 @@ import "./Login.css";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  
 
 const url = "http://localhost:3001/api/auth/login"; 
 
 export function Login({setUser}) {
+  const [show, setShow] = useState(false); 
   const navigate = useNavigate(); 
 
   function handleSubmit(event) {
@@ -38,6 +41,7 @@ export function Login({setUser}) {
         if (userData.token) {
           localStorage.setItem("token", userData.token);
           localStorage.setItem("user", JSON.stringify(userData))
+          //localStorage.setItem("user", JSON.parse(userData)) probar descomentando esto para ver si se guardan los parametros sin estar entre ""
           navigate("/"); 
         } else {
           console.log("Token no recibido");
@@ -77,10 +81,16 @@ export function Login({setUser}) {
             <div className="control">
               <input 
                 className="input" 
-                type="password" 
+                type={show ? "text" : "password"}  
                 placeholder="********"
                 id="passwordInput"
               />
+              <span 
+                onClick={() => setShow(!show)}  
+                className="passwordEye"
+              >
+                {show? <FaEyeSlash /> : <FaEye />}
+              </span>
             </div>
           </div>
         </form>
