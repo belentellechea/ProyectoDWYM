@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel } from "antd";
 import "./Carousel.css";
 
-export function PostCarousel() {
+export function PostCarousel({ post }) {
   return (
     <>
       <div className="carouselDiv">
