@@ -43,3 +43,11 @@ p.text {
   margin-top: 15px;
   font-size: 14px;
 }
+
+.passwordEye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+ transform: translateY(-70%);
+  cursor: pointer;
+}
