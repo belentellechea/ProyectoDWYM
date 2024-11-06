@@ -41,6 +41,7 @@ export function Login({setUser}) {
         if (userData.token) {
           localStorage.setItem("token", userData.token);
           localStorage.setItem("user", JSON.stringify(userData))
+          //localStorage.setItem("user", JSON.parse(userData)) probar descomentando esto para ver si se guardan los parametros sin estar entre ""
           navigate("/"); 
         } else {
           console.log("Token no recibido");

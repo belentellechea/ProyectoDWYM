@@ -16,7 +16,10 @@ import { Post } from "./Components/Post";
 //import { NotificationsPage } from "./Pages/NotificationsPage";
 
 function App() {
+  // Managing data
   const [user, setUser] = useState(() => {localStorage.getItem('user');});
+  const [userPosts, setUserPosts] = useState([]);
+  
   // Managing open notifications
   const [notificationsModal, setNotificationsModal] = useState(false);
 
@@ -28,12 +31,14 @@ function App() {
     setNotificationsModal(false);
   }
 
+  // Actualiza el localStorage si el usuario está presente, cada vez que hay un cambio en este.
   useEffect(() => {
     if (user) {
-      localStorage.setItem('user', JSON.stringify(user)); // Actualiza el localStorage si el usuario está presente
+      localStorage.setItem('user', JSON.stringify(user));
     }
   }, [user]);
 
+  // Fetches user and userPosts data
   async function getUserData(id,token) {
     try {
       const response = await fetch(`http://localhost:3001/api/user/profile/${id}`, {
@@ -42,10 +47,12 @@ function App() {
           'Authorization': `Bearer ${token}`
         }
       });
-      
-      if (!response.ok) throw new Error("Error en la respuesta");
-  
       const data = await response.json();
+
+      if (!response.ok) throw new Error("Error en la respuesta");
+
+      // Updates user and userPosts data.
+      setUserPosts(data?.posts);
       
       if (data.user) {
         setUser(data.user);
@@ -67,7 +74,7 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser}/>} />
           <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
-          <Route path="/profile" element={<MyProfile user={user} getData={getUserData} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
+          <Route path="/profile" element={<MyProfile user={user} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
           <Route path="/register" element={ <CreateAccount setUser={setUser}/> }/>
         </Routes>
