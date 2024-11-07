@@ -26,8 +26,8 @@ export function FriendProfile({friends}) {
       console.log(data)
       setProfile(data);
 
-      const isFriend = friends.some(friend => friend._id == data.user._id);
-      setfriendButton (isFriend ? "Delete friend" : "Add friend")
+      //const isFriend = friends.some(friend => friend._id == data.user._id);
+      //setfriendButton (isFriend ? "Delete friend" : "Add friend")
 
     } catch (error) {
       console.log("Error fetching profile details:", error);

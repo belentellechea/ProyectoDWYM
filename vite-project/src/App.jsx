@@ -74,13 +74,9 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser}/>} />
           <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
           {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
-<<<<<<< HEAD
-          <Route path="/profile" element={<MyProfile user={user} getData={getUserData} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-          <Route path="/friendProfile/:id" element={<FriendProfile friends={user.friends}/>} />
-=======
           <Route path="/profile" element={<MyProfile user={user} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-          {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
->>>>>>> 188ebad5bd448a2287348174d283b58fcf297e38
+          {/* <Route path="/friendProfile/:id" element={<FriendProfile friends={user.friends}/>} /> */}
+
           <Route path="/register" element={ <CreateAccount setUser={setUser}/> }/>
         </Routes>
         </div>
