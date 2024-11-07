@@ -17,9 +17,11 @@ import { Post } from "./Components/Post";
 
 function App() {
   // Managing data
-  const [user, setUser] = useState(() => {localStorage.getItem('user');});
+  const [user, setUser] = useState(() => {
+    localStorage.getItem("user");
+  });
   const [userPosts, setUserPosts] = useState([]);
-  
+
   // Managing open notifications
   const [notificationsModal, setNotificationsModal] = useState(false);
 
@@ -29,34 +31,37 @@ function App() {
 
   const closeNotifications = () => {
     setNotificationsModal(false);
-  }
+  };
 
   // Actualiza el localStorage si el usuario está presente, cada vez que hay un cambio en este.
   useEffect(() => {
     if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
     }
   }, [user]);
 
   // Fetches user and userPosts data
-  async function getUserData(id,token) {
+  async function getUserData(id, token) {
     try {
-      const response = await fetch(`http://localhost:3001/api/user/profile/${id}`, {
-        method: "GET",
-        headers: {
-          'Authorization': `Bearer ${token}`
+      const response = await fetch(
+        `http://localhost:3001/api/user/profile/${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       const data = await response.json();
 
       if (!response.ok) throw new Error("Error en la respuesta");
 
       // Updates user and userPosts data.
       setUserPosts(data?.posts);
-      
+
       if (data.user) {
         setUser(data.user);
-        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
+        localStorage.setItem("user", JSON.stringify(data.user)); // Actualiza el localStorage
       } else {
         console.log("No se encontró el usuario en los datos recibidos.");
       }
@@ -67,18 +72,43 @@ function App() {
 
   return (
     <>
-      <Router> 
+      <Router>
         <div className="app">
-        <Routes>
-          <Route path="/*" element={<Navigate replace to="/"/>} />
-          <Route path="/login" element={<Login setUser={setUser}/>} />
-          <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-          {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
-          <Route path="/profile" element={<MyProfile user={user} openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-          <Route path="/friendProfile/:id" element={<FriendProfile friends={user.friends}/>} />
+          <Routes>
+            <Route path="/*" element={<Navigate replace to="/" />} />
+            <Route path="/login" element={<Login setUser={setUser} />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  openNotifications={openNotifications}
+                  closeNotifications={closeNotifications}
+                  isNotificationsActive={notificationsModal}
+                />
+              }
+            />
+            {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
+            <Route
+              path="/profile"
+              element={
+                <MyProfile
+                  user={user}
+                  openNotifications={openNotifications}
+                  closeNotifications={closeNotifications}
+                  isNotificationsActive={notificationsModal}
+                />
+              }
+            />
+            <Route
+              path="/friendProfile/:id"
+              element={<FriendProfile friends={user?.friends} />}
+            />
 
-          <Route path="/register" element={ <CreateAccount setUser={setUser}/> }/>
-        </Routes>
+            <Route
+              path="/register"
+              element={<CreateAccount setUser={setUser} />}
+            />
+          </Routes>
         </div>
       </Router>
     </>

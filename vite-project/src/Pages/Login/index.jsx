@@ -3,25 +3,24 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';  
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const url = "http://localhost:3001/api/auth/login"; 
+const url = "http://localhost:3001/api/auth/login";
 
-export function Login({setUser}) {
-  const [show, setShow] = useState(false); 
-  const navigate = useNavigate(); 
+export function Login({ setUser }) {
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const account = {
-      email: document.getElementById('emailInput').value,
-      password: document.getElementById('passwordInput').value,
-    }
+      email: document.getElementById("emailInput").value,
+      password: document.getElementById("passwordInput").value,
+    };
 
-    console.log(account); 
-    postAccount(account); 
-
+    console.log(account);
+    postAccount(account);
   }
 
   async function postAccount(account) {
@@ -36,26 +35,25 @@ export function Login({setUser}) {
 
       if (response.status === 200) {
         const userData = await response.json();
-        setUser(userData); 
-        
+        setUser(userData);
+
         if (userData.token) {
           localStorage.setItem("token", userData.token);
-          localStorage.setItem("user", JSON.stringify(userData))
+          localStorage.setItem("user", JSON.stringify(userData));
           //localStorage.setItem("user", JSON.parse(userData)) probar descomentando esto para ver si se guardan los parametros sin estar entre ""
-          navigate("/"); 
+          navigate("/");
         } else {
           console.log("Token no recibido");
         }
-
       } else if (response.status === 401) {
-        alert("Credenciales incorrectas"); 
+        alert("Credenciales incorrectas");
       } else {
-        console.log("Error al inciar sesión"); 
+        console.log("Error al inciar sesión");
       }
     } catch (error) {
       console.log("Error del servidor", error);
     }
-  };
+  }
 
   return (
     <div className="loginBackground">
@@ -79,23 +77,22 @@ export function Login({setUser}) {
           <div className="field  loginLabel">
             <label className="label">Password</label>
             <div className="control">
-              <input 
-                className="input" 
-                type={show ? "text" : "password"}  
+              <input
+                className="input"
+                type={show ? "text" : "password"}
                 placeholder="********"
                 id="passwordInput"
               />
-              <span 
-                onClick={() => setShow(!show)}  
-                className="passwordEye"
-              >
-                {show? <FaEyeSlash /> : <FaEye />}
+              <span onClick={() => setShow(!show)} className="passwordEye">
+                {show ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
           </div>
         </form>
 
-        <button className="button is-danger" onClick={handleSubmit}>Sign in</button>
+        <button className="button is-danger" onClick={handleSubmit}>
+          Sign in
+        </button>
         <p className="orText">or</p>
         <p className="text">
           Create account <Link to="/register">here</Link>
