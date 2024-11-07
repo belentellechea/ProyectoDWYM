@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import "./App.css";
 import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/Profiles/MyProfile";
 // import { FriendProfile } from "./Pages/FriendProfile"
 import { CreateAccount } from "./Pages/CreateAccount";
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import { Post } from "./Components/Post";
+import { AuthProvider } from './Context/AuthContext.jsx';
 //import { NotificationsPage } from "./Pages/NotificationsPage";
+
 
 function App() {
   // Managing data
@@ -66,7 +66,7 @@ function App() {
   }
 
   return (
-    <>
+    <AuthProvider>
       <Router> 
         <div className="app">
         <Routes>
@@ -80,7 +80,7 @@ function App() {
         </Routes>
         </div>
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 

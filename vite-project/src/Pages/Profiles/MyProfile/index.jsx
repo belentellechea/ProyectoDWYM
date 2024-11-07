@@ -116,7 +116,7 @@ export function MyProfile({ userI, posts, setUser, openNotifications, closeNotif
               </div>
               <div className="postsFriends">
                 <p>
-                  <strong>{posts?.length}</strong> posts
+                  <strong>{posts?.length || 0}</strong> posts
                 </p>
                 <p>
                   <strong>{user?.friends?.length || 0}</strong> friends
