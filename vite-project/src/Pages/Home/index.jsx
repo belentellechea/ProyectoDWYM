@@ -12,6 +12,7 @@ import styles from "./Home.module.css";
 import { useState } from "react";
 import { ModalCreate } from "../../Components/ModalCreate";
 import { Feed } from "../../Components/Feed";
+import { useAuth } from "../../Context/AuthContext.jsx";
 
 const { Sider, Content } = Layout;
 
@@ -70,7 +71,8 @@ export function Home({
   const [visible, setVisible] = useState("none");
   const [files, setFiles] = useState([]);
 
-  
+  const { auth, updateAuth} = useAuth();
+
 
   return (
     <Layout>

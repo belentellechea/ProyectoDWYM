@@ -9,10 +9,11 @@ export function Feed() {
     try {
         const user = localStorage?.getItem("user");
         const userParsed = JSON.parse(user);
+        const token = localStorage?.getItem("token");
         
         const response = await fetch("http://localhost:3001/api/posts/feed", {
             headers: {
-                'Authorization': `Bearer ${userParsed?.token}`
+                'Authorization': `Bearer ${token}`
             }
         });
         if (response.ok) {
