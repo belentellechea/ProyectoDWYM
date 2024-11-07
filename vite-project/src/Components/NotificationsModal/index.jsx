@@ -6,7 +6,7 @@ import styles from "./NotificationsModal.module.css";
 
 const { Sider, Content } = Layout;
 
-export function NotificationsModal({ isActive, onClose }) {
+export function NotificationsModal({ isActive }) {
   const hardcodedNots = [
     {
       user: "usuario1",

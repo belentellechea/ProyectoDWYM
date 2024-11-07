@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Tabs } from "antd";
+import { Tabs, Menu, ConfigProvider } from "antd";
+import "./SiderContent.css";
+import logo from "../../assets/logoSider.png";
+import logoColapsado from "../../assets/logo_Collapsed.png";
 
 import {
   HomeFilled,
@@ -7,16 +10,16 @@ import {
   PlusSquareOutlined,
   QqOutlined,
   UserOutlined,
-  CreditCardFilled,
 } from "@ant-design/icons";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { NotificationsModal } from "../NotificationsModal";
 
 export function SiderContent({
   openNotifications,
   closeNotifications,
   setVisible,
+  setCollapsed,
+  collapsed,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,6 +27,13 @@ export function SiderContent({
 
   function openModal() {
     setVisible("block");
+  }
+
+  function closeSideBar() {
+    setCollapsed(true);
+  }
+  function openSideBar() {
+    setCollapsed(false);
   }
 
   useEffect(() => {
@@ -50,11 +60,14 @@ export function SiderContent({
       navigate("/profile");
       previousTab = "ProfileTab";
       completeCloseNotifications();
+      openSideBar();
     } else if (key === "HomeTab") {
       navigate("/");
       previousTab = "HomeTab";
       completeCloseNotifications();
+      openSideBar();
     } else if (key === "NotificationsTab") {
+      closeSideBar();
       //navigate("/notifications");
       openNotifications();
     } else if (key === "CreateTab") {
@@ -65,36 +78,36 @@ export function SiderContent({
   const itemsArray = [
     {
       label: (
-        <span>
-          <HomeFilled />
-          <span> Home </span>
+        <span className="spanSider">
+          <HomeFilled style={{ fontSize: "20px" }} />
+          <span className="spanText"> Home </span>
         </span>
       ),
       key: "HomeTab",
     },
     {
       label: (
-        <span>
-          <HeartOutlined style={{ color: "#ff69b4" }} />
-          <span> Notifications </span>
+        <span className="spanSider">
+          <HeartOutlined style={{ fontSize: "20px" }} />
+          <span className="spanText"> Notifications </span>
         </span>
       ),
       key: "NotificationsTab",
     },
     {
       label: (
-        <span>
-          <PlusSquareOutlined />
-          <span> Create </span>
+        <span className="spanSider">
+          <PlusSquareOutlined style={{ fontSize: "20px" }} />
+          <span className="spanText"> Create </span>
         </span>
       ),
       key: "CreateTab",
     },
     {
       label: (
-        <span>
-          <UserOutlined />
-          <span> Profile </span>
+        <span className="spanSider">
+          <UserOutlined style={{ fontSize: "20px" }} />
+          <span className="spanText"> Profile </span>
         </span>
       ),
       key: "ProfileTab",
@@ -102,14 +115,45 @@ export function SiderContent({
   ];
 
   return (
-    <div onClick={closeNotifications}>
-      <h2 className="title siderTitle"> fakestagram </h2>
-      <Tabs
-        tabPosition="left"
-        items={itemsArray}
-        onChange={handleTabChange} // Maneja cambio de pestaña
-        activeKey={activeTabKey} // Vincula la pestaña activa al estado
-      />
-    </div>
+    <ConfigProvider
+      theme={{
+        components: {
+          Menu: {
+            itemActiveBg: "#f4acb7",
+            itemSelectedBg: "#ffccd5",
+            itemSelectedColor: "#000000",
+            itemHeight: 60,
+            itemPaddingInline: 100,
+          },
+        },
+      }}
+    >
+      <div>
+        {collapsed ? (
+          <img
+            src={logoColapsado}
+            className="logoSiderColapsado"
+            alt="Logo fakestragram"
+          />
+        ) : (
+          <img src={logo} className="logoSider" alt="Logo fakestagram Sider" />
+        )}
+
+        {/* <Tabs
+          tabPosition="left"
+          items={itemsArray}
+          onChange={handleTabChange} // Maneja cambio de pestaña
+          activeKey={activeTabKey} // Vincula la pestaña activa al estado
+        /> */}
+        <Menu
+          style={{ background: "none" }}
+          mode="inline"
+          defaultSelectedKeys={[activeTabKey]}
+          items={itemsArray}
+          onClick={({ key }) => handleTabChange(key)}
+          inlineCollapsed={collapsed}
+        />
+      </div>
+    </ConfigProvider>
   );
 }
