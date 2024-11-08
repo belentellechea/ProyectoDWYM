@@ -1,26 +1,23 @@
 import React from "react";
 import { Carousel } from "antd";
-import "./Carousel.css";
+import style from "./Carousel.module.css";
 
 export function PostCarousel({ post }) {
   return (
     <>
-      <div className="carouselDiv">
+      <>
         <Carousel arrows infinite={false}>
           <div>
-            <h3 className="carouselContent"> foto 1</h3>
+            <p className={style.carouselContent}> foto 2</p>
           </div>
           <div>
-            <h3 className="carouselContent"> foto 2</h3>
+            <p className={style.carouselContent}> foto 3</p>
           </div>
           <div>
-            <h3 className="carouselContent"> foto 3</h3>
-          </div>
-          <div>
-            <h3 className="carouselContent"> foto 4</h3>
+            <p className={style.carouselContent}> foto 4</p>
           </div>
         </Carousel>
-      </div>
+      </>
     </>
   );
 }

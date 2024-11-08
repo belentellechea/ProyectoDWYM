@@ -1,13 +1,13 @@
 .carouselContent {
   margin: 0;
-  height: 400px;
   color: #fff;
-  line-height: 500px;
+  height: 400px;
+  line-height: 400px;
   text-align: center;
   background: #364d79;
 }
 
-.carouselDiv {
-  width: 400px;
-  height: 400px;
+div.carouselDiv {
+  width: 500px;
+  height: 500px;
 }

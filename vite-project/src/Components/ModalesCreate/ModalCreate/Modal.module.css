@@ -41,8 +41,19 @@
   height: 40px;
   font-size: 14px;
   font-weight: bold;
-  color: white;
   margin-top: 40px;
+  color: rgb(255, 255, 255);
+  background: rgb(0, 136, 255);
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.subirFoto:hover {
+  background: rgb(81, 174, 255);
+  transition: 0.3s;
 }
 
 .previewItem {

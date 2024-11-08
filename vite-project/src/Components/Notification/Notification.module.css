@@ -1,15 +1,17 @@
 span {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1%;
-    margin-bottom: 2%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  align-items: center;
 }
 
 .picture {
-    margin: 5px;
+  margin: 5px;
+  margin-right: 15px;
 }
 
 label {
-    display: flex;
-    
+  display: flex;
+  text-align: left;
 }

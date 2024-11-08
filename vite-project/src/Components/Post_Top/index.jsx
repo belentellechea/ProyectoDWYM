@@ -9,7 +9,7 @@ export function PostTop({ user }) {
       <div className="avatarYNombre">
         {/* <Avatar size="small" className="avatarIcon" icon={<UserOutlined />} /> */}
         <Avatar
-          size={"small"}
+          size={40}
           className="avatarIcon"
           icon={user?.profilePicture ? user?.profilePicture : <UserOutlined />}
         />
@@ -19,7 +19,7 @@ export function PostTop({ user }) {
           {user?.username ? user.username : "Profile Name"}{" "}
         </p>
       </div>
-      <MoreOutlined />
+      <MoreOutlined style={{ fontSize: 20 }} />
     </div>
   );
 }

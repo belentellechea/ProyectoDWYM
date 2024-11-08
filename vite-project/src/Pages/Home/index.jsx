@@ -117,13 +117,24 @@ export function Home({
         ></SiderContent>
       </Sider>
       <Layout
-        style={{
-          marginLeft: collapsed ? "0%" : "20%", // Ajuste automático al ancho de Sider
-        }}
+      // style={{
+      //   marginLeft: collapsed ? "0%" : "20%", // Ajuste automático al ancho de Sider
+      //   transition: "0.5s",
+      // }}
       >
-        <Content className="content" onClick={closeNotifications}>
+        <Content
+          className="content"
+          onClick={closeNotifications}
+          style={{
+            marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
+            transition: "0.5s",
+          }}
+        >
           <ViewProfileSuggestions profiles={profilesPreView} />
 
+          <Post></Post>
+          <Post></Post>
+          <Post></Post>
           <Post></Post>
           <Feed></Feed>
         </Content>

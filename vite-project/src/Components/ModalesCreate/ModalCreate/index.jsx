@@ -83,10 +83,7 @@ export function ModalCreate({
               accept=".jpg,.png,.jpeg"
               multiple
             />
-            <label
-              htmlFor="browse"
-              className={`button ${styles.subirFoto} is-danger`}
-            >
+            <label htmlFor="browse" className={styles.subirFoto}>
               Seleccionar del ordenador
             </label>
             <div className="previewList">

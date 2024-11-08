@@ -1,3 +1,11 @@
-.postDiv {
-  width: 400px;
+div.postDiv {
+  width: 500px;
+  border: 1px solid rgb(255, 206, 229);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.postDiv:hover {
+  background-color: rgba(255, 206, 229, 0.202);
+  transition: 1.5s;
 }
