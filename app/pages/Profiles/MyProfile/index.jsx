@@ -4,7 +4,7 @@ export default function Profile() {
 
     return (
         <SafeAreaView>
-            <Text>Profile</Text>
+            <Text>My profileeeeeeee</Text>
         </SafeAreaView>
     )
 }

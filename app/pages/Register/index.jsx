@@ -18,17 +18,17 @@ export default function Register({navigation}) {
                 <View style={styles.registerContainer}>
                     <Text style={styles.title}>Create account</Text>
                     <View style={styles.inputContainer}>
-                        <Text style={styles.inputText}>Correo electrónico</Text>
+                        <Text style={styles.inputText}>Email</Text>
                         <TextInput 
                             placeholder='your.email@example.com'
                             style={styles.input}
                         />
-                        <Text style={styles.inputText}>Nombre de usuario</Text>
+                        <Text style={styles.inputText}>Username</Text>
                         <TextInput 
                             placeholder='your.username'
                             style={styles.input}
                         />
-                        <Text style={styles.inputText}>Contraseña</Text>
+                        <Text style={styles.inputText}>Password</Text>
                         <View style={styles.passwordContainer}>
                         <TextInput 
                             placeholder='*****'
@@ -42,10 +42,10 @@ export default function Register({navigation}) {
                     </View>
                     <View style={styles.buttonContainer}>
                         <Pressable style={[styles.button, styles.createButton]}>
-                            <Text style={styles.buttonText}>Crear</Text>
+                            <Text style={styles.buttonText}>Create</Text>
                         </Pressable>
                         <Pressable style={styles.button} onPress={goToLogin}>
-                            <Text style={styles.buttonText}>Cancelar</Text>
+                            <Text style={styles.buttonText}>Cancel</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     iconContainer: {
         position: 'absolute',
         right: 15,
-        top: 20,
+        top: 20
     }
 })
