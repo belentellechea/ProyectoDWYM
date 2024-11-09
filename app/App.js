@@ -1,18 +1,18 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../app/pages/Login';
 import Register from '../app/pages/Register';
-import Home from '../app/pages/Home';
+import MainPage from './pages/MainPage';
 import MyProfile from '../app/pages/Profiles/MyProfile';
 import FriendProfile from '../app/pages/Profiles/FriendProfile';
+import Feed from '../app/pages/Feed'; 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" >
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -25,7 +25,12 @@ export default function App() {
         />
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={MainPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Feed"
+          component={Feed}
         />
         <Stack.Screen
           name="FriendProfile"
@@ -39,5 +44,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-

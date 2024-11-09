@@ -91,15 +91,15 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start'
     }, 
     logo: {
-        width: 70,
-        height: 54,
+        width: 82,
+        height: 63,
         alignSelf: 'center',
         transform: [{rotate: '15deg'}],
         marginBottom: 5
     }, 
     name: {
         fontWeight: 'bold', 
-        fontSize: 30,
+        fontSize: 35,
         alignSelf: 'center', 
         marginBottom: 80
     },
@@ -139,6 +139,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 15,
         top: 20,
-    },
+    }
 
 }); 
