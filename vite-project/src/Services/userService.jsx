@@ -68,7 +68,32 @@ export const editProfileLook = async (auth, user, newUser, updateUser) => {
     }
 }
 
-export const removeFriend = async (auth, exfriend, updateUser) => {
+export const addFriend = async (auth, newFriend, addFriend) => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/user/remove-friend/${newFriend.id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData.message);
+    }
+
+    const data = await response.json();
+    console.log(data.message); 
+
+    addFriend(newFriend);
+    
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+
+export const removeFriend = async (auth, exfriend, removeFriend) => {
   try {
     const response = await fetch(`http://localhost:3001/api/user/remove-friend/${exfriend.id}`, {
       method: 'PUT',
@@ -78,13 +103,16 @@ export const removeFriend = async (auth, exfriend, updateUser) => {
       },
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data.message); 
-    } else {
+    if (!response.ok) {
       const errorData = await response.json();
       console.log(errorData.message);
     }
+
+    const data = await response.json();
+    console.log(data.message); 
+
+    removeFriend(exfriend);
+
   } catch (error) {
     console.log("Error:", error);
   }
