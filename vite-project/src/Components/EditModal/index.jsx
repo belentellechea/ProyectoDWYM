@@ -1,29 +1,35 @@
 import { useState } from "react";
 import "./styles.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { editProfileLook } from "../../Services/userService";
+import { useAuth } from "../../Context/AuthContext";
+import { useUser } from "../../Context/UserContext";
 
 export function EditModal({visible, setVisible, userData}){
-    const [formData, setFormData] = useState(userData);
+    const { auth, updateAuth } = useAuth();
+    const { user, updateUser } = useUser();
+
+    const [formData, setFormData] = useState(user);
     const [fileName, setFileName] = useState("Ningún archivo seleccionado");
 
-    async function postChanges() {
-        try {
-          const response = await fetch(`http://localhost:3001/api/profile/edit`, {
-            method: "PUT",
-            headers: {
-              'Authorization': `Bearer ${formData.token}`
-            },
-            body: {
-                "username": formData.username, 
-                "profilePicture": formData.profilePicture
-            }
-          });
-          const data = await response.json(); 
-          console.log(data); 
-        } catch (error) {
-          console.log("Error fetching data: ", error);
-        }
-    }
+    // async function postChanges() {
+    //     try {
+    //       const response = await fetch(`http://localhost:3001/api/profile/edit`, {
+    //         method: "PUT",
+    //         headers: {
+    //           'Authorization': `Bearer ${formData.token}`
+    //         },
+    //         body: {
+    //             "username": formData.username, 
+    //             "profilePicture": formData.profilePicture
+    //         }
+    //       });
+    //       const data = await response.json(); 
+    //       console.log(data); 
+    //     } catch (error) {
+    //       console.log("Error fetching data: ", error);
+    //     }
+    // }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -46,11 +52,28 @@ export function EditModal({visible, setVisible, userData}){
         setVisible("none"); 
     }
 
+    function updateProfile(e) {
+        e.preventDefault();
+        console.log("estoy en updateProfile");
+        const newUser = {
+            id: user._id,
+            username: formData.name ? formData.name : user.username,
+            description: user?.description,
+            profilePicture: file.name,
+            // friends: user?.friends,
+            // posts: user?.posts,
+        }
+        console.log(user);
+        console.log(newUser);
+        console.log("estoy en updateProfile");
+        editProfileLook(auth, user, newUser, updateUser);
+    }
+
     return (
         <div className="modal" style={{display: visible}}>
             <div className="modal-content editModal">
             <h2>Edit profile</h2>
-            <form id="taskForm">
+            <form id="taskForm" onSubmit={(e) => e.preventDefault()}>
                 <div className="field loginLabel">
                     <label className="label">Username</label>
                     <div className="control">
@@ -58,7 +81,7 @@ export function EditModal({visible, setVisible, userData}){
                             className="input"
                             type="text"
                             id="user"
-                            defaultValue={formData?.username}
+                            defaultValue={user?.username}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -88,7 +111,7 @@ export function EditModal({visible, setVisible, userData}){
                     <button type="button" id="cancel-button" onClick={closeModal} className="button is-danger">
                         Cancelar
                     </button>
-                    <button type="submit" id="save-button" className="button is-danger" onClick={postChanges}> 
+                    <button type="button" id="save-button" className="button is-danger" onClick={updateProfile}> 
                         Guardar cambios
                     </button>
                 </div>

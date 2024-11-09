@@ -6,51 +6,25 @@ import "./style.css";
 import image from "../../../assets/user.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
-// import { EditModal } from "../../../Components/EditModal"
+import { EditModal } from "../../../Components/EditModal";
+import { useUser } from "../../../Context/UserContext";
+import { useAuth } from "../../../Context/AuthContext";
+import { getUser } from "../../../Services/userService.jsx"
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({ userI, posts, setUser, openNotifications, closeNotifications, isNotificationsActive }) {
+export function MyProfile({ openNotifications, closeNotifications, isNotificationsActive }) {
+  const { auth, updateAuth } = useAuth();
+  const { user, updateUser } = useUser();
 
-  const userLocalStorage = localStorage.getItem('user');
-  const [user, setUserData] = useState(JSON.parse(userLocalStorage));
-  //const [posts, setPosts] = useState([]); 
   const [visible, setVisible] = useState("none"); 
   const [isLoading, setIsLoading] = useState(true); 
-  const token = localStorage.getItem('token'); 
-
-  async function getUserData(id,token) {
-    try {
-      const response = await fetch(`http://localhost:3001/api/user/profile/${user._id}`, {
-        method: "GET",
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await response.json();
-
-      if (!response.ok) throw new Error("Error en la respuesta");
-      
-      if (data.user) {
-        console.log(data);
-        localStorage.setItem('user', JSON.stringify(data.user)); // Actualiza el localStorage
-      } else {
-        console.log("No se encontró el usuario en los datos recibidos.");
-      }
-    } catch (error) {
-      console.log("Error fetching data: ", error);
-    }
-  }
 
   useEffect(() => {
-    if (user && token) {
-      setIsLoading(false);
-      console.log(user);
-      getUserData(user._id, token);
-    }
-  }, [user, token]);
+    getUser(auth.id, auth.token, updateUser);
+    setIsLoading(false);
+  }, []);
 
-  
   function openModal() {
     setVisible("block");
   }
@@ -81,7 +55,7 @@ export function MyProfile({ userI, posts, setUser, openNotifications, closeNotif
               </div>
               <div className="postsFriends">
                 <p>
-                  <strong>{posts?.length || 0}</strong> posts
+                  <strong>{user?.posts?.length || 0}</strong> posts
                 </p>
                 <p>
                   <strong>{user?.friends?.length || 0}</strong> friends
@@ -90,7 +64,7 @@ export function MyProfile({ userI, posts, setUser, openNotifications, closeNotif
             </div>
           </div>
           <div className="photos">
-            <Grid photos={posts} />
+            <Grid photos={user?.posts} />
           </div>
           <NotificationsModal isActive={isNotificationsActive} />
         </Content>
