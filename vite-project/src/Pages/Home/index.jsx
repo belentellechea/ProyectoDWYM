@@ -1,8 +1,11 @@
-import React from "react";
 import { Layout } from "antd";
-import { SiderContent } from "../../Components/SiderContent";
+import React, { useState } from "react";
+import { ModalCreate } from "../../Components/ModalesCreate/ModalCreate";
+import { NotificationsModal } from "../../Components/NotificationsModal";
 import { Post } from "../../Components/Post";
+import { SiderContent } from "../../Components/SiderContent";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
+import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
 import { NotificationsModal } from "../../Components/NotificationsModal";
 import { ProfilePreView } from "../../Components/ProfilePreView";
 import styles from "./Home.module.css";
@@ -91,11 +94,10 @@ export function Home({
           <Post></Post>
           <Feed></Feed>
         </Content>
-
         <NotificationsModal isActive={isNotificationsActive} />
       </Layout>
-
-      <ModalCreate
+      <ParentModalCreate
+        files={files}
         visible={visible}
         setVisible={setVisible}
         onFilesSelected={setFiles}

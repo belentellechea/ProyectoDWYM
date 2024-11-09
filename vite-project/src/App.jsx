@@ -3,7 +3,7 @@ import "./App.css";
 import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/Profiles/MyProfile";
-// import { FriendProfile } from "./Pages/FriendProfile"
+import { FriendProfile } from "./Pages/Profiles/FriendProfile";
 import { CreateAccount } from "./Pages/CreateAccount";
 import {
   BrowserRouter as Router,

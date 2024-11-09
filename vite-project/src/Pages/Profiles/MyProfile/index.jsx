@@ -29,12 +29,16 @@ export function MyProfile({ openNotifications, closeNotifications, isNotificatio
     setVisible("block");
   }
 
+
   return (
     <>
     { !isLoading ? (
       <Layout className="layout">
         <Sider className="sider" width="20%">
-          <SiderContent openNotifications={openNotifications} closeNotifications={closeNotifications} ></SiderContent>
+          <SiderContent
+            openNotifications={openNotifications}
+            closeNotifications={closeNotifications}
+          ></SiderContent>
         </Sider>
 
         <Content className="content" onClick={closeNotifications}>
