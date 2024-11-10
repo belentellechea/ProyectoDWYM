@@ -23,7 +23,11 @@ export function SiderContent({
 }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeTabKey, setActiveTabKey] = useState("HomeTab");
+  const [activeTabKey, setActiveTabKey] = useState(() => {
+    if (location.pathname === "/") return "HomeTab";
+    if (location.pathname === "/profile") return "ProfileTab";
+    return "NotificationsTab";
+  });
 
   function openModal() {
     setVisible("block");
@@ -138,13 +142,6 @@ export function SiderContent({
         ) : (
           <img src={logo} className="logoSider" alt="Logo fakestagram Sider" />
         )}
-
-        {/* <Tabs
-          tabPosition="left"
-          items={itemsArray}
-          onChange={handleTabChange} // Maneja cambio de pestaña
-          activeKey={activeTabKey} // Vincula la pestaña activa al estado
-        /> */}
         <Menu
           style={{ background: "none" }}
           mode="inline"

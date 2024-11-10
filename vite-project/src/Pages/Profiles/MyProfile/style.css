@@ -32,12 +32,6 @@ h2.title.siderTitle {
   align-items: center;
 }
 
-.rightInfo {
-  display: flex;
-  flex-direction: column;
-  margin-left: 6rem;
-}
-
 .userEdit {
   display: flex;
   align-items: center;
@@ -50,6 +44,7 @@ h2.title.siderTitle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-left: 5rem;
 }
 
 .subtitle.is-4 {

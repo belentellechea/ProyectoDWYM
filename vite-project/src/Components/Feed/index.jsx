@@ -3,7 +3,6 @@ import { Post } from "../Post";
 import { getFeed } from "../../Services/postService";
 
 export function Feed() {
-
   // const [posts, setPosts] = useState([]);
 
   // const fetchPosts = async () => {
@@ -11,7 +10,7 @@ export function Feed() {
   //       const user = localStorage?.getItem("user");
   //       const userParsed = JSON.parse(user);
   //       const token = localStorage?.getItem("token");
-        
+
   //       const response = await fetch("http://localhost:3001/api/posts/feed", {
   //           headers: {
   //               'Authorization': `Bearer ${token}`
@@ -38,9 +37,13 @@ export function Feed() {
   return (
     <div>
       <ul>
-        {feed?.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        {feed.length > 0 && (
+          <div>
+            {feed.map((post) => (
+              <Post key={post._id} post={post} />
+            ))}
+          </div>
+        )}
       </ul>
     </div>
   );

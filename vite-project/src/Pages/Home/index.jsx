@@ -76,6 +76,7 @@ export function Home({
 }) {
   const [visible, setVisible] = useState("none");
   const [files, setFiles] = useState([]);
+  const [collapsed, setCollapsed] = useState(false);
 
   const { auth, updateAuth } = useAuth();
 
