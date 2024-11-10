@@ -9,16 +9,20 @@ import { useState, useEffect } from "react";
 import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
-import { getUser } from "../../../Services/userService.jsx"
+import { getUser } from "../../../Services/userService.jsx";
 
 const { Sider, Content } = Layout;
 
-export function MyProfile({ openNotifications, closeNotifications, isNotificationsActive }) {
+export function MyProfile({
+  openNotifications,
+  closeNotifications,
+  isNotificationsActive,
+}) {
   const { auth, updateAuth } = useAuth();
   const { user, updateUser } = useUser();
 
-  const [visible, setVisible] = useState("none"); 
-  const [isLoading, setIsLoading] = useState(true); 
+  const [visible, setVisible] = useState("none");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getUser(auth.id, auth.token, updateUser);
@@ -57,12 +61,11 @@ export function MyProfile({ openNotifications, closeNotifications, isNotificatio
                 </p>
               </div>
             </div>
-          </div>
-          <div className="photos">
-            <Grid photos={user?.posts} />
-          </div>
-          <NotificationsModal isActive={isNotificationsActive} />
-        </Content>
+            <div className="photos">
+              <Grid photos={user?.posts} />
+            </div>
+            <NotificationsModal isActive={isNotificationsActive} />
+          </Content>
           <EditModal
             visible={visible}
             setVisible={setVisible}
