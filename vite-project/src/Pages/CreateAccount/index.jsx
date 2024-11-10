@@ -1,9 +1,12 @@
-import "./CreateAccount.css"
-import { useNavigate } from "react-router-dom"
+import "./CreateAccount.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext.jsx";
+import { postAccount } from "../../Services/authService";
 
-const url="http://localhost:3001/api/auth/register"
+const url="http://localhost:3001/api/auth/register";
 
-export function CreateAccount({setUser}) {
+export function CreateAccount() {
+    const { auth, updateAuth} = useAuth();
 
     const navigate = useNavigate(); 
 
@@ -19,42 +22,10 @@ export function CreateAccount({setUser}) {
             username: document.getElementById('usernameInput').value,
             password: document.getElementById('passwordInput').value, 
         }
-        postAccount(account); 
-    }
 
-    async function postAccount(account) {
-        try {
-            const response = await fetch( url, {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify(account)
-            }); 
-
-            if (response.status === 201) {
-                const userData = await response.json(); 
-                console.log("Cuenta creada exitosamente"); 
-                setUser(userData); 
-
-                if (userData.token) {
-                    localStorage.setItem("token", userData.token);
-                    localStorage.setItem("user", JSON.stringify(userData))
-                    navigate("/");
-                } else {
-                    console.log("Token no recibido");
-                }
-                
-            } else if (response.status === 400) {
-                console.log("El usuario ya existe"); 
-                alert("El usuario ya existe"); 
-            } else {
-                console.log("Error al crear la cuenta"); 
-            }
-
-        } catch (error) {
-            console.log("Error posting account: ", error); 
-        }
+        //postAccount(account, updateAuth);
+        const success = postAccount(account, updateAuth);
+        if (success) navigate("/");
     }
 
     return (
@@ -96,7 +67,6 @@ export function CreateAccount({setUser}) {
                             </div>
                         </div>
                     </div>
-                    
                     
 
                     <div className="buttonDiv">

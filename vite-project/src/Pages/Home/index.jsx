@@ -7,6 +7,7 @@ import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCre
 import { NotificationsModal } from "../../Components/NotificationsModal";
 import styles from "./Home.module.css";
 import { Feed } from "../../Components/Feed";
+import { useAuth } from "../../Context/AuthContext.jsx";
 
 const { Sider, Content } = Layout;
 
@@ -76,8 +77,7 @@ export function Home({
   const [visible, setVisible] = useState("none");
   const [files, setFiles] = useState([]);
 
-  // si abro las notificaciones se colapsa el sider
-  const [collapsed, setCollapsed] = useState(false);
+  const { auth, updateAuth } = useAuth();
 
   return (
     <Layout>

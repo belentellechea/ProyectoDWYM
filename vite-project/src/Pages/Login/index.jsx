@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuth } from "../../Context/AuthContext.jsx";
+import { loginAccount } from "../../Services/authService";
 
 const url = "http://localhost:3001/api/auth/login";
 
-export function Login({ setUser }) {
+export function Login() {
+  const { auth, updateAuth } = useAuth();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -20,39 +23,8 @@ export function Login({ setUser }) {
     };
 
     console.log(account);
-    postAccount(account);
-  }
-
-  async function postAccount(account) {
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(account),
-      });
-
-      if (response.status === 200) {
-        const userData = await response.json();
-        setUser(userData);
-
-        if (userData.token) {
-          localStorage.setItem("token", userData.token);
-          localStorage.setItem("user", JSON.stringify(userData));
-          //localStorage.setItem("user", JSON.parse(userData)) probar descomentando esto para ver si se guardan los parametros sin estar entre ""
-          navigate("/");
-        } else {
-          console.log("Token no recibido");
-        }
-      } else if (response.status === 401) {
-        alert("Credenciales incorrectas");
-      } else {
-        console.log("Error al inciar sesión");
-      }
-    } catch (error) {
-      console.log("Error del servidor", error);
-    }
+    const success = loginAccount(account, updateAuth);
+    if (success) navigate("/");
   }
 
   return (
