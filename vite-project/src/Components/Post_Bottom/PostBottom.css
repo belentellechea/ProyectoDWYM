@@ -1,6 +1,6 @@
 .Likes {
   display: flex;
-
+  margin-left: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -17,4 +17,10 @@
 .Comentarios {
   display: flex;
   justify-content: left;
+}
+
+.Iconos :hover {
+  color: rgb(67, 127, 223);
+  transition: 0.5s;
+  font-size: 35;
 }

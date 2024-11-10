@@ -29,29 +29,24 @@ export function MyProfile({ openNotifications, closeNotifications, isNotificatio
     setVisible("block");
   }
 
-
   return (
     <>
-    { !isLoading ? (
-      <Layout className="layout">
-        <Sider className="sider" width="20%">
-          <SiderContent
-            openNotifications={openNotifications}
-            closeNotifications={closeNotifications}
-          ></SiderContent>
-        </Sider>
+      {!isLoading ? (
+        <Layout className="layout">
+          <Sider className="sider" width="20%">
+            <SiderContent
+              openNotifications={openNotifications}
+              closeNotifications={closeNotifications}
+            ></SiderContent>
+          </Sider>
 
-        <Content className="content" onClick={closeNotifications}>
-          <div className="profileInfo">
-            <div className="leftInfo">
-              <ProfilePhoto size={160} url={user?.profilePicture ? user.profilePicture : image} />
-            </div>
-            <div className="rightInfo">
-              <div className="userEdit">
-                <h4 className="subtitle is-4">
-                  <strong>{user?.username}</strong>
-                </h4>
-                <button className="button editProfile" onClick={openModal}>edit profile</button>
+          <Content className="content" onClick={closeNotifications}>
+            <div className="profileInfo">
+              <div className="leftInfo">
+                <ProfilePhoto
+                  size={160}
+                  url={user?.profilePicture ? user.profilePicture : image}
+                />
               </div>
               <div className="postsFriends">
                 <p>
@@ -68,14 +63,15 @@ export function MyProfile({ openNotifications, closeNotifications, isNotificatio
           </div>
           <NotificationsModal isActive={isNotificationsActive} />
         </Content>
-
-        <EditModal
-          visible={visible}
-          setVisible={setVisible}
-          userData={user}
-        />
-      </Layout>)
-     :  (<p>Loading...</p>)} 
+          <EditModal
+            visible={visible}
+            setVisible={setVisible}
+            userData={user}
+          />
+        </Layout>
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }

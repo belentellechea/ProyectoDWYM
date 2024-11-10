@@ -30,7 +30,7 @@ function App() {
 
   const closeNotifications = () => {
     setNotificationsModal(false);
-  }
+  };
 
   // Actualiza el localStorage si el usuario está presente, cada vez que hay un cambio en este.
   // useEffect(() => {

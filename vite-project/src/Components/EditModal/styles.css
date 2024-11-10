@@ -1,67 +1,66 @@
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /*fondo semitransparente*/
-    place-content: center;
+.modal.editModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /*fondo semitransparente*/
+  place-content: center;
 }
 
-.modal-content {
-    margin: 10% auto; 
-    border: 1px solid #888;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(../../assets/fondo.png);
-    padding: 30px; 
-    border-radius: 15px;
+.modal-content.editModal {
+  margin: 10% auto;
+  border: 1px solid #888;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../assets/fondo.png);
+  padding: 30px;
+  border-radius: 15px;
 }
 
-.modal h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 800;
+.modal.editModal h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 800;
 }
 
-.modal form {
-    display: flex;
-    flex-direction: column;
+.modal.editModal form {
+  display: flex;
+  flex-direction: column;
 }
 
-.modal form label {
-    margin-bottom: 10px;
+.modal.editModal form label {
+  margin-bottom: 10px;
 }
 
-.modal form input {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-} 
+.modal.editModal form input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
 
 .modal-buttons {
-    display: flex;
-    justify-content: center; 
-    gap: 20px; 
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .modal-buttons button {
-    padding: 10px; 
-    border-radius: 15px;
-    width: 150px; 
+  padding: 10px;
+  border-radius: 15px;
+  width: 150px;
 }
 
-.modal-content h2 {
-    display: flex;
-    justify-content: center;
+.modal-content.editModal h2 {
+  display: flex;
+  justify-content: center;
 }
 
-.modal-content form .columns .column .box {
-    background-color: #FFE5D9 ;
+.modal-content.editModal form .columns .column .box {
+  background-color: #ffe5d9;
 }
-

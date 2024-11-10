@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import foto from "../../../assets/create.png";
 import { ModalPreview } from "../ModalPreview";
-import "./Modal.css";
+import styles from "./Modal.module.css";
 
 export function ModalCreate({
   onFilesSelected,
@@ -57,20 +57,23 @@ export function ModalCreate({
   return (
     <div className="modal" style={{ display: visible }}>
       <div className="modal-background"></div>
-      <div className="modal-content">
-        <div className="card">
-          <div className="card-header">
+      <div className={`modal-content ${styles.modalContent}`}>
+        <div className={`card ${styles.card}`}>
+          <div className={`card-header ${styles.cardHeader}`}>
             <h1 className="title is-6"> Crear nueva publicacion </h1>
           </div>
           <div
-            className={`card-content ${
+            className={`card-content ${styles.cardContent} ${
               files.length > 0 ? "upload-box active" : "upload-box"
             }`}
             onDrop={handleDrop}
             onDragOver={(event) => event.preventDefault()}
           >
-            <img src={foto} className="createFoto" alt="create foto" />
-            <p>Arrastra las fotos y los videos aqui</p>
+            <img src={foto} className={styles.createFoto} alt="create foto" />
+            <p className={styles.uploadText}>
+              {" "}
+              Arrastra las fotos y los videos aqui
+            </p>
             {/* <DragNdrop onFilesSelected={setFiles} width="300px" height="50px" /> */}
             <input
               type="file"
@@ -80,18 +83,18 @@ export function ModalCreate({
               accept=".jpg,.png,.jpeg"
               multiple
             />
-            <label htmlFor="browse" className="button subirFoto is-danger">
+            <label htmlFor="browse" className={styles.subirFoto}>
               Seleccionar del ordenador
             </label>
             <div className="previewList">
               {files.length > 0 && (
                 <div>
                   {files.map((file, index) => (
-                    <div className="previewItem" key={index}>
-                      <p className="itemName">{file.name}</p>
+                    <div className={styles.previewItem} key={index}>
+                      <p className={styles.itemName}>{file.name}</p>
                       <div className="">
                         <button
-                          className="button previewButton is-danger is-outlined is-rounded"
+                          className={`button ${styles.previewButton} is-danger is-outlined is-rounded`}
                           onClick={() => handleRemoveFile(index)}
                         >
                           X
@@ -104,7 +107,7 @@ export function ModalCreate({
             </div>
             {files.length > 0 && (
               <button
-                className="button botonSiguiente is-link is-rounded"
+                className={`button ${styles.botonSiguiente} is-link is-rounded`}
                 onClick={() => openModalPreview()}
               >
                 {" "}
