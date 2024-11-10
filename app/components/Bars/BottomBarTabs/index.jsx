@@ -1,44 +1,64 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import { Ionicons as Icon } from '@expo/vector-icons';
-import MyProfile from "../../../pages/Profiles/MyProfile";
-import Feed from '../../../pages/Feed';
+import { useNavigation } from '@react-navigation/native';
 
-const BottomTab = createBottomTabNavigator();
+export default function BottomBarTabs({atPage}) {
+  const navigation = useNavigation(); 
 
-export default function BottomBarTabs() {
-    function FeedScreen() {
-      return <Feed />;
-    }
-    
-    function ProfileScreen() {
-      return <MyProfile />;
-    }
-      
+  function goToHome(){
+    navigation.navigate('Home'); 
+  }
+
+  function goToProfile(){
+    navigation.navigate('Profile')
+  }
+
   return (
-    <BottomTab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarShowLabel: false,
-        tabBarIcon: ({ focused }) => {
-          let iconName;
-          if (route.name === 'Feed') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'person' : 'person-outline';
-          }
-          return <Icon name={iconName} size={24} color={focused ? 'black' : 'grey'} />;
-        },
-        headerShown: false
-      })}
-    >
-      <BottomTab.Screen name="Feed" component={FeedScreen} />
-      <BottomTab.Screen name="Profile" component={ProfileScreen} />
-    </BottomTab.Navigator>
+    <View style={styles.bar}>
+      <Pressable onPress={goToHome}>
+        <Icon size={30} name={atPage ==='Home' ? 'home' : 'home-outline'}/>
+      </Pressable>
+      <Pressable onPress={goToProfile}>
+        <View style={[
+          styles.profileContainer, 
+          { borderWidth: atPage === 'Profile' ? 1 : 0 } // Aplicar borderWidth condicionalmente
+        ]}>
+          <Image source={require('../../../assets/user.png')} style={styles.profile}></Image>
+        </View>
+        
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  bar: {
+    display: 'flex',
+    height: '9%',
+    position: 'absolute', 
+    bottom: 0, 
+    left: 0,
+    right: 0,
+    borderTopColor: '#adb5bd',
+    borderTopWidth: 1,
+    paddingTop: 15,
+    paddingBottom: 15, 
+    paddingLeft: 25, 
+    paddingRight: 25, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between'
+  }, 
+  profileContainer: {
+    borderRadius: 50,
+    borderColor: 'black', 
+    padding: 3,
+  },
+  profile: {
+    width: 30,
+    height: 30,
+    borderRadius: 50,
   
+  }
+
 });
