@@ -125,7 +125,10 @@ export function Home({
       >
         <Content
           className="content"
-          onClick={closeNotifications}
+          onClick={() => {
+            closeNotifications();
+            setCollapsed(false);
+          }}
           style={{
             marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
             transition: "0.5s",
