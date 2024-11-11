@@ -29,7 +29,49 @@ h2.title.siderTitle {
 .profileInfo {
   display: flex;
   flex-direction: row;
+  width: 600px;
+  justify-content: space-between;
+}
+
+.rightInfo {
+  width: 360px;
+  text-align: left;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.nameEdit {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.buttonSettings {
+  display: flex;
+  align-content: center;
+}
+
+h1.title.is-6.profileName {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.editButton {
+  height: 35px;
+  background-color: rgb(46, 158, 255);
+  color: white;
+  width: 120px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 1s;
+}
+
+.editButton:hover {
+  transform: scale(1.08);
 }
 
 .userEdit {
@@ -44,7 +86,8 @@ h2.title.siderTitle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 5rem;
+  margin-top: 1.5rem;
+  font-size: 16px;
 }
 
 .subtitle.is-4 {
@@ -60,8 +103,14 @@ h2.title.siderTitle {
   margin-top: 1rem;
 }
 
-.button.editProfile {
-  background-color: pink;
-  width: 120px;
-  height: 30px;
+#settingsIcon {
+  transition: 0.5s;
+}
+
+#settingsIcon:hover {
+  color: rgb(67, 127, 223);
+  transition: 0.3s;
+  font-size: 35;
+  rotate: 15deg;
+  transform: scale(1.08);
 }
