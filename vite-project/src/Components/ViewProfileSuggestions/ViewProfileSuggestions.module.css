@@ -9,6 +9,7 @@
   padding-bottom: 0;
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;
+  transition: 0.3s;
 }
 
 .viewTitle {
@@ -22,5 +23,6 @@
 }
 
 div.container:hover {
-  scrollbar-color: inherit;
+  scrollbar-color: rgba(193, 193, 193, 0.627) #d5d5d50f;
+  transition: 1s;
 }

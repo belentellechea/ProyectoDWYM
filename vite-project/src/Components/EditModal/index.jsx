@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { editProfileLook } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
 import { useUser } from "../../Context/UserContext";
+import { EditOutlined, UserOutlined } from "@ant-design/icons";
 
 export function EditModal({ visible, setVisible, userData }) {
   const { auth, updateAuth } = useAuth();
@@ -71,8 +72,12 @@ export function EditModal({ visible, setVisible, userData }) {
 
   return (
     <div className="modal" style={{ display: visible }}>
+      <div className="modal-background"></div>
       <div className="modal-content editModal">
-        <h2>Edit profile</h2>
+        <div className="editTitle">
+          <h2 className="title is-4">Edit profile</h2>
+        </div>
+
         <form id="taskForm" onSubmit={(e) => e.preventDefault()}>
           <div className="field loginLabel">
             <label className="label">Username</label>
@@ -112,14 +117,14 @@ export function EditModal({ visible, setVisible, userData }) {
               type="button"
               id="cancel-button"
               onClick={closeModal}
-              className="button is-danger"
+              className="button"
             >
               Cancelar
             </button>
             <button
               type="button"
               id="save-button"
-              className="button is-danger"
+              className="button save"
               onClick={updateProfile}
             >
               Guardar cambios

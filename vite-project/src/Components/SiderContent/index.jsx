@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, Menu, ConfigProvider } from "antd";
 import "./SiderContent.css";
-import logo from "../../assets/logoSider.png";
+import logo from "../../assets/logoSider2.png";
 import logoColapsado from "../../assets/logo_Collapsed.png";
 
 import {

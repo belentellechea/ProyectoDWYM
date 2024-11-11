@@ -1,6 +1,6 @@
 .Likes {
   display: flex;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -14,13 +14,68 @@
   padding: 5px;
 }
 
-.Comentarios {
-  display: flex;
+.commentInput {
+  border: 1px solid rgb(255, 206, 229);
+  width: 455px;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0);
+  transition: 0.3s ease-in-out;
+  height: 40px;
+  border-radius: 10px;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid rgb(255, 206, 229);
+  background-color: white;
+  transition: 0.3s;
+}
+
+.ComentariosContent {
   justify-content: left;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 15px;
 }
 
 .Iconos :hover {
   color: rgb(67, 127, 223);
   transition: 0.5s;
   font-size: 35;
+  transform: scale(1.03);
+}
+
+.Comentarios p {
+  margin: 0;
+}
+
+.listaComentarios {
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+  width: 450px;
+  transition: 0.5s;
+}
+
+.listaComentarios:hover {
+  scrollbar-color: rgba(193, 193, 193, 0.627) #d5d5d50f;
+  transition: 0.3s;
+}
+
+.commentSend {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  max-height: 50px;
+  position: relative;
+  display: inline-block;
+}
+
+.sendButton {
+  position: absolute;
+  font-size: 20px;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }

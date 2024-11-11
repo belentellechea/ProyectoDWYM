@@ -11,6 +11,11 @@ import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
 import { getUser } from "../../../Services/userService.jsx";
+import {
+  MenuOutlined,
+  SettingFilled,
+  SettingOutlined,
+} from "@ant-design/icons";
 
 const { Sider, Content } = Layout;
 
@@ -91,17 +96,36 @@ export function MyProfile({
               <div className="profileInfo">
                 <div className="leftInfo">
                   <ProfilePhoto
+                    className="myProfilePic"
                     size={160}
                     url={user?.profilePicture ? user.profilePicture : image}
                   />
                 </div>
-                <div className="postsFriends">
-                  <p>
-                    <strong>{user?.posts?.length || 0}</strong> posts
-                  </p>
-                  <p>
-                    <strong>{user?.friends?.length || 0}</strong> friends
-                  </p>
+                <div className="rightInfo">
+                  <div className="nameEdit">
+                    <h1 className="title is-6 profileName">
+                      {user?.name ? user.name : "nombre_usuario"}
+                    </h1>
+                    <div className="buttonSettings">
+                      <button className="editButton" onClick={openModal}>
+                        {" "}
+                        edit profile{" "}
+                      </button>
+                      <SettingOutlined
+                        id="settingsIcon"
+                        style={{ fontSize: "26px", marginLeft: "10px" }}
+                        onClick={openModal}
+                      />
+                    </div>
+                  </div>
+                  <div className="postsFriends">
+                    <p>
+                      <strong>{user?.posts?.length || 0}</strong> posts
+                    </p>
+                    <p>
+                      <strong>{user?.friends?.length || 0}</strong> friends
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="photos">
