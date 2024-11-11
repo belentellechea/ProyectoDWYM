@@ -26,7 +26,7 @@
 
 input:focus {
   outline: none;
-  border: 2px solid rgb(67, 127, 223);
+  border: 2px solid rgb(255, 206, 229);
   background-color: white;
   transition: 0.3s;
 }
@@ -34,7 +34,7 @@ input:focus {
 .ComentariosContent {
   justify-content: left;
   text-align: left;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-bottom: 15px;
 }
 
@@ -53,7 +53,7 @@ input:focus {
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;
   width: 450px;
-  transition: 1s;
+  transition: 0.5s;
 }
 
 .listaComentarios:hover {
@@ -66,7 +66,16 @@ input:focus {
   align-items: center;
   align-content: center;
   max-height: 50px;
+  position: relative;
+  display: inline-block;
 }
 
-.sendComment {
+.sendButton {
+  position: absolute;
+  font-size: 20px;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }

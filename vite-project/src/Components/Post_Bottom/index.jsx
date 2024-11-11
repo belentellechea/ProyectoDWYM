@@ -76,6 +76,7 @@ export function PostBottom({ post }) {
             style={{
               overflowY: visible === "visible" ? "scroll" : "hidden",
               maxHeight: "100px",
+              padding: "5px",
             }}
           >
             {/* {post?.comments?.map((comment) => (
@@ -92,13 +93,12 @@ export function PostBottom({ post }) {
             <p> hola </p>
           </div>
           <form className="commentSend">
-            <div className="commentSend">
-              <input
-                className="commentInput"
-                type="text"
-                placeholder="Add a comment..."
-              ></input>
-            </div>
+            <input
+              className="commentInput"
+              type="text"
+              placeholder="Add a comment..."
+            ></input>
+            <SendOutlined className="sendButton"></SendOutlined>
           </form>
         </div>
       </div>

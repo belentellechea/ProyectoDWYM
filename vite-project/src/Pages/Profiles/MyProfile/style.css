@@ -61,8 +61,8 @@ h1.title.is-6.profileName {
 
 .editButton {
   height: 35px;
-  background-color: rgb(46, 158, 255);
-  color: white;
+  background-color: rgb(184, 211, 255);
+  color: rgb(54, 54, 54);
   width: 120px;
   border-radius: 20px;
   font-size: 14px;
