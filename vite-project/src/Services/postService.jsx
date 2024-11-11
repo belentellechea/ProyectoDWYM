@@ -1,17 +1,25 @@
 
 export const uploadPost = async (imageUrl, caption, addPost, auth) => {
+
+    console.log("image:", imageUrl);
+    console.log("caption:", caption);
+    const formData = new FormData();
+    formData.append("image", imageUrl);
+    formData.append("caption", caption);
+
+    console.log("formData:", formData);
+
     try {
         const response = await fetch(`http://localhost:3001/api/posts/upload`, {
             method: "POST",
             headers: {
                 'Authorization': `Bearer ${auth.token}`
-              },
-            body: {
-                "imageUrl": imageUrl,
-                "caption": caption,
-            }
+            },
+            body: formData
         });
         const data = await response.json();
+        console.log("data respuesta post");
+        console.log(data);
 
         //verificar que data devuelva el post!!!
         addPost(data);
@@ -21,7 +29,7 @@ export const uploadPost = async (imageUrl, caption, addPost, auth) => {
     }
 }
 
-export const getFeed = async () => {
+export const getFeed = async (auth) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts/feed`, {
             method: "GET",
@@ -40,10 +48,32 @@ export const getFeed = async () => {
     }
 }
 
-export const likeHandler = async (post, updatePost) => {
+export const likePost = async (post, updatePost) => {
     try {
-        const response = await fetch(`http://localhost:3001/api/posts/feed`, {
-            method: "PUT",
+        const response = await fetch(`http://localhost:3001/api/posts//${post._id}/like`, {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${auth.token}`
+            },
+            body: {
+                "postId": post._id
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) throw new Error("Error en la respuesta");
+        updatePost(post, data);
+        
+    } catch (error) {
+        console.log("Error fetching posts: ", error);
+    }
+}
+
+export const unLike = async (post, updatePost) => {
+    try {
+        const response = await fetch(`http://localhost:3001/api/posts/${post._id}/like`, {
+            method: "DELETE",
             headers: {
                 'Authorization': `Bearer ${auth.token}`
             },

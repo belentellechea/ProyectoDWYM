@@ -14,7 +14,7 @@ export function Login() {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const account = {
@@ -23,8 +23,10 @@ export function Login() {
     };
 
     console.log(account);
-    const success = loginAccount(account, updateAuth);
-    if (success) navigate("/");
+    const success = await loginAccount(account, updateAuth);
+    console.log(success);
+    if (!success) {navigate("/login")} 
+    if (success) {navigate("/")}
   }
 
   return (

@@ -8,6 +8,7 @@ import { NotificationsModal } from "../../Components/NotificationsModal";
 import styles from "./Home.module.css";
 import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
+import { useUser } from "../../Context/UserContext.jsx";
 
 const { Sider, Content } = Layout;
 
@@ -79,6 +80,7 @@ export function Home({
   const [collapsed, setCollapsed] = useState(false);
 
   const { auth, updateAuth } = useAuth();
+  const { user } = useUser();
 
   return (
     <Layout>
@@ -134,7 +136,7 @@ export function Home({
             transition: "0.5s",
           }}
         >
-          <ViewProfileSuggestions profiles={profilesPreView} />
+          <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
 
           <Post></Post>
           <Post></Post>

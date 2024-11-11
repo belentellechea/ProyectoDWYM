@@ -64,6 +64,8 @@ export function EditModal({ visible, setVisible, userData }) {
       // friends: user?.friends,
       // posts: user?.posts,
     };
+
+    console.log("formData", formData)
     console.log(user);
     console.log(newUser);
     console.log("estoy en updateProfile");
@@ -86,6 +88,7 @@ export function EditModal({ visible, setVisible, userData }) {
                 className="input"
                 type="text"
                 id="user"
+                name="username"
                 defaultValue={user?.username}
                 onChange={handleInputChange}
               />
