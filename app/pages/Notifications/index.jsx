@@ -1,16 +1,16 @@
-import { Text, View, StyleSheet } from "react-native"
+import { Text, View, StyleSheet, SafeAreaView } from "react-native"
 import TopBarTabs from "../../components/Bars/TopBarTabs"
 import BottomBarTabs from "../../components/Bars/BottomBarTabs"
 
 export default function Notifications(){
     return (
-        <View>
+        <SafeAreaView style={{ flex: 1 }}>
             <TopBarTabs atPage='Notifications'/>
             <View style={styles.pageContent}>
-                <Text>Notificationss</Text>
+                <Text>Notificationsssss</Text>
             </View>
-            <BottomBarTabs atPage='Notifications'/>
-        </View>
+            <BottomBarTabs atPage='Notifications' />
+        </SafeAreaView>
     )
 }
 
