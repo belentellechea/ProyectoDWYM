@@ -8,6 +8,7 @@ import { NotificationsModal } from "../../Components/NotificationsModal";
 import styles from "./Home.module.css";
 import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
+import { useUser } from "../../Context/UserContext.jsx";
 import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
 
 const { Sider, Content } = Layout;
@@ -80,6 +81,7 @@ export function Home({
   const [collapsed, setCollapsed] = useState(false);
 
   const { auth, updateAuth } = useAuth();
+  const { user } = useUser();
 
   useEffect(() => {
     // Define la media query para el ancho máximo de 700px
@@ -145,7 +147,7 @@ export function Home({
             transition: "0.5s",
           }}
         >
-          <ViewProfileSuggestions profiles={profilesPreView} />
+          <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
 
           <Post></Post>
           <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />

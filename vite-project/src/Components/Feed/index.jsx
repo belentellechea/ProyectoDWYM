@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Post } from "../Post";
 import { getFeed } from "../../Services/postService";
+import { useAuth } from "../../Context/AuthContext";
 
 export function Feed() {
+  const { auth } = useAuth();
   // const [posts, setPosts] = useState([]);
 
   // const fetchPosts = async () => {
@@ -28,7 +30,7 @@ export function Feed() {
   //   }
   // };
 
-  const feed = getFeed();
+  const feed = getFeed(auth);
 
   // useEffect(() => {
   //   fetchPosts();

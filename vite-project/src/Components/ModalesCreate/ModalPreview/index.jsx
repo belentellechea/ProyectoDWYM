@@ -1,13 +1,25 @@
 import "./style.css";
 import { useState, useEffect } from "react";
 import { Avatar } from "antd";
+import { useUser } from "../../../Context/UserContext";
+import { useAuth } from "../../../Context/AuthContext";
+import { uploadPost } from "../../../Services/postService";
 
 export function ModalPreview({ siguiente, setSiguiente, files }) {
+  const { user, addPost } = useUser();
+  const { auth } = useAuth();
+
   function closeModal() {
     setSiguiente("none");
   }
 
   function compartir() {
+    const imageUrl = "http://localhost:3001/" + files[0].name;
+    const imageUrl2 = URL.createObjectURL(files[0]);
+    console.log("imageUrl:");
+    console.log(imageUrl2);
+    const caption = "example caption";
+    uploadPost(files[0], caption, addPost, auth);
     closeModal();
   }
 
@@ -45,7 +57,7 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
                 <div className="commentArea help">
                   <div className="profileNameComment">
                     <Avatar size={25} />
-                    <p className="userNameComment"> @Usuario_actual </p>
+                    <p className="userNameComment"> {user?.username ? "@" + user.username : "@Usuario_actual"} </p>
                   </div>
                   <textarea
                     className="textarea comment"

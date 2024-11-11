@@ -43,7 +43,7 @@ export const UserProvider = ({ children }) => {
 
     const addFriend = (newFriend) => {
         const newFriendsList = [...user?.friends, newFriend];
-        updateFriends(newFriendsList)
+        updateFriends(newFriendsList);
     }
 
     const updatePosts = (newPostsList) => {
@@ -76,7 +76,7 @@ export const UserProvider = ({ children }) => {
     }, [user]);
 
     return (
-        <UserContext.Provider value={{user, updateUser}}>
+        <UserContext.Provider value={{user, updateUser, updatePost, addPost, addFriend, removeFriend}}>
             {children}
         </UserContext.Provider>
     );

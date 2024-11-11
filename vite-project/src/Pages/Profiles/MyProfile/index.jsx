@@ -104,7 +104,7 @@ export function MyProfile({
                 <div className="rightInfo">
                   <div className="nameEdit">
                     <h1 className="title is-6 profileName">
-                      {user?.name ? user.name : "nombre_usuario"}
+                      {user?.username ? user.username : "nombre_usuario"}
                     </h1>
                     <div className="buttonSettings">
                       <button className="editButton" onClick={openModal}>

@@ -29,8 +29,10 @@ export const getUser = async (id, token, updateUser) => {
 
   // Change profile look
 export const editProfileLook = async (auth, user, newUser, updateUser) => {
-    try {
-      const response = await fetch(`http://localhost:3001/api/profile/edit`, {
+  console.log("!!! new user: ", newUser)  
+  
+  try {
+      const response = await fetch(`http://localhost:3001/api/user/profile/edit`, {
         method: "PUT",
         headers: {
           'Authorization': `Bearer ${auth.token}`
