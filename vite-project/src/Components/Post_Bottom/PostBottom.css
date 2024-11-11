@@ -16,12 +16,19 @@
 
 .commentInput {
   border: 1px solid rgb(255, 206, 229);
-  width: 450px;
+  width: 455px;
   padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0);
+  transition: 0.3s ease-in-out;
+  height: 40px;
+  border-radius: 10px;
 }
 
-.commentInput:focu {
-  border: 1px solid rgb(255, 206, 229);
+input:focus {
+  outline: none;
+  border: 2px solid rgb(67, 127, 223);
+  background-color: white;
+  transition: 0.3s;
 }
 
 .ComentariosContent {
@@ -43,6 +50,23 @@
 }
 
 .listaComentarios {
-  overflow-y: scroll;
-  max-height: 100px;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+  width: 450px;
+  transition: 1s;
+}
+
+.listaComentarios:hover {
+  scrollbar-color: rgba(193, 193, 193, 0.627) #d5d5d50f;
+  transition: 0.3s;
+}
+
+.commentSend {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  max-height: 50px;
+}
+
+.sendComment {
 }

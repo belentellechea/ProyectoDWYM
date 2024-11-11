@@ -1,5 +1,10 @@
 import { theme } from "antd";
-import { CommentOutlined, HeartFilled, HeartOutlined } from "@ant-design/icons";
+import {
+  CommentOutlined,
+  HeartFilled,
+  HeartOutlined,
+  SendOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 import "./PostBottom.css";
 
@@ -57,15 +62,22 @@ export function PostBottom({ post }) {
         <div
           className="ComentariosContent"
           style={{
-            maxHeight: visible === "visible" ? "200px" : "0px",
-            transition: "0.5s",
+            maxHeight: visible === "visible" ? "300px" : "0px",
+            transition: "0.8s",
+            overflow: "hidden",
           }} // Ajusta el valor según la altura del contenido}}
           // style={{
           //   maxHeight: visible === "visible" ? "200px" : "0px", // Ajusta el valor según la altura del contenido
           //   transition: "0.5s",
           // }}
         >
-          <div className="listaComentarios">
+          <div
+            className="listaComentarios"
+            style={{
+              overflowY: visible === "visible" ? "scroll" : "hidden",
+              maxHeight: "100px",
+            }}
+          >
             {/* {post?.comments?.map((comment) => (
               <span>
                 {" "}
@@ -79,12 +91,14 @@ export function PostBottom({ post }) {
             <p> hola </p>
             <p> hola </p>
           </div>
-          <form>
-            <input
-              className="commentInput"
-              type="text"
-              placeholder="Add a comment..."
-            ></input>
+          <form className="commentSend">
+            <div className="commentSend">
+              <input
+                className="commentInput"
+                type="text"
+                placeholder="Add a comment..."
+              ></input>
+            </div>
           </form>
         </div>
       </div>
