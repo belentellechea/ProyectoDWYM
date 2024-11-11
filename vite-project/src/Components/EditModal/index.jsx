@@ -112,19 +112,31 @@ export function EditModal({ visible, setVisible, userData }) {
               </label>
             </div>
           </div>
+          <div className="field loginLabel">
+            <label className="label">Description</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                id="user"
+                defaultValue={user?.description}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
           <div className="modal-buttons">
             <button
               type="button"
               id="cancel-button"
               onClick={closeModal}
-              className="button"
+              className="cancel"
             >
               Cancelar
             </button>
             <button
               type="button"
               id="save-button"
-              className="button save"
+              className="save"
               onClick={updateProfile}
             >
               Guardar cambios

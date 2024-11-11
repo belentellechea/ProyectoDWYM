@@ -3,6 +3,7 @@ import {
   CommentOutlined,
   HeartFilled,
   HeartOutlined,
+  RightOutlined,
   SendOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
@@ -85,12 +86,24 @@ export function PostBottom({ post }) {
                 <strong> {comment?.user?.username} </strong> {comment?.content}{" "}
               </span>
             ))} */}
-            <p> hola </p>
-            <p> hola </p>
-            <p> hola </p>
-            <p> hola </p>
-            <p> hola </p>
-            <p> hola </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
+            <p>
+              <strong> user_name </strong> hola{" "}
+            </p>
           </div>
           <form className="commentSend">
             <input
@@ -98,7 +111,7 @@ export function PostBottom({ post }) {
               type="text"
               placeholder="Add a comment..."
             ></input>
-            <SendOutlined className="sendButton"></SendOutlined>
+            <RightOutlined className="sendButton" />
           </form>
         </div>
       </div>

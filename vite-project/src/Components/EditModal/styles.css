@@ -74,9 +74,28 @@ h2.title.is-4 {
   width: 160px;
 }
 
-button.button.save {
-  background-color: rgb(0, 136, 255);
-  color: white;
+.cancel {
+  background-color: white;
+  transition: 0.3s;
+  border: 0.3px solid grey;
+  font-weight: 600;
+}
+
+.save {
+  background-color: rgb(184, 211, 255);
+  color: rgb(54, 54, 54);
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.cancel:hover {
+  transform: scale(1.08);
+  transition: 0.5s;
+}
+
+.save:hover {
+  transform: scale(1.08);
+  transition: 0.5s;
 }
 
 .modal-content.editModal h2 {
@@ -86,4 +105,10 @@ button.button.save {
 
 .modal-content.editModal form .columns .column .box {
   background-color: #ffe5d9;
+}
+
+input.input:focus {
+  outline: none;
+  border: 3px solid pink;
+  box-shadow: none;
 }
