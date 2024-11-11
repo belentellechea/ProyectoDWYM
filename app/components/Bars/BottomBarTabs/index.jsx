@@ -22,7 +22,7 @@ export default function BottomBarTabs({atPage}) {
       <Pressable onPress={goToProfile}>
         <View style={[
           styles.profileContainer, 
-          { borderWidth: atPage === 'Profile' ? 1 : 0 } // Aplicar borderWidth condicionalmente
+          { borderWidth: atPage === 'Profile' ? 1 : 0 } 
         ]}>
           <Image source={require('../../../assets/user.png')} style={styles.profile}></Image>
         </View>
@@ -40,14 +40,13 @@ const styles = StyleSheet.create({
     bottom: 0, 
     left: 0,
     right: 0,
-    borderTopColor: '#adb5bd',
-    borderTopWidth: 1,
     paddingTop: 15,
     paddingBottom: 15, 
     paddingLeft: 25, 
     paddingRight: 25, 
     flexDirection: 'row', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: '#ffcad4'
   }, 
   profileContainer: {
     borderRadius: 50,
@@ -57,8 +56,7 @@ const styles = StyleSheet.create({
   profile: {
     width: 30,
     height: 30,
-    borderRadius: 50,
-  
+    borderRadius: 50, 
   }
 
 });

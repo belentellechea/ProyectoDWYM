@@ -5,7 +5,7 @@ import Register from '../app/pages/Register';
 import Home from './pages/Home';
 import MyProfile from '../app/pages/Profiles/MyProfile';
 import FriendProfile from '../app/pages/Profiles/FriendProfile';
-
+import Notifications from './pages/Notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +35,11 @@ export default function App() {
         <Stack.Screen 
           name="Profile" 
           component={MyProfile}
+          options={{ headerShown: false }} 
+        /> 
+        <Stack.Screen 
+          name="Notifications" 
+          component={Notifications}
           options={{ headerShown: false }} 
         /> 
       </Stack.Navigator>
