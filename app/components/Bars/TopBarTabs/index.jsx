@@ -1,65 +1,104 @@
-// import * as React from 'react';
-// import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-// import { Ionicons as Icon } from '@expo/vector-icons';
-// import Notifications from '../../../pages/Notifications';
+import * as React from 'react';
+import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
+import Icon from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import Icon2 from '@expo/vector-icons/Ionicons';
+import Icon3 from '@expo/vector-icons/Entypo';
 
-// const TopTab = createMaterialTopTabNavigator();
 
-// export default function TopBarTabs() {
-//   function NotificationsScreen() {
-//     return <Notifications />;
-//   }
+export default function TopBarTabs({atPage}) {
+  const navigation = useNavigation(); 
 
-//   function SettingsScreen() {
-//     return (
-//       <View style={styles.screenContainer}>
-//         <Text>Settings Screen</Text>
-//       </View>
-//     );
-//   }
+  function goToNotifications(){
+    navigation.navigate('Notifications'); 
+  }
 
-//   return (
-//     <TopTab.Navigator
-//       screenOptions={({ route }) => ({
-//         tabBarShowLabel: false,
-//         tabBarIcon: ({ focused }) => {
-//           let iconName;
-//           let iconColor; 
-//           if (route.name === 'Settings') {
-//             iconName = focused ? 'heart' : 'heart-outline';
-//             iconColor = focused ? 'red' : 'black'
-//           } else if (route.name === 'Notifications') {
-//             iconName = focused ? 'add-circle' : 'add-circle-outline';
-//             iconColor = 'black'
-//           }
-//           return <Icon name={iconName} size={24} color={iconColor} />;
-//         },
-//         tabBarIndicatorStyle: { backgroundColor: 'black' },
-//       })}
-//     >
-//       <TopTab.Screen name="Settings" component={SettingsScreen} />
-//       <TopTab.Screen name="Notifications" component={NotificationsScreen} />
-//     </TopTab.Navigator>
-//   );
-// }
+  return (
+    <View style={styles.bar}>
+      <View>
+        {atPage === 'Home'|| atPage === 'Notifications' ? (
+          <Image source={require('../../../assets/name.png')} style={styles.name} />
+        ) : null}
+        {atPage === 'Profile' ? (
+          <Text style={styles.userName}>user_name</Text>
+        ): null}
+      </View>
+      <View >
+        {atPage === 'Home' ? (
+          <View style={styles.buttons}>
+            <Pressable onPress={goToNotifications}>
+              <Icon name='hearto' size={23}/>
+            </Pressable>
+            <Pressable>
+              <Icon2 name='add-circle-outline' size={25}/>
+            </Pressable>
+          </View>
+        ) : null}
+        {atPage === 'Profile' ? (
+          <View style={styles.buttons}>
+            <Pressable>
+              <Icon2 name='add-circle-outline' size={25}/>
+            </Pressable>
+            <Pressable>
+              <Icon3 name='menu' size={25}/>
+            </Pressable>
+        </View>
+        ): null}
+        {atPage === 'Notifications' ? (
+          <View style={styles.buttons}>
+            <Pressable onPress={goToNotifications}>
+              <Icon name='heart' size={23}/>
+            </Pressable>
+            <Pressable>
+              <Icon2 name='add-circle-outline' size={25}/>
+            </Pressable>
+          </View>
+        ) : null}
+      </View>
+    </View>
+  );
+}
 
-// const styles = StyleSheet.create({
-//   title: {
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//   },
-//   iconContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//   },
-//   iconButton: {
-//     padding: 8,
-//   },
-//   screenContainer: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  bar: {
+    display: 'flex',
+    height: '12%',
+    position: 'absolute', 
+    top: 0, 
+    left: 0,
+    right: 0,
+    paddingTop: 50,
+    paddingBottom: 15, 
+    paddingLeft: 25, 
+    paddingRight: 25, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    backgroundColor: '#ffcad4', 
+    alignItems: 'center'
+  }, 
+  profileContainer: {
+    borderRadius: 50,
+    borderColor: 'black', 
+    padding: 3,
+  },
+  profile: {
+    width: 30,
+    height: 30,
+    borderRadius: 50, 
+  }, 
+  name: {
+    width: 150, 
+    height: 30
+  }, 
+  userName: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  }, 
+  buttons: {
+    display: 'flex', 
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10
+  }
+
+});

@@ -22,10 +22,8 @@ export default function Login({navigation}) {
                 <View style={styles.loginContainer}>
                     <Image 
                         style={styles.logo}
-                        source={require('../../assets/Logo.png')}
-                        resizeMode="cover"
+                        source={require('../../assets/nameLogo.png')}
                     />
-                    <Text style={styles.name}>Fakestagram</Text>
                     <Text style={styles.inputText}>Email</Text>
                     <TextInput 
                         placeholder='your.email@example.com'
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
         padding: 30,
         backgroundColor: 'rgba(255, 255, 255, 0.30)',
         borderRadius: '20%',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
     }, 
     input: {
         backgroundColor: 'white',
@@ -91,18 +89,11 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start'
     }, 
     logo: {
-        width: 82,
-        height: 63,
+        width: 290,
+        height: 70,
         alignSelf: 'center',
-        transform: [{rotate: '15deg'}],
-        marginBottom: 5
-    }, 
-    name: {
-        fontWeight: 'bold', 
-        fontSize: 35,
-        alignSelf: 'center', 
         marginBottom: 80
-    },
+    }, 
     signIn: {
         alignSelf: 'center',
         marginTop: 50
