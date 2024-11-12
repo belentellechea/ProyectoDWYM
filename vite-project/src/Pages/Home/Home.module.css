@@ -1,9 +1,92 @@
-header {
-  /* padding-bottom: 30px;
-  margin-bottom: 50px; */
+/* header {
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 1rem;
+} */
+
+.divSider {
+  width: 20%;
+  transition: width 0.5s;
+  background-color: rgb(255, 215, 222);
+}
+
+.content {
+  width: 80%;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: width 0.5s;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.siderCollapsed {
+  width: 7%;
+  transition: width 0.5s;
+  background-color: rgb(255, 215, 222);
+}
+
+.contentCollapsed {
+  width: 93%;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: width 0.5s;
+}
+
+.siderContent {
+  position: fixed;
+  width: 20%;
+  transition: 0.5s;
+}
+
+.siderContentCollapsed {
+  position: fixed;
+  width: 7%;
+  transition: 0.5s;
+}
+
+@media only screen and (min-width: 600px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .divSider {
+    width: 100%;
+    min-height: 10%;
+    background-color: 0.5s;
+    background-color: rgb(255, 215, 222);
+  }
+
+  .siderCollapsed {
+    width: 100%;
+    height: 10%;
+    background-color: 0.5s;
+    background-color: rgb(255, 215, 222);
+  }
+  .siderContent {
+    position: fixed;
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .contentCollapsed {
+    width: 100%;
+  }
 }

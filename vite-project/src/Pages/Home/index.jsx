@@ -83,87 +83,62 @@ export function Home({
   const { auth, updateAuth } = useAuth();
   const { user } = useUser();
 
-  useEffect(() => {
-    // Define la media query para el ancho máximo de 700px
-    const mediaQuery = window.matchMedia("(max-width: 900px)").matches;
-    if (mediaQuery === true) {
-      setCollapsed(true);
-    } else {
-      setCollapsed(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Define la media query para el ancho máximo de 700px
+  //   const mediaQuery = window.matchMedia("(max-width: 900px)").matches;
+  //   if (mediaQuery === true) {
+  //     setCollapsed(true);
+  //   } else {
+  //     setCollapsed(false);
+  //   }
+  // }, []);
 
   return (
-    <Layout>
-      <Sider
-        theme={"light"}
-        width={collapsed ? 0 : "20%"}
-        collapsedWidth={100}
-        className="sider"
-        trigger={null}
-        breakpoint="lg"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-          setCollapsed(false);
-        }}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-          setCollapsed(true);
-        }}
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          insetInlineStart: 0,
-          top: 0,
-          bottom: 0,
-          scrollbarWidth: "thin",
-        }}
-      >
-        <SiderContent
-          openNotifications={openNotifications}
-          closeNotifications={closeNotifications}
-          setVisible={setVisible}
-          collapsed={collapsed}
-          setCollapsed={setCollapsed}
-        ></SiderContent>
-      </Sider>
-      <Layout
-      // style={{
-      //   marginLeft: collapsed ? "0%" : "20%", // Ajuste automático al ancho de Sider
-      //   transition: "0.5s",
-      // }}
-      >
-        <Content
-          className="content"
-          onClick={() => {
-            closeNotifications();
-            setCollapsed(false);
-          }}
-          style={{
-            marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
-            transition: "0.5s",
-          }}
+    <div className={styles.layout}>
+      <div className={collapsed ? styles.siderCollapsed : styles.divSider}>
+        <div
+          className={
+            collapsed ? styles.siderContentCollapsed : styles.siderContent
+          }
         >
-          <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
+          <SiderContent
+            openNotifications={openNotifications}
+            closeNotifications={closeNotifications}
+            setVisible={setVisible}
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+          ></SiderContent>
+        </div>
+      </div>
+      <div
+        className={collapsed ? styles.contentCollapsed : styles.content}
+        // onClick={() => {
+        //   closeNotifications();
+        //   setCollapsed(false);
+        // }}
+        // style={{
+        //   marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
+        //   transition: "0.5s",
+        // }}
+      >
+        <ViewProfileSuggestions
+          profiles={user?.friends == [] ? user.friends : profilesPreView}
+        />
 
-          <Post></Post>
-          <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />
-          <Post image="https://i.pinimg.com/564x/b3/77/9b/b3779b630e879c741eda9d77c0c9925b.jpg" />
-          <Post image="https://i.pinimg.com/564x/85/5c/31/855c319dd6bdeaa28222d88d7a71decd.jpg" />
-          <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" />
-          <Feed></Feed>
-        </Content>
-        <NotificationsModal isActive={isNotificationsActive} />
-      </Layout>
+        <Post></Post>
+        <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />
+        <Post image="https://i.pinimg.com/564x/b3/77/9b/b3779b630e879c741eda9d77c0c9925b.jpg" />
+        <Post image="https://i.pinimg.com/564x/85/5c/31/855c319dd6bdeaa28222d88d7a71decd.jpg" />
+        <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" />
+        <Feed></Feed>
+      </div>
+      {/* <NotificationsModal isActive={isNotificationsActive} /> */}
       <ParentModalCreate
         files={files}
         visible={visible}
         setVisible={setVisible}
         onFilesSelected={setFiles}
       />
-    </Layout>
+    </div>
   );
 }

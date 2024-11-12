@@ -28,6 +28,19 @@ export function SiderContent({
     if (location.pathname === "/profile") return "ProfileTab";
     return "NotificationsTab";
   });
+  const [mode, setMode] = useState(
+    window.innerWidth >= 600 ? "horizontal" : "vertical"
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setMode(window.innerWidth >= 600 ? "horizontal" : "vertical");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function openModal() {
     setVisible("block");
@@ -119,38 +132,44 @@ export function SiderContent({
   ];
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Menu: {
-            itemActiveBg: "#f4acb7",
-            itemSelectedBg: "#ffccd5",
-            itemSelectedColor: "#000000",
-            itemHeight: 60,
-            itemPaddingInline: 100,
+    <div className="siderContent">
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              itemActiveBg: "#f4acb7",
+              itemSelectedBg: "#ffccd5",
+              itemSelectedColor: "#000000",
+              itemHeight: 60,
+              itemPaddingInline: 50,
+            },
           },
-        },
-      }}
-    >
-      <div>
-        {collapsed ? (
-          <img
-            src={logoColapsado}
-            className="logoSiderColapsado"
-            alt="Logo fakestragram"
+        }}
+      >
+        <div className="siderContent">
+          {collapsed ? (
+            <img
+              src={logoColapsado}
+              className="logoSiderColapsado"
+              alt="Logo fakestragram"
+            />
+          ) : (
+            <img
+              src={logo}
+              className="logoSider"
+              alt="Logo fakestagram Sider"
+            />
+          )}
+          <Menu
+            style={{ background: "none", width: "100%" }}
+            mode={mode}
+            defaultSelectedKeys={[activeTabKey]}
+            items={itemsArray}
+            onClick={({ key }) => handleTabChange(key)}
+            inlineCollapsed={collapsed}
           />
-        ) : (
-          <img src={logo} className="logoSider" alt="Logo fakestagram Sider" />
-        )}
-        <Menu
-          style={{ background: "none" }}
-          mode="inline"
-          defaultSelectedKeys={[activeTabKey]}
-          items={itemsArray}
-          onClick={({ key }) => handleTabChange(key)}
-          inlineCollapsed={collapsed}
-        />
-      </div>
-    </ConfigProvider>
+        </div>
+      </ConfigProvider>
+    </div>
   );
 }
