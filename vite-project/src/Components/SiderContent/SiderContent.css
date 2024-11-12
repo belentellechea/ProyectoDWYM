@@ -4,6 +4,7 @@
 }
 
 .logoSider {
+  width: 300px;
   margin-bottom: 1rem;
   margin-top: 1rem;
   transition: 0.5s;
@@ -12,20 +13,69 @@
 .logoSiderColapsado {
   height: 40px;
   margin-bottom: 2rem;
-  margin-top: 1rem;
-  transition: 0.2s;
+  margin-top: 3.5rem;
+  transition: 0.5s;
 }
 
-@media only screen and (min-width: 600px) {
+.siderContent {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
   .logoSider {
-    width: 200px;
-    margin: 0;
+    display: none;
+  }
+
+  .logoSiderColapsado {
+    display: none;
   }
 
   .siderContent {
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    width: 90%;
+    height: 9vh;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .logoSider {
+    display: none;
+  }
+
+  .logoSiderColapsado {
+    display: none;
+  }
+
+  .siderContent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    width: 90%;
+    height: 9vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .logoSider {
+    display: flex;
+    width: 250px;
+    align-self: center;
+  }
+
+  .logoSiderColapsado {
+    display: flex;
+  }
+  .siderContent {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    justify-content: flex-start;
     align-items: center;
-    max-width: 10%;
   }
 }

@@ -29,11 +29,11 @@ export function SiderContent({
     return "NotificationsTab";
   });
   const [mode, setMode] = useState(
-    window.innerWidth >= 600 ? "horizontal" : "vertical"
+    window.innerWidth >= 1200 ? "vertical" : "horizontal"
   );
   useEffect(() => {
-    const handleResize = () => {
-      setMode(window.innerWidth >= 600 ? "horizontal" : "vertical");
+    const handleResize = (width) => {
+      setMode(window.innerWidth >= 1200 ? "vertical" : "horizontal");
     };
 
     window.addEventListener("resize", handleResize);
@@ -140,8 +140,8 @@ export function SiderContent({
               itemActiveBg: "#f4acb7",
               itemSelectedBg: "#ffccd5",
               itemSelectedColor: "#000000",
-              itemHeight: 60,
-              itemPaddingInline: 50,
+              itemPaddingInline: "50px",
+              itemHeight: "70px",
             },
           },
         }}

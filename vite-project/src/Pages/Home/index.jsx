@@ -83,16 +83,6 @@ export function Home({
   const { auth, updateAuth } = useAuth();
   const { user } = useUser();
 
-  // useEffect(() => {
-  //   // Define la media query para el ancho máximo de 700px
-  //   const mediaQuery = window.matchMedia("(max-width: 900px)").matches;
-  //   if (mediaQuery === true) {
-  //     setCollapsed(true);
-  //   } else {
-  //     setCollapsed(false);
-  //   }
-  // }, []);
-
   return (
     <div className={styles.layout}>
       <div className={collapsed ? styles.siderCollapsed : styles.divSider}>
@@ -112,14 +102,10 @@ export function Home({
       </div>
       <div
         className={collapsed ? styles.contentCollapsed : styles.content}
-        // onClick={() => {
-        //   closeNotifications();
-        //   setCollapsed(false);
-        // }}
-        // style={{
-        //   marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
-        //   transition: "0.5s",
-        // }}
+        onClick={() => {
+          closeNotifications();
+          setCollapsed(false);
+        }}
       >
         <ViewProfileSuggestions
           profiles={user?.friends == [] ? user.friends : profilesPreView}
@@ -132,7 +118,10 @@ export function Home({
         <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" />
         <Feed></Feed>
       </div>
-      {/* <NotificationsModal isActive={isNotificationsActive} /> */}
+      <NotificationsModal
+        isActive={isNotificationsActive}
+        closeNotifications={closeNotifications}
+      />
       <ParentModalCreate
         files={files}
         visible={visible}
