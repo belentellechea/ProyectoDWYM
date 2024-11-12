@@ -138,7 +138,7 @@ export function Home({
         >
           <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
 
-          <Post></Post>
+          <Post ></Post>
           <Post></Post>
           <Post></Post>
           <Post></Post>

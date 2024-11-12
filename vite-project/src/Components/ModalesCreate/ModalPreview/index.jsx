@@ -14,10 +14,6 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
   }
 
   function compartir() {
-    const imageUrl = "http://localhost:3001/" + files[0].name;
-    const imageUrl2 = URL.createObjectURL(files[0]);
-    console.log("imageUrl:");
-    console.log(imageUrl2);
     const caption = "example caption";
     uploadPost(files[0], caption, addPost, auth);
     closeModal();
@@ -49,6 +45,7 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
                       src={URL.createObjectURL(file)}
                       alt={file.name}
                       style={{ width: "100%", height: "100%" }}
+                      onClick={() => console.log("url:" + URL.createObjectURL(file))}
                     />
                   </div>
                 ))}
