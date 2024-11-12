@@ -1,9 +1,14 @@
 import { SafeAreaView, View, Text, Alert, Modal, StyleSheet, Pressable } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
-import Icon2 from '@expo/vector-icons/Foundation';
+import { useNavigation } from '@react-navigation/native';
 
+export default function ExitModal ({visible, setVisible}) {
+    const navigation = useNavigation();
 
-export default function CreatePostModal ({visible, setVisible}) {
+    function goToLogin(){
+        setVisible(false)
+        navigation.navigate('Login')
+    }
     
     return(
         <Modal
@@ -13,25 +18,17 @@ export default function CreatePostModal ({visible, setVisible}) {
         >
             <Pressable style={styles.centeredView} onPress={() => setVisible(!visible)}>
                 <View style={styles.modalView}>
-                    <View>
-                        <Pressable style={styles.closeButton} onPress={() => setVisible(!visible)}>
-                            <Icon name='close' size={20} />
+                    <Pressable style={styles.closeButton} onPress={() => setVisible(!visible)}>
+                        <Icon name='close' size={20} />
+                    </Pressable>
+                    <Text style={styles.modalText}>Do you wish to log out?</Text>
+                    <View style={styles.buttonContainer}>
+                        <Pressable onPress={goToLogin} style={styles.yesButton}>
+                            <Text style={styles.buttonText}>Yes</Text>
                         </Pressable>
-                    </View>
-                    <Text style={styles.modalText}>Select an option please</Text>
-                    <View  style={styles.buttonContainer}>
-                        <View > 
-                            <Pressable style={styles.button}>
-                                <Icon name='camera' size={45} style={styles.icon}/>
-                            </Pressable>
-                            <Text style={styles.text}>Camera</Text>
-                        </View>
-                        <View>
-                            <Pressable style={styles.button}>
-                                <Icon2 name='photo' size={45} style={styles.icon}/>
-                            </Pressable>
-                            <Text style={styles.text}>Gallery</Text>
-                        </View>
+                        <Pressable style={styles.noButton} onPress={() => setVisible(!visible)}>
+                            <Text style={styles.buttonText}>No</Text>
+                        </Pressable>
                     </View>
                 </View>
             </Pressable>
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
     },
     modalView: {
         margin: 20,
@@ -76,21 +73,24 @@ const styles = StyleSheet.create({
     }, 
     buttonContainer: {
         display: 'flex', 
-        flexDirection: 'row', 
-        justifyContent: 'space-between'
-    }, 
-    button: {
-        backgroundColor: '#cae9ff',
-        width: 80,
-        height: 80,
-        padding: 15, 
-        borderRadius: 50, 
-    }, 
+        gap: 15
+        
+    },
     text: {
         alignSelf: 'center',
         marginTop: 8
-    },
-    icon: {
+    }, 
+    buttonText: {
         alignSelf: 'center'
+    }, 
+    yesButton: {
+        backgroundColor: '#cae9ff',
+        borderRadius: 50,
+        padding: 15,  
+    }, 
+    noButton: {
+        backgroundColor: '#e9ecef',
+        borderRadius: 50,
+        padding: 15, 
     }
 })
