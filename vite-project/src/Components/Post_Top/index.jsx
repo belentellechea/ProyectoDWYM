@@ -19,7 +19,7 @@ export function PostTop({ user }) {
           {user?.username ? user.username : "Profile Name"}{" "}
         </p>
       </div>
-      <MoreOutlined style={{ fontSize: 20 }} />
+      <MoreOutlined id="moreOutlined" style={{ fontSize: 25 }} />
     </div>
   );
 }

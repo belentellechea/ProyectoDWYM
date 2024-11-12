@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Post } from "../../Components/Post";
 import { SiderContent } from "../../Components/SiderContent";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
@@ -9,6 +9,7 @@ import styles from "./Home.module.css";
 import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
+import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
 
 const { Sider, Content } = Layout;
 
@@ -82,6 +83,16 @@ export function Home({
   const { auth, updateAuth } = useAuth();
   const { user } = useUser();
 
+  useEffect(() => {
+    // Define la media query para el ancho máximo de 700px
+    const mediaQuery = window.matchMedia("(max-width: 900px)").matches;
+    if (mediaQuery === true) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  }, []);
+
   return (
     <Layout>
       <Sider
@@ -138,10 +149,11 @@ export function Home({
         >
           <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
 
-          <Post ></Post>
           <Post></Post>
-          <Post></Post>
-          <Post></Post>
+          <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />
+          <Post image="https://i.pinimg.com/564x/b3/77/9b/b3779b630e879c741eda9d77c0c9925b.jpg" />
+          <Post image="https://i.pinimg.com/564x/85/5c/31/855c319dd6bdeaa28222d88d7a71decd.jpg" />
+          <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" />
           <Feed></Feed>
         </Content>
         <NotificationsModal isActive={isNotificationsActive} />

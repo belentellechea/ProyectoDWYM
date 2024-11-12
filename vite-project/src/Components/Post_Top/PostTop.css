@@ -16,3 +16,8 @@
   margin-right: 15px;
   margin-left: 10px;
 }
+
+#moreOutlined {
+  transform: rotate(90deg);
+  margin-right: 10px;
+}

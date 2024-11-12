@@ -104,7 +104,6 @@ export function EditModal({ visible, setVisible, userData }) {
               />
             </div>
           </div>
-
           <div className="field loginLabel">
             <label className="label">Description</label>
             <div className="control">
@@ -119,7 +118,6 @@ export function EditModal({ visible, setVisible, userData }) {
               />
             </div>
           </div>
-
           <div className="modal-buttons">
           <button
               type="button"
@@ -135,7 +133,6 @@ export function EditModal({ visible, setVisible, userData }) {
                 onClick={updateProfile}
               >Save</button>
             </div>
-
         </form>
 
       </div>

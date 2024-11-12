@@ -32,7 +32,7 @@ button.button_viewProfile {
   margin-top: 10px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0);
-  color: rgb(0, 136, 255);
+  color: rgb(111, 161, 240);
   height: 25px;
   font-size: 12px;
   font-weight: 700;
@@ -51,7 +51,7 @@ div.deleteSuggestion {
   align-self: flex-end;
   justify-content: flex-end;
   color: rgb(102, 102, 102);
-  margin-right: 5px;
+  margin-right: 0px;
 }
 
 div.profileBox:hover {
