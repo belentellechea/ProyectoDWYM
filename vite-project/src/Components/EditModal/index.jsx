@@ -10,44 +10,34 @@ export function EditModal({ visible, setVisible, userData }) {
   const { auth, updateAuth } = useAuth();
   const { user, updateUser } = useUser();
 
-  const [formData, setFormData] = useState(user);
-  const [fileName, setFileName] = useState("Ningún archivo seleccionado");
+  const [formData, setFormData] = useState({
+    username: user?.username,
+    profilePicture: user?.profilePicture,
+    description: user?.description});
 
-  // async function postChanges() {
-  //     try {
-  //       const response = await fetch(`http://localhost:3001/api/profile/edit`, {
-  //         method: "PUT",
-  //         headers: {
-  //           'Authorization': `Bearer ${formData.token}`
-  //         },
-  //         body: {
-  //             "username": formData.username,
-  //             "profilePicture": formData.profilePicture
-  //         }
-  //       });
-  //       const data = await response.json();
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log("Error fetching data: ", error);
-  //     }
-  // }
+  // const handleUsernameInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handlePictureInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
-    } else {
-      setFileName("Ningún archivo seleccionado");
-    }
-  };
+  // const handleDescriptionInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   function closeModal() {
     setVisible("none");
@@ -55,21 +45,24 @@ export function EditModal({ visible, setVisible, userData }) {
 
   function updateProfile(e) {
     e.preventDefault();
-    console.log("estoy en updateProfile");
-    const newUser = {
-      id: user._id,
-      username: formData.name ? formData.name : user.username,
-      description: user?.description,
-      profilePicture: file.name,
+  
+    const newLook = {
+      // id: user.id,
+      username: formData.username ? formData.username : user.username,
+      description: formData.description ? formData.description : user?.description,
+      profilePicture: formData.profilePicture ? formData.profilePicture : user?.profilePicture,
       // friends: user?.friends,
       // posts: user?.posts,
     };
 
     console.log("formData", formData)
-    console.log(user);
-    console.log(newUser);
-    console.log("estoy en updateProfile");
-    editProfileLook(auth, user, newUser, updateUser);
+    console.log("username formdata: ", formData.username);
+    console.log("description formdata: ", formData.description);
+    console.log("picture formdata: ", formData.profilePicture);
+    console.log("user: ",user);
+    console.log("newUser: ", newLook);
+    editProfileLook(auth, user, newLook, updateUser);
+    closeModal();
   }
 
   return (
@@ -80,7 +73,8 @@ export function EditModal({ visible, setVisible, userData }) {
           <h2 className="title is-4">Edit profile</h2>
         </div>
 
-        <form id="taskForm" onSubmit={(e) => e.preventDefault()}>
+        <form id="taskForm" onSubmit={updateProfile}>
+
           <div className="field loginLabel">
             <label className="label">Username</label>
             <div className="control">
@@ -90,29 +84,24 @@ export function EditModal({ visible, setVisible, userData }) {
                 id="user"
                 name="username"
                 defaultValue={user?.username}
-                onChange={handleInputChange}
+                //value={formData?.username}
+                onChange={(e) => setFormData({...formData, username: e.target.value})}
               />
             </div>
           </div>
+
           <div className="field loginLabel">
-            <label className="label">Profile picture</label>
-            <div className="file is-normal has-name">
-              <label className="file-label">
-                <input
-                  className="file-input"
-                  type="file"
-                  id="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-                <span className="file-cta">
-                  <span className="file-icon">
-                    <i className="fas fa-upload"></i>
-                  </span>
-                  <span className="file-label">Choose a file...</span>
-                </span>
-                <span className="file-name">{fileName}</span>
-              </label>
+            <label className="label">Profile picture (link)</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                id="picture"
+                name="profilePicture"
+                defaultValue={user?.profilePicture}
+                //value={formData?.profilePicture}
+                onChange={(e) => setFormData({...formData, profilePicture: e.target.value})}
+              />
             </div>
           </div>
           <div className="field loginLabel">
@@ -121,31 +110,31 @@ export function EditModal({ visible, setVisible, userData }) {
               <input
                 className="input"
                 type="text"
-                id="user"
+                id="description"
+                name="description"
+                //value={formData?.description}
                 defaultValue={user?.description}
-                onChange={handleInputChange}
+                onChange={(e) => setFormData({...formData, description: e.target.value})}
               />
             </div>
           </div>
           <div className="modal-buttons">
-            <button
+          <button
               type="button"
               id="cancel-button"
               onClick={closeModal}
-              className="cancel"
-            >
-              Cancelar
-            </button>
+              className="button"
+            >Cancel</button>
+
             <button
-              type="button"
-              id="save-button"
-              className="save"
-              onClick={updateProfile}
-            >
-              Guardar cambios
-            </button>
-          </div>
+                type="submit"
+                id="save-button"
+                className="button save"
+                onClick={updateProfile}
+              >Save</button>
+            </div>
         </form>
+
       </div>
     </div>
   );
