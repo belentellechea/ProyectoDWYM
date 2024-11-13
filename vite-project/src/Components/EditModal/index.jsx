@@ -47,14 +47,17 @@ export function EditModal({ visible, setVisible, userData }) {
     e.preventDefault();
   
     const newLook = {
-      // id: user.id,
       username: formData.username ? formData.username : user.username,
       description: formData.description ? formData.description : user?.description,
       profilePicture: formData.profilePicture ? formData.profilePicture : user?.profilePicture,
-      // friends: user?.friends,
-      // posts: user?.posts,
     };
-
+   
+    console.log(user);
+    console.log(newUser);
+    console.log("estoy en updateProfile");
+    editProfileLook(auth, user, newUser, updateUser);
+    
+    /* estaba en mi rama de julian    */
     console.log("formData", formData)
     console.log("username formdata: ", formData.username);
     console.log("description formdata: ", formData.description);

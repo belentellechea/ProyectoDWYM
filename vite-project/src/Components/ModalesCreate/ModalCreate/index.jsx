@@ -55,9 +55,9 @@ export function ModalCreate({
   }, [files, onFilesSelected]);
 
   return (
-    <div className="modal" style={{ display: visible }}>
+    <div className={`modal ${styles.modalCreate}`} style={{ display: visible }}>
       <div className="modal-background"></div>
-      <div className={`modal-content ${styles.modalContent}`}>
+      <div className={styles.modalContent}>
         <div className={`card ${styles.card}`}>
           <div className={`card-header ${styles.cardHeader}`}>
             <h1 className="title is-6"> Crear nueva publicacion </h1>
@@ -118,7 +118,7 @@ export function ModalCreate({
         </div>
       </div>
       <button
-        className="modal-close is-large"
+        className={`modal-close is-large ${styles.cerrarModal}`}
         aria-label="close"
         onClick={cancel}
       ></button>
