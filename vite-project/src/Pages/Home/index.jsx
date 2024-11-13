@@ -1,14 +1,13 @@
-import { Layout } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Feed } from "../../Components/Feed";
+import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
+import { NotificationsModal } from "../../Components/NotificationsModal";
 import { Post } from "../../Components/Post";
 import { SiderContent } from "../../Components/SiderContent";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
-import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
-import { NotificationsModal } from "../../Components/NotificationsModal";
-import styles from "./Home.module.css";
-import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
+import styles from "./Home.module.css";
 
 const profilesPreView = [
   {
@@ -73,7 +72,7 @@ export function Home({
   closeNotifications,
   isNotificationsActive,
 }) {
-  const [visible, setVisible] = useState("none");
+  const [visible, setVisible] = useState(false);
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -119,12 +118,13 @@ export function Home({
         isActive={isNotificationsActive}
         closeNotifications={closeNotifications}
       />
-      <ParentModalCreate
-        files={files}
-        visible={visible}
-        setVisible={setVisible}
-        onFilesSelected={setFiles}
-      />
+      {visible && (
+        <ParentModalCreate
+          files={files}
+          setVisible={setVisible}
+          onFilesSelected={setFiles}
+        />
+      )}
     </div>
   );
 }

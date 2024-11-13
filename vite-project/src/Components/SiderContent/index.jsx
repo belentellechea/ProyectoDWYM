@@ -43,7 +43,7 @@ export function SiderContent({
   }, []);
 
   function openModal() {
-    setVisible("block");
+    setVisible(true);
   }
 
   function closeSideBar() {
@@ -142,6 +142,9 @@ export function SiderContent({
               itemSelectedColor: "#000000",
               itemPaddingInline: "50px",
               itemHeight: "70px",
+              horizontalItemSelectedColor: "#000000",
+              horizontalItemSelectedBg: "transparent",
+              horizontalLineHeight: "50px",
             },
           },
         }}

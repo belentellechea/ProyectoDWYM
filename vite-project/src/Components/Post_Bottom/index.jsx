@@ -23,15 +23,18 @@ export function PostBottom({ post }) {
           }}
         >
           {heartIcon ? (
-            <HeartOutlined style={{ marginRight: 10, marginLeft: 10 }} />
+            <HeartOutlined
+              className="heartIcon"
+              style={{ marginRight: 10, marginLeft: 10 }}
+            />
           ) : (
             <HeartFilled
               style={{
                 marginRight: 10,
                 marginLeft: 10,
-                color: "rgb(67, 127, 223)",
+                color: "rgb(206, 68, 68)",
               }}
-              className="heartFilled"
+              className="heartIcon"
             />
           )}
         </div>

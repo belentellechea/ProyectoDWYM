@@ -13,31 +13,8 @@ export function EditModal({ visible, setVisible, userData }) {
   const [formData, setFormData] = useState({
     username: user?.username,
     profilePicture: user?.profilePicture,
-    description: user?.description});
-
-  // const handleUsernameInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handlePictureInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleDescriptionInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
+    description: user?.description,
+  });
 
   function closeModal() {
     setVisible("none");
@@ -45,24 +22,28 @@ export function EditModal({ visible, setVisible, userData }) {
 
   function updateProfile(e) {
     e.preventDefault();
-  
+
     const newLook = {
       username: formData.username ? formData.username : user.username,
-      description: formData.description ? formData.description : user?.description,
-      profilePicture: formData.profilePicture ? formData.profilePicture : user?.profilePicture,
+      description: formData.description
+        ? formData.description
+        : user?.description,
+      profilePicture: formData.profilePicture
+        ? formData.profilePicture
+        : user?.profilePicture,
     };
-   
+
     console.log(user);
     console.log(newUser);
     console.log("estoy en updateProfile");
     editProfileLook(auth, user, newUser, updateUser);
-    
+
     /* estaba en mi rama de julian    */
-    console.log("formData", formData)
+    console.log("formData", formData);
     console.log("username formdata: ", formData.username);
     console.log("description formdata: ", formData.description);
     console.log("picture formdata: ", formData.profilePicture);
-    console.log("user: ",user);
+    console.log("user: ", user);
     console.log("newUser: ", newLook);
     editProfileLook(auth, user, newLook, updateUser);
     closeModal();
@@ -77,7 +58,6 @@ export function EditModal({ visible, setVisible, userData }) {
         </div>
 
         <form id="taskForm" onSubmit={updateProfile}>
-
           <div className="field loginLabel">
             <label className="label">Username</label>
             <div className="control">
@@ -88,7 +68,9 @@ export function EditModal({ visible, setVisible, userData }) {
                 name="username"
                 defaultValue={user?.username}
                 //value={formData?.username}
-                onChange={(e) => setFormData({...formData, username: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, username: e.target.value })
+                }
               />
             </div>
           </div>
@@ -103,7 +85,9 @@ export function EditModal({ visible, setVisible, userData }) {
                 name="profilePicture"
                 defaultValue={user?.profilePicture}
                 //value={formData?.profilePicture}
-                onChange={(e) => setFormData({...formData, profilePicture: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, profilePicture: e.target.value })
+                }
               />
             </div>
           </div>
@@ -117,27 +101,32 @@ export function EditModal({ visible, setVisible, userData }) {
                 name="description"
                 //value={formData?.description}
                 defaultValue={user?.description}
-                onChange={(e) => setFormData({...formData, description: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
               />
             </div>
           </div>
           <div className="modal-buttons">
-          <button
+            <button
               type="button"
               id="cancel-button"
               onClick={closeModal}
               className="button"
-            >Cancel</button>
+            >
+              Cancel
+            </button>
 
             <button
-                type="submit"
-                id="save-button"
-                className="button save"
-                onClick={updateProfile}
-              >Save</button>
-            </div>
+              type="submit"
+              id="save-button"
+              className="button save"
+              onClick={updateProfile}
+            >
+              Save
+            </button>
+          </div>
         </form>
-
       </div>
     </div>
   );

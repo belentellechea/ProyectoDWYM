@@ -29,7 +29,7 @@ export function MyProfile({
 
   const [visible, setVisible] = useState("none");
   const [isLoading, setIsLoading] = useState(true);
-  const [visibleModalCreate, setVisibleModalCreate] = useState("none");
+  const [visibleModalCreate, setVisibleModalCreate] = useState(false);
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -120,12 +120,14 @@ export function MyProfile({
             setVisible={setVisible}
             userData={user}
           />
-          <ParentModalCreate
-            files={files}
-            visible={visibleModalCreate}
-            setVisible={setVisibleModalCreate}
-            onFilesSelected={setFiles}
-          />
+          {visibleModalCreate && (
+            <ParentModalCreate
+              files={files}
+              visible={visibleModalCreate}
+              setVisible={setVisibleModalCreate}
+              onFilesSelected={setFiles}
+            />
+          )}
         </div>
       ) : (
         <p>Loading...</p>
