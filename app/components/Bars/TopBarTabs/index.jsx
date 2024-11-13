@@ -1,61 +1,78 @@
-import * as React from 'react';
-import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, Pressable, Image, SafeAreaView } from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Icon2 from '@expo/vector-icons/Ionicons';
 import Icon3 from '@expo/vector-icons/Entypo';
 
-
-export default function TopBarTabs({atPage}) {
+export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVisible = () => {}, addVisible = () => {} }) {
   const navigation = useNavigation(); 
+  const [buttonAdd, setButtonAdd] = useState('add-circle-outline'); 
+
+  useEffect(() => {
+    if (!addVisible) {
+      setButtonAdd('add-circle-outline');  
+    }
+  }, [addVisible]);
 
   function goToNotifications(){
     navigation.navigate('Notifications'); 
   }
 
+  function addButton(){
+    setButtonAdd('add-circle'); 
+    setAddVisible(true); 
+  }
+
+  function exitButton(){
+    setExitVisible(true); 
+  }
+
   return (
-    <View style={styles.bar}>
-      <View>
-        {atPage === 'Home'|| atPage === 'Notifications' ? (
-          <Image source={require('../../../assets/name.png')} style={styles.name} />
-        ) : null}
-        {atPage === 'Profile' ? (
-          <Text style={styles.userName}>user_name</Text>
-        ): null}
-      </View>
-      <View >
-        {atPage === 'Home' ? (
-          <View style={styles.buttons}>
-            <Pressable onPress={goToNotifications}>
-              <Icon name='hearto' size={23}/>
-            </Pressable>
-            <Pressable>
-              <Icon2 name='add-circle-outline' size={25}/>
-            </Pressable>
-          </View>
-        ) : null}
-        {atPage === 'Profile' ? (
-          <View style={styles.buttons}>
-            <Pressable>
-              <Icon2 name='add-circle-outline' size={25}/>
-            </Pressable>
-            <Pressable>
-              <Icon3 name='menu' size={25}/>
-            </Pressable>
+    <>
+      <View style={styles.bar}>
+        <View>
+          {atPage === 'Home'|| atPage === 'Notifications' ? (
+            <Image source={require('../../../assets/name.png')} style={styles.name} />
+          ) : null}
+          {atPage === 'Profile' ? (
+            <Text style={styles.userName}>user_name</Text>
+          ): null}
         </View>
-        ): null}
-        {atPage === 'Notifications' ? (
-          <View style={styles.buttons}>
-            <Pressable onPress={goToNotifications}>
-              <Icon name='heart' size={23}/>
-            </Pressable>
-            <Pressable>
-              <Icon2 name='add-circle-outline' size={25}/>
-            </Pressable>
+        <View >
+          {atPage === 'Home' ? (
+            <View style={styles.buttons}>
+              <Pressable onPress={goToNotifications}>
+                <Icon name='hearto' size={23}/>
+              </Pressable>
+              <Pressable onPress={addButton}>
+                <Icon2 name={buttonAdd} size={25}/>
+              </Pressable>
+            </View>
+          ) : null}
+          {atPage === 'Profile' ? (
+            <View style={styles.buttons}>
+              <Pressable onPress={addButton}>
+                <Icon2 name={buttonAdd} size={25}/>
+              </Pressable>
+              <Pressable onPress={exitButton}>
+                <Icon3 name='menu' size={25}/>
+              </Pressable>
           </View>
-        ) : null}
+          ): null}
+          {atPage === 'Notifications' ? (
+            <View style={styles.buttons}>
+              <Pressable onPress={goToNotifications}>
+                <Icon name='heart' size={23}/>
+              </Pressable>
+              <Pressable onPress={addButton}>
+                <Icon2 name={buttonAdd} size={25}/>
+              </Pressable>
+            </View>
+          ) : null}
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

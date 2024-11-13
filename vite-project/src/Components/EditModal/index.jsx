@@ -21,7 +21,7 @@ export function EditModal({ visible, setVisible }) {
 
   function updateProfile(e) {
     e.preventDefault();
-  
+
     const newLook = {
       username: formData.username ? formData.username : user.username,
       description: formData.description ? formData.description : user?.description,
@@ -41,7 +41,6 @@ export function EditModal({ visible, setVisible }) {
         </div>
 
         <form id="taskForm" onSubmit={updateProfile}>
-
           <div className="field loginLabel">
             <label className="label">Username</label>
             <div className="control">
@@ -78,27 +77,32 @@ export function EditModal({ visible, setVisible }) {
                 id="description"
                 name="description"
                 defaultValue={user?.description}
-                onChange={(e) => setFormData({...formData, description: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
               />
             </div>
           </div>
           <div className="modal-buttons">
-          <button
+            <button
               type="button"
               id="cancel-button"
               onClick={closeModal}
               className="button"
-            >Cancel</button>
+            >
+              Cancel
+            </button>
 
             <button
-                type="submit"
-                id="save-button"
-                className="button save"
-                onClick={updateProfile}
-              >Save</button>
-            </div>
+              type="submit"
+              id="save-button"
+              className="button save"
+              onClick={updateProfile}
+            >
+              Save
+            </button>
+          </div>
         </form>
-
       </div>
     </div>
   );

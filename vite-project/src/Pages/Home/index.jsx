@@ -1,18 +1,19 @@
-import { Layout } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Feed } from "../../Components/Feed";
+import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
+import { NotificationsModal } from "../../Components/NotificationsModal";
 import { Post } from "../../Components/Post";
 import { SiderContent } from "../../Components/SiderContent";
 import { ViewProfileSuggestions } from "../../Components/ViewProfileSuggestions";
-import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
-import { NotificationsModal } from "../../Components/NotificationsModal";
-import styles from "./Home.module.css";
-import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
 import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
 import { getAllProfiles, getUser } from "../../Services/userService.jsx";
+import styles from "./Home.module.css";
 
 const { Sider, Content } = Layout;
+
+
 
 const profilesPreView = [
   {
@@ -77,7 +78,7 @@ export function Home({
   closeNotifications,
   isNotificationsActive,
 }) {
-  const [visible, setVisible] = useState("none");
+  const [visible, setVisible] = useState(false);
   const [files, setFiles] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
@@ -111,60 +112,32 @@ export function Home({
     fetchAllUsers();
   }, []);
 
+
   return (
-    <Layout>
-      <Sider
-        theme={"light"}
-        width={collapsed ? 0 : "20%"}
-        collapsedWidth={100}
-        className="sider"
-        trigger={null}
-        breakpoint="lg"
-        onBreakpoint={(broken) => {
-          console.log(broken);
+    <div className={styles.layout}>
+      <div className={collapsed ? styles.siderCollapsed : styles.divSider}>
+        <div
+          className={
+            collapsed ? styles.siderContentCollapsed : styles.siderContent
+          }
+        >
+          <SiderContent
+            openNotifications={openNotifications}
+            closeNotifications={closeNotifications}
+            setVisible={setVisible}
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+          ></SiderContent>
+        </div>
+      </div>
+      <div
+        className={collapsed ? styles.contentCollapsed : styles.content}
+        onClick={() => {
+          closeNotifications();
           setCollapsed(false);
         }}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-          setCollapsed(true);
-        }}
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          insetInlineStart: 0,
-          top: 0,
-          bottom: 0,
-          scrollbarWidth: "thin",
-        }}
       >
-        <SiderContent
-          openNotifications={openNotifications}
-          closeNotifications={closeNotifications}
-          setVisible={setVisible}
-          collapsed={collapsed}
-          setCollapsed={setCollapsed}
-        ></SiderContent>
-      </Sider>
-      <Layout
-      // style={{
-      //   marginLeft: collapsed ? "0%" : "20%", // Ajuste automático al ancho de Sider
-      //   transition: "0.5s",
-      // }}
-      >
-        <Content
-          className="content"
-          onClick={() => {
-            closeNotifications();
-            setCollapsed(false);
-          }}
-          style={{
-            marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
-            transition: "0.5s",
-          }}
-        >
+        
           <ViewProfileSuggestions profiles={allUsers?.filter((profile) => profile._id !== user.id)} />
 
           {/* <Post></Post> */}
@@ -173,15 +146,19 @@ export function Home({
           <Post image="https://i.pinimg.com/564x/85/5c/31/855c319dd6bdeaa28222d88d7a71decd.jpg" />
           <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" /> */}
           <Feed users={allUsers} ></Feed>
-        </Content>
-        <NotificationsModal isActive={isNotificationsActive} />
-      </Layout>
-      <ParentModalCreate
-        files={files}
-        visible={visible}
-        setVisible={setVisible}
-        onFilesSelected={setFiles}
+        
+      </div>
+      <NotificationsModal
+        isActive={isNotificationsActive}
+        closeNotifications={closeNotifications}
       />
-    </Layout>
+      {visible && (
+        <ParentModalCreate
+          files={files}
+          setVisible={setVisible}
+          onFilesSelected={setFiles}
+        />
+      )}
+    </div>
   );
 }

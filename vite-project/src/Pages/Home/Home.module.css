@@ -1,9 +1,170 @@
-header {
-  /* padding-bottom: 30px;
-  margin-bottom: 50px; */
-  background-color: white;
+.content {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 1rem;
+  align-content: center;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.contentCollapsed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+/* PARA CELULARES */
+@media only screen and (max-width: 600px) {
+  .content {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .divSider {
+    width: 100%;
+    transition: width 0.5s;
+    height: 10vh;
+  }
+
+  .siderCollapsed {
+    width: 100%;
+    background-color: 0.5s;
+    height: 9vh;
+    background-color: rgb(255, 215, 222);
+    transition: 1s;
+  }
+  .siderContent {
+    width: 100%;
+    background-color: rgb(255, 215, 222);
+    top: 0;
+    display: flex;
+    height: 9vh;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+  }
+
+  .content {
+    width: 100%;
+    max-height: 80%;
+  }
+
+  .contentCollapsed {
+    width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+/*  PARA TABLETS  */
+@media only screen and (min-width: 600px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .divSider {
+    width: 100%;
+    transition: width 0.5s;
+    height: 9vh;
+  }
+
+  .siderCollapsed {
+    width: 100%;
+    height: 9vh;
+    transition: width 0.5s;
+  }
+
+  .siderContentCollapsed {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 215, 222);
+    top: 0;
+  }
+
+  .siderContent {
+    width: 100%;
+    background-color: rgb(255, 215, 222);
+    top: 0;
+    display: flex;
+    height: 9vh;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    z-index: 3;
+  }
+
+  .content {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+  }
+
+  .contentCollapsed {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .divSider {
+    width: 20%;
+    transition: width 0.5s;
+    height: 100vh;
+  }
+
+  .siderCollapsed {
+    width: 7%;
+  }
+
+  .siderContent {
+    width: 20%;
+    position: fixed;
+    background-color: rgb(255, 215, 222);
+    height: 100vh;
+    transition: width 0.5s;
+    z-index: 0;
+  }
+
+  .siderCollapsed {
+    width: 7%;
+    transition: width 0.5s;
+  }
+
+  .siderContentCollapsed {
+    width: 7%;
+    position: fixed;
+    background-color: rgb(255, 215, 222);
+    height: 100vh;
+    transition: width 0.5s;
+  }
+
+  .content {
+    width: 80%;
+    padding: 4rem;
+    transition: width 0.5s;
+  }
+
+  .contentCollapsed {
+    width: 93%;
+    padding: 4rem;
+    transition: width 0.5s;
+  }
 }

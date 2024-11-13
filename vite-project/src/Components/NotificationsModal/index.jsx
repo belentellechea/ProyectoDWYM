@@ -3,10 +3,11 @@ import { Layout } from "antd";
 import { SiderContent } from "../../Components/SiderContent";
 import { Notification } from "../../Components/Notification";
 import styles from "./NotificationsModal.module.css";
+import { CloseOutlined } from "@ant-design/icons";
 
 const { Sider, Content } = Layout;
 
-export function NotificationsModal({ isActive }) {
+export function NotificationsModal({ isActive, closeNotifications }) {
   const hardcodedNots = [
     {
       user: "usuario1",
@@ -49,13 +50,21 @@ export function NotificationsModal({ isActive }) {
     <>
       {" "}
       {isActive && (
-        <div
-          className={`notifications ${isActive ? "is-active" : ""} ${
-            styles.notifications
-          } shadow`}
-        >
+        <div className={isActive ? styles.notifications : ""}>
           <div className="notifications-content">
-            <span className="title is-4"> Notifications </span>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <span className="title is-4"> Notifications </span>
+              <div className={styles.closeNotification}>
+                <CloseOutlined onClick={closeNotifications} />
+              </div>
+            </div>
             <ul>
               {hardcodedNots.map((notification) => (
                 <Notification

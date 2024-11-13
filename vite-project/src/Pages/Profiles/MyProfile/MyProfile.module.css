@@ -1,0 +1,207 @@
+#settingsIcon {
+  transition: 0.5s;
+}
+
+#settingsIcon:hover {
+  color: rgb(111, 161, 240);
+  transition: 0.3s;
+  font-size: 35;
+  rotate: 15deg;
+  transform: scale(1.08);
+}
+
+.editButton:hover {
+  transform: scale(1.08);
+}
+
+@media only screen and (max-width: 750px) {
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .rightInfo {
+    width: 90%;
+    margin-top: 2rem;
+    flex-direction: column;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+  }
+  .nameEdit {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .profileName {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .editButton {
+    height: 35px;
+    background-color: rgb(184, 211, 255);
+    color: rgb(54, 54, 54);
+    width: 120px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.5s;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 1rem;
+  }
+
+  .postsFriends {
+    width: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 16px;
+  }
+
+  .buttonSettings {
+    display: flex;
+    align-content: center;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .profileInfo {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+  }
+  .rightInfo {
+    width: 60%;
+    text-align: left;
+    align-items: flex-start;
+    padding-top: 0;
+  }
+
+  .nameEdit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .profileName {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .buttonSettings {
+    display: flex;
+    align-content: center;
+  }
+
+  .editButton {
+    height: 35px;
+    background-color: rgb(184, 211, 255);
+    color: rgb(54, 54, 54);
+    width: 120px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.5s;
+  }
+
+  .postsFriends {
+    width: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 16px;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .profileInfo {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    justify-content: space-between;
+  }
+
+  .rightInfo {
+    width: 360px;
+    text-align: left;
+    align-items: flex-start;
+    padding-top: 0;
+  }
+
+  .nameEdit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .profileName {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .buttonSettings {
+    display: flex;
+    align-content: center;
+  }
+  .editButton {
+    height: 35px;
+    background-color: rgb(184, 211, 255);
+    color: rgb(54, 54, 54);
+    width: 120px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.5s;
+  }
+
+  .postsFriends {
+    width: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 16px;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 1rem;
+  }
+}
