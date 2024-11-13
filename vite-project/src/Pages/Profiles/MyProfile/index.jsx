@@ -110,7 +110,6 @@ export function MyProfile({
                       onClick={openConfigurationModal}
                     />
                   </div>
-                  <p>{user?.description}</p>
                 </div>
                 <div className={styles.postsFriends}>
                   <p>
@@ -120,6 +119,7 @@ export function MyProfile({
                     <strong>{user?.friends?.length || 0}</strong> friends
                   </p>
                 </div>
+                <p>{user?.description}</p>
               </div>
             </div>
             <div className="photos">
