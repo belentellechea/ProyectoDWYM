@@ -14,3 +14,8 @@
 .modalBackground {
     background-color: rgba(10, 10, 10, 0.86); /* Opacidad de fondo */
   }
+
+.postPostInfo {
+    display: flex;
+    flex-direction: row;
+}

@@ -26,13 +26,18 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('auth', JSON.stringify(newAuth));
     }
 
+    const logOut = () => {
+        //localStorage.removeItem('auth');
+        localStorage.clear();
+    }
+
     // Utiliza useEffect para confirmar la actualización de auth
     useEffect(() => {
         console.log("Auth actualizado:", auth);
     }, [auth]);
 
     return (
-        <AuthContext.Provider value={{auth, updateAuth}}>
+        <AuthContext.Provider value={{auth, updateAuth, logOut}}>
             {children}
         </AuthContext.Provider>
     );

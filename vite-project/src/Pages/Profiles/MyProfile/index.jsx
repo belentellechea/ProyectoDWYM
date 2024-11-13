@@ -18,6 +18,7 @@ import {
   SettingFilled,
   SettingOutlined,
 } from "@ant-design/icons";
+import { ConfigurationModal } from "../../../Components/ConfigurationModal/index.jsx";
 
 export function MyProfile({
   openNotifications,
@@ -28,6 +29,7 @@ export function MyProfile({
   const { user, updateUser } = useUser();
 
   const [visible, setVisible] = useState("none");
+  const [visibleConfiguration, setVisibleConfiguration] = useState("none");
   const [isLoading, setIsLoading] = useState(true);
   const [visibleModalCreate, setVisibleModalCreate] = useState(false);
   const [files, setFiles] = useState([]);
@@ -38,8 +40,17 @@ export function MyProfile({
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    getUser(auth.id, auth.token, updateUser);
+    setIsLoading(false);
+  }, [user?.post]);
+
   function openModal() {
     setVisible("block");
+  }
+
+  function openConfigurationModal() {
+    setVisibleConfiguration("block");
   }
 
   return (
@@ -96,9 +107,10 @@ export function MyProfile({
                     <SettingOutlined
                       id={styles.settingsIcon}
                       style={{ fontSize: "26px", marginLeft: "10px" }}
-                      onClick={openModal}
+                      onClick={openConfigurationModal}
                     />
                   </div>
+                  <p>{user?.description}</p>
                 </div>
                 <div className={styles.postsFriends}>
                   <p>
@@ -120,6 +132,12 @@ export function MyProfile({
             setVisible={setVisible}
             userData={user}
           />
+          
+          <ConfigurationModal
+          visible={visibleConfiguration}
+          setVisible={setVisibleConfiguration}
+          />
+
           {visibleModalCreate && (
             <ParentModalCreate
               files={files}
@@ -129,6 +147,7 @@ export function MyProfile({
             />
           )}
         </div>
+
       ) : (
         <p>Loading...</p>
       )}

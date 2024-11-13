@@ -2,47 +2,87 @@ import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
 import { Layout } from "antd";
 import { SiderContent } from "../../../Components/SiderContent";
+import "./style.css";
+import image from "../../../assets/user.png";
+import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
+import { ParentModalCreate } from "../../../Components/ModalesCreate/ParentModalCreate";
+import { EditModal } from "../../../Components/EditModal";
+import { useUser } from "../../../Context/UserContext";
+import { useAuth } from "../../../Context/AuthContext";
+import { getAllProfiles, getUser } from "../../../Services/userService.jsx";
+import {
+  MenuOutlined,
+  SettingFilled,
+  SettingOutlined,
+} from "@ant-design/icons";
+import { ConfigurationModal } from "../../../Components/ConfigurationModal/index.jsx";
 import { useParams } from "react-router-dom";
 
 const { Sider, Content } = Layout;
 
-const url = `http://localhost:3001/api/user/profile`;
-
-export function FriendProfile({ friends }) {
+export function FriendProfile({
+  openNotifications,
+  closeNotifications,
+  isNotificationsActive,
+}) {
+  const { auth, updateAuth } = useAuth();
+  const { user, updateUser } = useUser();
   const { id } = useParams();
-  const [profile, setProfile] = useState(null);
-  const [friendButton, setfriendButton] = useState(" ");
-  const [visible, setVisible] = useState("none");
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [visibleModalCreate, setVisibleModalCreate] = useState("none");
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
+  const [friend, setFriend] = useState({});
 
-  async function fetchProfileDetails() {
+  const fetchFriend = async () => {
     try {
-      const response = await fetch(`${url}/${id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await response.json();
-      console.log(data);
-      setProfile(data);
-
-      //const isFriend = friends.some(friend => friend._id == data.user._id);
-      //setfriendButton (isFriend ? "Delete friend" : "Add friend")
+      const data = await getUser(id, auth.token);
+      setFriend(data);
+      console.log("data friend: ",data);
     } catch (error) {
-      console.log("Error fetching profile details:", error);
+      console.error("Error fetching friend:", error);
     }
   }
-
   useEffect(() => {
-    fetchProfileDetails();
-  }, [id]);
+    fetchFriend();
+    setIsLoading(false);
+    console.log("print friend: ", friend );
+  }, []);
+
+  // useEffect(() => {
+  //   getUser(auth.id, auth.token, updateUser);
+  //   setIsLoading(false);
+  // }, []);
+  // const fetchAllUsers = async () => {
+  //   try {
+  //     const data = await getAllProfiles(auth);
+  //     setAllUsers(data);
+  //   } catch (error) {
+  //     console.error("Error fetching feed:", error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchAllUsers();
+  //   setIsLoading(false);
+  // }, []);
+
+  // const friend = allUsers.find((profile) => profile._id == id);
+  // console.log("print friend: ", friend );
+
+  function openModal() {
+    setVisible("block");
+  }
+
+  function followUnFollow() {
+
+  }
 
   return (
     <>
-      {profile && (
+      {!isLoading ? (
         <Layout className="layout">
           <Sider
             theme={"light"}
@@ -93,34 +133,52 @@ export function FriendProfile({ friends }) {
             >
               <div className="profileInfo">
                 <div className="leftInfo">
-                  <ProfilePhoto size={160} url={profile.user.profileImage} />
+                  <ProfilePhoto
+                    className="myProfilePic"
+                    size={160}
+                    url={friend?.profilePicture ? friend.profilePicture : image}
+                  />
                 </div>
                 <div className="rightInfo">
-                  <div className="userEdit">
-                    <h4 className="subtitle is-4">
-                      <strong>{profile.user.username}</strong>
-                    </h4>
-                    <button className="button editProfile">
-                      {friendButton}
-                    </button>
+                  <div className="nameEdit">
+                    <h1 className="title is-6 profileName">
+                      {friend?.username ? friend.username : "nombre_usuario"}
+                    </h1>
+                    <div className="buttonSettings">
+                      <button className="editButton" onClick={followUnFollow}>
+                        {" "}
+                        follow{" "}
+                      </button>
+                    </div>
                   </div>
                   <div className="postsFriends">
                     <p>
-                      <strong>{profile.posts?.length || 0}</strong> posts
+                      <strong>{friend?.posts?.length || 0}</strong> posts
                     </p>
                     <p>
-                      <strong>{profile.user.friends?.length || 0}</strong>{" "}
-                      friends
+                      <strong>{friend?.user?.friends?.length || 0}</strong> friends
                     </p>
                   </div>
+                  <p>{friend?.description}</p>
                 </div>
               </div>
               <div className="photos">
-                <Grid photos={profile.posts} />
+                <Grid posts={friend?.posts} />
               </div>
+              <NotificationsModal isActive={isNotificationsActive} />
             </Content>
           </Layout>
+          
+          <ParentModalCreate
+            files={files}
+            visible={visibleModalCreate}
+            setVisible={setVisibleModalCreate}
+            onFilesSelected={setFiles}
+          />
+
         </Layout>
+      ) : (
+        <p>Loading...</p>
       )}
     </>
   );

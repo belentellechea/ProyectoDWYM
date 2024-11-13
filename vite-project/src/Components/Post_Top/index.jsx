@@ -5,13 +5,14 @@ import "./PostTop.css";
 
 export function PostTop({ user }) {
   return (
-    <div className="divPostTop flex-container">
+    <div className="divPostTop flex-container" >
       <div className="avatarYNombre">
         {/* <Avatar size="small" className="avatarIcon" icon={<UserOutlined />} /> */}
         <Avatar
           size={40}
           className="avatarIcon"
-          icon={user?.profilePicture ? user?.profilePicture : <UserOutlined />}
+          src={user?.profilePicture}
+          icon={!user?.profilePicture && <UserOutlined />}
         />
         {/* <p className="title is-6"> Profile Name </p> */}
         <p className="title is-6">

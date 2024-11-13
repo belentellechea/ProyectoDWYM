@@ -9,12 +9,13 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
   const { user, addPost } = useUser();
   const { auth } = useAuth();
 
+  const [caption, setCaption] = useState('');
+
   function closeModal() {
     setSiguiente("none");
   }
 
   function compartir() {
-    const caption = "example caption";
     uploadPost(files[0], caption, addPost, auth);
     closeModal();
   }
@@ -59,6 +60,8 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
                   <textarea
                     className="textarea comment"
                     placeholder="e.g. Hello world"
+                    value={caption}
+                    onChange={(e) => setComment(e.target.value)}
                   ></textarea>
                 </div>
               </div>
