@@ -1,11 +1,11 @@
-import "./Login.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logoSider2.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { loginAccount } from "../../Services/authService";
+import style from "./Login.module.css";
 
 const url = "http://localhost:3001/api/auth/login";
 
@@ -25,18 +25,22 @@ export function Login() {
     console.log(account);
     const success = await loginAccount(account, updateAuth);
     console.log(success);
-    if (!success) {navigate("/login")} 
-    if (success) {navigate("/")}
+    if (!success) {
+      navigate("/login");
+    }
+    if (success) {
+      navigate("/");
+    }
   }
 
   return (
-    <div className="loginBackground">
-      <div className="loginDiv">
-        <img src={logo} className="logo" alt="Logo fakestagram" />
-        <h1 className="title is-1"> Fakestagram </h1>
+    <div className={style.loginBackground}>
+      <div className={style.loginDiv}>
+        <img src={logo} className={style.logo} alt="Logo fakestagram" />
+        {/* <h1 className="title is-1"> Fakestagram </h1> */}
 
-        <form className="formDiv">
-          <div className="field loginLabel">
+        <form className={style.formDiv}>
+          <div className={style.loginLabel}>
             <label className="label">Email</label>
             <div className="control">
               <input
@@ -48,7 +52,7 @@ export function Login() {
             </div>
           </div>
 
-          <div className="field  loginLabel">
+          <div className={style.loginLabel}>
             <label className="label">Password</label>
             <div className="control">
               <input
@@ -57,18 +61,25 @@ export function Login() {
                 placeholder="********"
                 id="passwordInput"
               />
-              <span onClick={() => setShow(!show)} className="passwordEye">
+              <span
+                onClick={() => setShow(!show)}
+                className={style.passwordEye}
+              >
                 {show ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
           </div>
         </form>
 
-        <button className="button is-danger" onClick={handleSubmit}>
+        <button
+          id={style.buttonSignIn}
+          className="button is-danger"
+          onClick={handleSubmit}
+        >
           Sign in
         </button>
-        <p className="orText">or</p>
-        <p className="text">
+        <p className={style.orText}>or</p>
+        <p className={style.text}>
           Create account <Link to="/register">here</Link>
         </p>
       </div>

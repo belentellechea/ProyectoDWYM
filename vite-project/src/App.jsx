@@ -70,8 +70,8 @@ function App() {
         <Router>
           <div className="app">
             <Routes>
-              {/* <Route path="/*" element={<Navigate replace to="/" />} />
-              <Route path="/login" element={<Login />} /> */}
+              <Route path="/*" element={<Navigate replace to="/" />} />
+              <Route path="/login" element={<Login />} />
               <Route
                 path="/"
                 element={
@@ -82,10 +82,18 @@ function App() {
                   />
                 }
               />
-              {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
-              {/* <Route path="/profile" element={<MyProfile openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} /> */}
+              <Route
+                path="/profile"
+                element={
+                  <MyProfile
+                    openNotifications={openNotifications}
+                    closeNotifications={closeNotifications}
+                    isNotificationsActive={notificationsModal}
+                  />
+                }
+              />
               {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
-              {/* <Route path="/register" element={ <CreateAccount /> }/> */}
+              <Route path="/register" element={<CreateAccount />} />
             </Routes>
           </div>
         </Router>

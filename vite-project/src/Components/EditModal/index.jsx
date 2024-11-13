@@ -65,7 +65,7 @@ export function EditModal({ visible, setVisible, userData }) {
       // posts: user?.posts,
     };
 
-    console.log("formData", formData)
+    console.log("formData", formData);
     console.log(user);
     console.log(newUser);
     console.log("estoy en updateProfile");

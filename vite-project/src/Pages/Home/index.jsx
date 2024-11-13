@@ -9,9 +9,6 @@ import styles from "./Home.module.css";
 import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
-import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
-
-const { Sider, Content } = Layout;
 
 const profilesPreView = [
   {

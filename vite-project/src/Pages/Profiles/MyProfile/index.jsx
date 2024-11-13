@@ -2,7 +2,6 @@ import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
 import { Layout } from "antd";
 import { SiderContent } from "../../../Components/SiderContent";
-import "./style.css";
 import image from "../../../assets/user.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
@@ -11,13 +10,14 @@ import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
 import { getUser } from "../../../Services/userService.jsx";
+import stylesHome from "../../Home/Home.module.css";
+import styles from "./MyProfile.module.css";
+
 import {
   MenuOutlined,
   SettingFilled,
   SettingOutlined,
 } from "@ant-design/icons";
-
-const { Sider, Content } = Layout;
 
 export function MyProfile({
   openNotifications,
@@ -45,95 +45,76 @@ export function MyProfile({
   return (
     <>
       {!isLoading ? (
-        <Layout className="layout">
-          <Sider
-            theme={"light"}
-            width={collapsed ? 0 : "20%"}
-            collapsedWidth={100}
-            className="sider"
-            trigger={null}
-            breakpoint="lg"
-            onBreakpoint={(broken) => {
-              console.log(broken);
+        <div className={stylesHome.layout}>
+          <div
+            className={
+              collapsed ? stylesHome.siderCollapsed : stylesHome.divSider
+            }
+          >
+            <div
+              className={
+                collapsed
+                  ? stylesHome.siderContentCollapsed
+                  : stylesHome.siderContent
+              }
+            >
+              <SiderContent
+                openNotifications={openNotifications}
+                closeNotifications={closeNotifications}
+                setVisible={setVisibleModalCreate}
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+              ></SiderContent>
+            </div>
+          </div>
+          <div
+            className={
+              collapsed ? stylesHome.contentCollapsed : stylesHome.content
+            }
+            onClick={() => {
+              closeNotifications();
               setCollapsed(false);
             }}
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-              setCollapsed(true);
-            }}
-            style={{
-              overflow: "auto",
-              height: "100vh",
-              position: "fixed",
-              insetInlineStart: 0,
-              top: 0,
-              bottom: 0,
-              scrollbarWidth: "thin",
-            }}
           >
-            <SiderContent
-              openNotifications={openNotifications}
-              closeNotifications={closeNotifications}
-              setVisible={setVisibleModalCreate}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-            ></SiderContent>
-          </Sider>
-          <Layout>
-            <Content
-              className="content"
-              onClick={() => {
-                closeNotifications();
-                setCollapsed(false);
-              }}
-              style={{
-                marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
-                transition: "0.5s",
-              }}
-            >
-              <div className="profileInfo">
-                <div className="leftInfo">
-                  <ProfilePhoto
-                    className="myProfilePic"
-                    size={160}
-                    url={user?.profilePicture ? user.profilePicture : image}
-                  />
-                </div>
-                <div className="rightInfo">
-                  <div className="nameEdit">
-                    <h1 className="title is-6 profileName">
-                      {user?.username ? user.username : "nombre_usuario"}
-                    </h1>
-                    <div className="buttonSettings">
-                      <button className="editButton" onClick={openModal}>
-                        {" "}
-                        edit profile{" "}
-                      </button>
-                      <SettingOutlined
-                        id="settingsIcon"
-                        style={{ fontSize: "26px", marginLeft: "10px" }}
-                        onClick={openModal}
-                      />
-                    </div>
-                  </div>
-                  <div className="postsFriends">
-                    <p>
-                      <strong>{user?.posts?.length || 0}</strong> posts
-                    </p>
-                    <p>
-                      <strong>{user?.friends?.length || 0}</strong> friends
-                    </p>
+            <div className={styles.profileInfo}>
+              <div className={styles.leftInfo}>
+                <ProfilePhoto
+                  size={160}
+                  url={user?.profilePicture ? user.profilePicture : image}
+                />
+              </div>
+              <div className={styles.rightInfo}>
+                <div className={styles.nameEdit}>
+                  <h1 className={styles.profileName}>
+                    {user?.username ? user.username : "nombre_usuario"}
+                  </h1>
+                  <div className={styles.buttonSettings}>
+                    <button className={styles.editButton} onClick={openModal}>
+                      {" "}
+                      edit profile{" "}
+                    </button>
+                    <SettingOutlined
+                      id={styles.settingsIcon}
+                      style={{ fontSize: "26px", marginLeft: "10px" }}
+                      onClick={openModal}
+                    />
                   </div>
                 </div>
+                <div className={styles.postsFriends}>
+                  <p>
+                    <strong>{user?.posts?.length || 0}</strong> posts
+                  </p>
+                  <p>
+                    <strong>{user?.friends?.length || 0}</strong> friends
+                  </p>
+                </div>
               </div>
-              <div className="photos">
-                <Grid photos={user?.posts} />
-              </div>
-              <NotificationsModal isActive={isNotificationsActive} />
-            </Content>
-          </Layout>
+            </div>
+            <div className="photos">
+              <Grid photos={user?.posts} />
+            </div>
+            <NotificationsModal isActive={isNotificationsActive} />
+          </div>
           <EditModal
             visible={visible}
             setVisible={setVisible}
@@ -145,7 +126,7 @@ export function MyProfile({
             setVisible={setVisibleModalCreate}
             onFilesSelected={setFiles}
           />
-        </Layout>
+        </div>
       ) : (
         <p>Loading...</p>
       )}

@@ -61,7 +61,9 @@ export function NotificationsModal({ isActive, closeNotifications }) {
               }}
             >
               <span className="title is-4"> Notifications </span>
-              <CloseOutlined onClick={closeNotifications} />
+              <div className={styles.closeNotification}>
+                <CloseOutlined onClick={closeNotifications} />
+              </div>
             </div>
             <ul>
               {hardcodedNots.map((notification) => (

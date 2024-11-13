@@ -1,9 +1,9 @@
 .content {
   display: flex;
   align-items: center;
-  justify-content: center;
   align-content: center;
   flex-direction: column;
+  overflow: auto;
 }
 
 .contentCollapsed {
@@ -50,7 +50,7 @@
     align-items: flex-end;
     position: fixed;
     width: 100%;
-    z-index: 1000;
+    z-index: 3;
   }
 
   .content {
@@ -101,6 +101,7 @@
     position: fixed;
     width: 100%;
     z-index: 1000;
+    z-index: 3;
   }
 
   .content {
@@ -139,6 +140,7 @@
     background-color: rgb(255, 215, 222);
     height: 100vh;
     transition: width 0.5s;
+    z-index: 0;
   }
 
   .siderCollapsed {
