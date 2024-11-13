@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, TextInput, Pressable, ImageBackground} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TextInput, Pressable, ImageBackground, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useState } from 'react';
 
@@ -16,7 +16,10 @@ export default function Register({navigation}) {
         >
             <SafeAreaView style={styles.container}>
                 <View style={styles.registerContainer}>
-                    <Text style={styles.title}>Create account</Text>
+                    <Image 
+                         source={require('../../assets/createAccount.png')}
+                         style={styles.createAccount}
+                    />
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputText}>Email</Text>
                         <TextInput 
@@ -115,5 +118,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 15,
         top: 20
+    }, 
+    createAccount: {
+        width: 280,
+        height: 30, 
+        alignSelf: 'center'
     }
 })

@@ -4,7 +4,8 @@ export const getUser = async (id, token, updateUser) => {
       const response = await fetch(`http://localhost:3001/api/user/profile/${id}`, {
         method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       });
       const data = await response.json();
@@ -28,20 +29,17 @@ export const getUser = async (id, token, updateUser) => {
   }
 
   // Change profile look
-export const editProfileLook = async (auth, user, newUser, updateUser) => {
-  console.log("!!! new user: ", newUser)  
+export const editProfileLook = async (auth, user, newLook, updateUser) => {
+  console.log("!!! new user: ", newLook)  
   
   try {
       const response = await fetch(`http://localhost:3001/api/user/profile/edit`, {
         method: "PUT",
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${auth.token}`
         },
-        body: {
-            "username": newUser?.username, 
-            "profilePicture": newUser?.profilePicture,
-            "description": newUser?.description
-        }
+        body: JSON.stringify(newLook)
       });
 
       if (!response.ok) {
@@ -52,18 +50,19 @@ export const editProfileLook = async (auth, user, newUser, updateUser) => {
       const data = await response.json(); 
       console.log(data); 
 
-    //   const updatedUser = {
-    //     id: user?._id,
-    //     username: data?.username,
-    //     description: data?.description,
-    //     profilePicture: data?.profilePicture,
-    //     friends: user?.friends,
-    //     posts: user?.posts,
-    //   }
+      const updatedUser = {
+        id: user?._id,
+        username: data?.user?.username,
+        description: data?.user?.description,
+        profilePicture: data?.user?.profilePicture,
+        friends: user?.friends,
+        posts: user?.posts,
+      }
     console.log("estoy en editProfileLook")
-    console.log(newUser);
+    console.log(newLook);
+    console.log(updatedUser)
 
-      updateUser(newUser);
+      updateUser(updatedUser);
 
     } catch (error) {
       console.log("Error fetching data: ", error);
