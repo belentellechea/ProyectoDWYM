@@ -165,7 +165,7 @@ export function Home({
             transition: "0.5s",
           }}
         >
-          <ViewProfileSuggestions profiles={allUsers.filter((profile) => profile._id !== user.id)} />
+          <ViewProfileSuggestions profiles={allUsers?.filter((profile) => profile._id !== user.id)} />
 
           {/* <Post></Post> */}
           {/* <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />

@@ -34,7 +34,6 @@ export function FriendProfile({
   const [visibleModalCreate, setVisibleModalCreate] = useState("none");
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
-  //const [allUsers, setAllUsers] = useState([]);
   const [friend, setFriend] = useState({});
 
   const fetchFriend = async () => {
@@ -157,7 +156,7 @@ export function FriendProfile({
                       <strong>{friend?.posts?.length || 0}</strong> posts
                     </p>
                     <p>
-                      <strong>{friend?.friends?.length || 0}</strong> friends
+                      <strong>{friend?.user?.friends?.length || 0}</strong> friends
                     </p>
                   </div>
                   <p>{friend?.description}</p>

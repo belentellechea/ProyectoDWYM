@@ -41,10 +41,10 @@ export const getUser = async (id, token, updateUser) => {
         friends: data?.user?.friends,
         posts: data?.posts,
       }
-      
+      console.log("data response get user: ", data );
       if (updateUser) updateUser(user);
       
-      return data.user;
+      return user;
 
     } catch (error) {
       console.log("Error fetching data: ", error);
