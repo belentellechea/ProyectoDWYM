@@ -18,6 +18,8 @@ import {
 } from "@ant-design/icons";
 import { ConfigurationModal } from "../../../Components/ConfigurationModal/index.jsx";
 import { useParams } from "react-router-dom";
+import styles from "./FriendProfile.module.css";
+import stylesHome from "../../Home/Home.module.css";
 
 const { Sider, Content } = Layout;
 
@@ -46,6 +48,7 @@ export function FriendProfile({
     }
   }
   useEffect(() => {
+    setVisibleModalCreate("none");
     fetchFriend();
     setIsLoading(false);
     console.log("print friend: ", friend );
@@ -73,7 +76,7 @@ export function FriendProfile({
   // console.log("print friend: ", friend );
 
   function openModal() {
-    setVisible("block");
+    setVisibleModalCreate("block");
   }
 
   function followUnFollow() {
@@ -83,100 +86,83 @@ export function FriendProfile({
   return (
     <>
       {!isLoading ? (
-        <Layout className="layout">
-          <Sider
-            theme={"light"}
-            width={collapsed ? 0 : "20%"}
-            collapsedWidth={100}
-            className="sider"
-            trigger={null}
-            breakpoint="lg"
-            onBreakpoint={(broken) => {
-              console.log(broken);
+        <div className={stylesHome.layout}>
+          <div
+            className={
+              collapsed ? stylesHome.siderCollapsed : stylesHome.divSider
+            }
+          >
+            <div
+              className={
+                collapsed
+                  ? stylesHome.siderContentCollapsed
+                  : stylesHome.siderContent
+              }
+            >
+              <SiderContent
+                openNotifications={openNotifications}
+                closeNotifications={closeNotifications}
+                setVisible={setVisibleModalCreate}
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+              ></SiderContent>
+            </div>
+          </div>
+          <div
+            className={
+              collapsed ? stylesHome.contentCollapsed : stylesHome.content
+            }
+            onClick={() => {
+              closeNotifications();
               setCollapsed(false);
             }}
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-              setCollapsed(true);
-            }}
-            style={{
-              overflow: "auto",
-              height: "100vh",
-              position: "fixed",
-              insetInlineStart: 0,
-              top: 0,
-              bottom: 0,
-              scrollbarWidth: "thin",
-            }}
           >
-            <SiderContent
-              openNotifications={openNotifications}
-              closeNotifications={closeNotifications}
-              setVisible={setVisibleModalCreate}
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-            ></SiderContent>
-          </Sider>
-          <Layout>
-            <Content
-              className="content"
-              onClick={() => {
-                closeNotifications();
-                setCollapsed(false);
-              }}
-              style={{
-                marginLeft: collapsed ? "7%" : "20%", // Ajuste automático al ancho de Sider
-                transition: "0.5s",
-              }}
-            >
-              <div className="profileInfo">
-                <div className="leftInfo">
-                  <ProfilePhoto
-                    className="myProfilePic"
-                    size={160}
-                    url={friend?.profilePicture ? friend.profilePicture : image}
-                  />
-                </div>
-                <div className="rightInfo">
-                  <div className="nameEdit">
-                    <h1 className="title is-6 profileName">
-                      {friend?.username ? friend.username : "nombre_usuario"}
-                    </h1>
-                    <div className="buttonSettings">
-                      <button className="editButton" onClick={followUnFollow}>
-                        {" "}
-                        follow{" "}
-                      </button>
-                    </div>
-                  </div>
-                  <div className="postsFriends">
-                    <p>
-                      <strong>{friend?.posts?.length || 0}</strong> posts
-                    </p>
-                    <p>
-                      <strong>{friend?.user?.friends?.length || 0}</strong> friends
-                    </p>
-                  </div>
-                  <p>{friend?.description}</p>
-                </div>
+            <div className={styles.profileInfo}>
+              <div className={styles.leftInfo}>
+                <ProfilePhoto
+                  size={160}
+                  url={friend?.profilePicture ? friend.profilePicture : image}
+                />
               </div>
-              <div className="photos">
-                <Grid posts={friend?.posts} />
+              <div className={styles.rightInfo}>
+                <div className={styles.nameEdit}>
+                  <h1 className={styles.profileName}>
+                    {friend?.username ? friend.username : "nombre_usuario"}
+                  </h1>
+                  <div className={styles.buttonSettings}>
+                    <button className={styles.editButton} onClick={openModal}>
+                      {" "}
+                      follow{" "}
+                    </button>
+                  </div>
+                </div>
+                <div className={styles.postsFriends}>
+                  <p>
+                    <strong>{friend?.posts?.length || 0}</strong> posts
+                  </p>
+                  <p>
+                    <strong>{friend?.friends?.length || 0}</strong> friends
+                  </p>
+                </div>
+                <p>{friend?.description}</p>
               </div>
-              <NotificationsModal isActive={isNotificationsActive} />
-            </Content>
-          </Layout>
-          
-          <ParentModalCreate
-            files={files}
-            visible={visibleModalCreate}
-            setVisible={setVisibleModalCreate}
-            onFilesSelected={setFiles}
-          />
+            </div>
+            <div className="photos">
+              <Grid photos={friend?.posts} />
+            </div>
+            <NotificationsModal isActive={isNotificationsActive} />
+          </div>
 
-        </Layout>
+          {visibleModalCreate && (
+            <ParentModalCreate
+              files={files}
+              visible={visibleModalCreate}
+              setVisible={setVisibleModalCreate}
+              onFilesSelected={setFiles}
+            />
+          )}
+        </div>
+
       ) : (
         <p>Loading...</p>
       )}
