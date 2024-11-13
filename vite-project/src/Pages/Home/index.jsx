@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Feed } from "../../Components/Feed";
 import { ParentModalCreate } from "../../Components/ModalesCreate/ParentModalCreate";
 import { NotificationsModal } from "../../Components/NotificationsModal";
@@ -10,8 +10,6 @@ import { useUser } from "../../Context/UserContext.jsx";
 import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
 import { getAllProfiles, getUser } from "../../Services/userService.jsx";
 import styles from "./Home.module.css";
-
-const { Sider, Content } = Layout;
 
 
 
@@ -104,6 +102,8 @@ export function Home({
     } else {
       setCollapsed(false);
     }
+
+    setVisible(false);
 
     // get user
     getUser(auth.id, auth.token, updateUser);

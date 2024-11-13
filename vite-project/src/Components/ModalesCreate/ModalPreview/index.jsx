@@ -61,7 +61,7 @@ export function ModalPreview({ siguiente, setSiguiente, files }) {
                     className="textarea comment"
                     placeholder="e.g. Hello world"
                     value={caption}
-                    onChange={(e) => setComment(e.target.value)}
+                    onChange={(e) => setCaption(e.target.value)}
                   ></textarea>
                 </div>
               </div>
