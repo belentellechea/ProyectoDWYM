@@ -7,13 +7,12 @@ export function ViewProfileSuggestions({ profiles }) {
     <div
       style={{ maxWidth: "90%", alignContent: "center", alignItems: "center" }}
     >
-      <span className={styles.viewTitle}> View your friends profile </span>
+      <span className={styles.viewTitle}> View your potential friends profile </span>
       <div className={`${styles.container}`}>
         {profiles.map((profile) => (
           <ProfilePreView
             className={`scroller-item ${styles.item}`}
-            userName={profile.userName}
-            picture={profile.picture}
+            profile={profile}
           ></ProfilePreView>
         ))}
       </div>

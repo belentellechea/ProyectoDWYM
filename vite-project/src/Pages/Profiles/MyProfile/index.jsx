@@ -16,6 +16,7 @@ import {
   SettingFilled,
   SettingOutlined,
 } from "@ant-design/icons";
+import { ConfigurationModal } from "../../../Components/ConfigurationModal/index.jsx";
 
 const { Sider, Content } = Layout;
 
@@ -28,6 +29,7 @@ export function MyProfile({
   const { user, updateUser } = useUser();
 
   const [visible, setVisible] = useState("none");
+  const [visibleConfiguration, setVisibleConfiguration] = useState("none");
   const [isLoading, setIsLoading] = useState(true);
   const [visibleModalCreate, setVisibleModalCreate] = useState("none");
   const [files, setFiles] = useState([]);
@@ -38,8 +40,17 @@ export function MyProfile({
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    getUser(auth.id, auth.token, updateUser);
+    setIsLoading(false);
+  }, [user?.post]);
+
   function openModal() {
     setVisible("block");
+  }
+
+  function openConfigurationModal() {
+    setVisibleConfiguration("block");
   }
 
   return (
@@ -114,7 +125,7 @@ export function MyProfile({
                       <SettingOutlined
                         id="settingsIcon"
                         style={{ fontSize: "26px", marginLeft: "10px" }}
-                        onClick={openModal}
+                        onClick={openConfigurationModal}
                       />
                     </div>
                   </div>
@@ -126,6 +137,7 @@ export function MyProfile({
                       <strong>{user?.friends?.length || 0}</strong> friends
                     </p>
                   </div>
+                  <p>{user?.description}</p>
                 </div>
               </div>
               <div className="photos">
@@ -139,6 +151,12 @@ export function MyProfile({
             setVisible={setVisible}
             userData={user}
           />
+          
+          <ConfigurationModal
+          visible={visibleConfiguration}
+          setVisible={setVisibleConfiguration}
+          />
+
           <ParentModalCreate
             files={files}
             visible={visibleModalCreate}

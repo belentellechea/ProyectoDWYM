@@ -10,6 +10,7 @@ import { Feed } from "../../Components/Feed";
 import { useAuth } from "../../Context/AuthContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
 import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem.js";
+import { getAllProfiles, getUser } from "../../Services/userService.jsx";
 
 const { Sider, Content } = Layout;
 
@@ -78,10 +79,21 @@ export function Home({
 }) {
   const [visible, setVisible] = useState("none");
   const [files, setFiles] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
   const { auth, updateAuth } = useAuth();
-  const { user } = useUser();
+  const { user, updateUser } = useUser();
+
+  const fetchAllUsers = async () => {
+    try {
+      const data = await getAllProfiles(auth);
+      setAllUsers(data);
+      console.log("print users: ", allUsers);
+    } catch (error) {
+      console.error("Error fetching feed:", error);
+    }
+  }
 
   useEffect(() => {
     // Define la media query para el ancho máximo de 700px
@@ -91,6 +103,12 @@ export function Home({
     } else {
       setCollapsed(false);
     }
+
+    // get user
+    getUser(auth.id, auth.token, updateUser);
+
+    // get all users
+    fetchAllUsers();
   }, []);
 
   return (
@@ -147,14 +165,14 @@ export function Home({
             transition: "0.5s",
           }}
         >
-          <ViewProfileSuggestions profiles={user?.friends == [] ? user.friends : profilesPreView} />
+          <ViewProfileSuggestions profiles={allUsers.filter((profile) => profile._id !== user.id)} />
 
-          <Post></Post>
-          <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />
+          {/* <Post></Post> */}
+          {/* <Post image="https://i.pinimg.com/564x/95/ce/8c/95ce8cd5c15594d6470774411bc5a446.jpg" />
           <Post image="https://i.pinimg.com/564x/b3/77/9b/b3779b630e879c741eda9d77c0c9925b.jpg" />
           <Post image="https://i.pinimg.com/564x/85/5c/31/855c319dd6bdeaa28222d88d7a71decd.jpg" />
-          <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" />
-          <Feed></Feed>
+          <Post image="https://i.pinimg.com/564x/49/23/6b/49236b9fff9e18536557edbce508d52e.jpg" /> */}
+          <Feed users={allUsers} ></Feed>
         </Content>
         <NotificationsModal isActive={isNotificationsActive} />
       </Layout>

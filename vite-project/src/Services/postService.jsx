@@ -39,7 +39,7 @@ export const getFeed = async (auth) => {
         });
 
         const data = await response.json();
-
+        console.log("data response getFeed: ", data);
         if (!response.ok) throw new Error("Error en la respuesta");
         
         return data;
@@ -48,7 +48,7 @@ export const getFeed = async (auth) => {
     }
 }
 
-export const likePost = async (post, updatePost) => {
+export const likePost = async (post, auth, updatePost) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts//${post._id}/like`, {
             method: "POST",
@@ -62,6 +62,7 @@ export const likePost = async (post, updatePost) => {
 
         const data = await response.json();
 
+        console.log("data response likePost: ", data);
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);
         
@@ -70,7 +71,7 @@ export const likePost = async (post, updatePost) => {
     }
 }
 
-export const unLike = async (post, updatePost) => {
+export const unLike = async (post, auth, updatePost) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts/${post._id}/like`, {
             method: "DELETE",
@@ -84,6 +85,7 @@ export const unLike = async (post, updatePost) => {
 
         const data = await response.json();
 
+        console.log("data response unLikePost: ", data);
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);
         
@@ -92,7 +94,7 @@ export const unLike = async (post, updatePost) => {
     }
 }
 
-export const postComment = async (post, content, updatePost) => {
+export const postComment = async (post, auth, content, updatePost) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts/${post._id}/comments`, {
             method: "POST",
@@ -105,6 +107,7 @@ export const postComment = async (post, content, updatePost) => {
         });
 
         const data =  await response.json();
+        console.log("data post comment: ", data);
 
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);

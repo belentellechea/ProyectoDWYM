@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(initialState);
 
+    // export function
     const updateUser = (newUser) => {
         setUser(newUser);
     }
@@ -36,11 +37,13 @@ export const UserProvider = ({ children }) => {
         updateUser(provisionalUser);
     }
 
+    // export function
     const removeFriend = (exFriend) => {
         const newFriendsList = user?.friends.filter((item) => item.username != exFriend.username);
         updateFriends(newFriendsList);
     }
 
+    // export function
     const addFriend = (newFriend) => {
         const newFriendsList = [...user?.friends, newFriend];
         updateFriends(newFriendsList);
@@ -59,11 +62,13 @@ export const UserProvider = ({ children }) => {
         updateUser(provisionalUser);
     }
 
+    // export function
     const addPost = (newPost) => {
         const newPostsList = [...user?.posts, newPost];
         updatePosts(newPostsList);
     }
 
+    // export function
     const updatePost = (oldPost, updatedPost) => {
         if (oldPost.user == user) {
             const newPostsList = user?.posts?.map((post) => {post._id == oldPost._id ? updatedPost : post});

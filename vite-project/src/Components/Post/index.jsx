@@ -1,18 +1,34 @@
+import { useAuth } from "../../Context/AuthContext";
+import { useUser } from "../../Context/UserContext";
+import { getUser } from "../../Services/userService";
 import { PostBottom } from "../Post_Bottom";
 import { PostCarousel } from "../Post_Carousel";
 import { PostTop } from "../Post_Top";
 import "./Post.css";
+import { useState, useEffect } from "react";
 
-export function Post({ post, image }) {
+export function Post({ post, users }) {
+  const { auth } = useAuth();
+  const { user } = useUser();
+  // const [user, setUser] = useState(null);
+
+  // const fetchUser = async () => {
+  //   const fetchedUser = await getUser(post.user, auth.token);
+  //   setUser(fetchedUser);
+  // };
+
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
+
+  const profile = users.find((profile) => profile._id == post.user._id);
+
+
   return (
     <div className="postDiv">
-      <PostTop user={post?.user ? post.user : "other_user"}></PostTop>
+      <PostTop user={profile}></PostTop>
       <img
-        src={
-          image
-            ? image
-            : "https://i.pinimg.com/564x/f3/b4/db/f3b4db6001af9e08c11a91a60316bf2a.jpg"
-        }
+        src={`http://localhost:3001/${post.imageUrl}`}
         style={{ width: "100%" }}
       />
       <PostBottom post={post}></PostBottom>

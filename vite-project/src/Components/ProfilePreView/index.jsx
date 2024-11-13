@@ -4,8 +4,16 @@ import { Button } from "primereact/button";
 import "./ProfilePreView.css";
 import { Avatar } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-export function ProfilePreView({ picture, userName }) {
+export function ProfilePreView({ profile }) {
+
+  const navigate = useNavigate();
+
+  function viewProfile() {
+    navigate(`/friendProfile/${profile._id}`);
+  }
+
   return (
     <div className="box profileBox">
       <div className="deleteSuggestion">
@@ -13,9 +21,9 @@ export function ProfilePreView({ picture, userName }) {
           <CloseOutlined />
         </div>
       </div>
-      <Avatar size={60} src={picture} />
-      <p className="userName"> {userName} </p>
-      <button className="button is-link button_viewProfile"> View </button>
+      <Avatar size={60} src={profile.profilePicture} />
+      <p className="userName"> {profile.username} </p>
+      <button className="button is-link button_viewProfile" onClick={viewProfile}> View </button>
     </div>
   );
 }

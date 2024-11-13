@@ -6,7 +6,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { useUser } from "../../Context/UserContext";
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
 
-export function EditModal({ visible, setVisible, userData }) {
+export function EditModal({ visible, setVisible }) {
   const { auth, updateAuth } = useAuth();
   const { user, updateUser } = useUser();
 
@@ -14,30 +14,6 @@ export function EditModal({ visible, setVisible, userData }) {
     username: user?.username,
     profilePicture: user?.profilePicture,
     description: user?.description});
-
-  // const handleUsernameInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handlePictureInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleDescriptionInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
 
   function closeModal() {
     setVisible("none");
@@ -47,20 +23,11 @@ export function EditModal({ visible, setVisible, userData }) {
     e.preventDefault();
   
     const newLook = {
-      // id: user.id,
       username: formData.username ? formData.username : user.username,
       description: formData.description ? formData.description : user?.description,
       profilePicture: formData.profilePicture ? formData.profilePicture : user?.profilePicture,
-      // friends: user?.friends,
-      // posts: user?.posts,
     };
 
-    console.log("formData", formData)
-    console.log("username formdata: ", formData.username);
-    console.log("description formdata: ", formData.description);
-    console.log("picture formdata: ", formData.profilePicture);
-    console.log("user: ",user);
-    console.log("newUser: ", newLook);
     editProfileLook(auth, user, newLook, updateUser);
     closeModal();
   }
@@ -84,7 +51,6 @@ export function EditModal({ visible, setVisible, userData }) {
                 id="user"
                 name="username"
                 defaultValue={user?.username}
-                //value={formData?.username}
                 onChange={(e) => setFormData({...formData, username: e.target.value})}
               />
             </div>
@@ -99,7 +65,6 @@ export function EditModal({ visible, setVisible, userData }) {
                 id="picture"
                 name="profilePicture"
                 defaultValue={user?.profilePicture}
-                //value={formData?.profilePicture}
                 onChange={(e) => setFormData({...formData, profilePicture: e.target.value})}
               />
             </div>
@@ -112,7 +77,6 @@ export function EditModal({ visible, setVisible, userData }) {
                 type="text"
                 id="description"
                 name="description"
-                //value={formData?.description}
                 defaultValue={user?.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
               />

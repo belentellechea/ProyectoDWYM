@@ -78,7 +78,7 @@ function App() {
             <Route path="/" element={<Home openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
             {/* <Route path="/notifications" element={<NotificationsPage />} /> */}
             <Route path="/profile" element={<MyProfile openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal} />} />
-            {/* <Route path="/friendProfile/:id" element={<FriendProfile />} /> */}
+            <Route path="/friendProfile/:id" element={<FriendProfile openNotifications={openNotifications} closeNotifications={closeNotifications} isNotificationsActive={notificationsModal}/>} />
             <Route path="/register" element={ <CreateAccount /> }/>
           </Routes>
           </div>

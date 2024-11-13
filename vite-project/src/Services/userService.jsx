@@ -1,3 +1,24 @@
+export const getAllProfiles = async (auth) => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/user/all`, {
+      method: "GET",
+      headers: {
+        'Authorization': `Bearer ${auth.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+
+    console.log("data response all users: ", data);
+    if (!response.ok) throw new Error("Error en la respuesta");
+    
+    return data;
+
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+  }
+}
+
 // Get user data
 export const getUser = async (id, token, updateUser) => {
     try {
@@ -12,7 +33,7 @@ export const getUser = async (id, token, updateUser) => {
 
       if (!response.ok) throw new Error("Error en la respuesta");
 
-      const newUser = {
+      const user = {
         id: data?.user?._id,
         username: data?.user?.username,
         description: data?.user?.description,
@@ -21,7 +42,9 @@ export const getUser = async (id, token, updateUser) => {
         posts: data?.posts,
       }
       
-      updateUser(newUser);
+      if (updateUser) updateUser(user);
+      
+      return data.user;
 
     } catch (error) {
       console.log("Error fetching data: ", error);
@@ -30,7 +53,6 @@ export const getUser = async (id, token, updateUser) => {
 
   // Change profile look
 export const editProfileLook = async (auth, user, newLook, updateUser) => {
-  console.log("!!! new user: ", newLook)  
   
   try {
       const response = await fetch(`http://localhost:3001/api/user/profile/edit`, {
