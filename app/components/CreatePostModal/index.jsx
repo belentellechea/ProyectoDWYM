@@ -1,55 +1,14 @@
 import { View, Text, Modal, StyleSheet, Pressable, Image } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
-import Icon2 from '@expo/vector-icons/Foundation';
-import * as ImagePicker from 'expo-image-picker';
 import { useState } from "react";
 import SecondCreatePostModal from "../SecondCreatePostModal";
+import PhotoButton from "../PhotoButton";
+import GalleryButton from "../GalleryButton";
 
 export default function CreatePostModal ({visible, setVisible}) {
     const [image, setImage] = useState(null); 
     const [errorMsg, setErrorMsg] = useState(null);
     const [showSecondModal, setShowSecondModal] = useState(false);  
-
-    async function pickImage() {
-        let { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-            setErrorMsg('Permiso para acceder al álbum denegado');
-            return;
-        }
-    
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaType.Photo,
-            allowsEditing: true,
-            aspect: [4, 4],
-            quality: 1,
-        });
-    
-        if (!result.canceled) {
-            setImage(result.assets[0].uri); 
-            setVisible(false); 
-            setShowSecondModal(true);  
-        }
-    }
-
-    async function takePhoto() {
-        let { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permiso para acceder a la cámara denegado');
-          return;
-        }
-    
-        let result = await ImagePicker.launchCameraAsync({
-          allowsEditing: true,
-          aspect: [4, 4],
-          quality: 1,
-        });
-    
-        if (!result.canceled) {
-          setImage(result.assets[0].uri); 
-          setVisible(false); 
-          setShowSecondModal(true); 
-        }
-    }
 
     return (
         <>
@@ -65,18 +24,18 @@ export default function CreatePostModal ({visible, setVisible}) {
                         </Pressable>
                         <Text style={styles.modalText}>Select an option please</Text>
                         <View style={styles.buttonContainer}>
-                            <View>
-                                <Pressable style={styles.button} onPress={takePhoto}>
-                                    <Icon name='camera' size={45} style={styles.icon} />
-                                </Pressable>
-                                <Text style={styles.text}>Camera</Text>
-                            </View>
-                            <View>
-                                <Pressable style={styles.button} onPress={pickImage}>
-                                    <Icon2 name='photo' size={45} style={styles.icon} />
-                                </Pressable>
-                                <Text style={styles.text}>Gallery</Text>
-                            </View>
+                            <PhotoButton 
+                                setImage={setImage}
+                                setErrorMsg={setErrorMsg}
+                                setVisible={setVisible}
+                                setShowSecondModal={setShowSecondModal}
+                            />
+                            <GalleryButton 
+                                setImage={setImage}
+                                setErrorMsg={setErrorMsg}
+                                setVisible={setVisible}
+                                setShowSecondModal={setShowSecondModal}
+                            />
                         </View>
                         {errorMsg && 
                             <View style={styles.errorContainer}>

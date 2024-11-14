@@ -10,9 +10,9 @@ export default function SecondCreatePostModal ({visible2, setVisible2, image}) {
                 transparent={true}
                 visible={visible2}
             >
-                <Pressable style={styles.centeredView} onPress={() => setVisible2(!visible)}>
+                <Pressable style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Pressable style={styles.closeButton} onPress={() => setVisible2(!visible)}>
+                        <Pressable style={styles.closeButton} onPress={() => setVisible2(!visible2)}>
                             <Icon name='close' size={20} />
                         </Pressable>
                         <Text style={styles.modalText}>Add a caption to your post</Text>
@@ -21,6 +21,10 @@ export default function SecondCreatePostModal ({visible2, setVisible2, image}) {
                             source={{ uri: image}}
                             style={styles.image}
                            />
+                           <TextInput 
+                                placeholder='Enter your caption'
+                                style={styles.input}
+                            />
                         </View>
         
                     </View>
@@ -68,5 +72,16 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200
+    }, 
+    input: {
+        backgroundColor: 'white',
+        borderRadius: 15, 
+        fontSize: 20,
+        padding: 10,
+        marginTop: 10,
+        marginBottom: 25,
+        fontSize: 20,
+        paddingRight: 40,
+        width: '100%'
     }
 })
