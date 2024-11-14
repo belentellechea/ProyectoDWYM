@@ -11,7 +11,7 @@ export function CreateAccount() {
   const navigate = useNavigate();
 
   function goToLogin() {
-    navigate("/login");
+    navigate("/");
   }
 
   function handleSubmit(event) {
@@ -25,7 +25,7 @@ export function CreateAccount() {
 
     //postAccount(account, updateAuth);
     const success = postAccount(account, updateAuth);
-    if (success) navigate("/");
+    if (success) navigate("/home");
   }
 
   return (

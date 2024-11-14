@@ -30,7 +30,7 @@ export function Feed({ users }) {
   return (
     <div>
       <ul>
-        {feed.length > 0 && (
+        {feed?.length > 0 && (
           <div>
             {feed.map((post) => (
               <Post key={post._id} post={post} users={users}/>

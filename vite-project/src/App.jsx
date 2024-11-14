@@ -35,9 +35,9 @@ function App() {
           <div className="app">
             <Routes>
               <Route path="/*" element={<Navigate replace to="/" />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Login />} />
               <Route
-                path="/"
+                path="/home"
                 element={
                   <Home
                     openNotifications={openNotifications}
