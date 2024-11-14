@@ -16,31 +16,32 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="FriendProfile"
           component={FriendProfile}
+          options={{ headerShown: false}}
         />
         <Stack.Screen 
           name="Profile" 
           component={MyProfile}
-          options={{ headerShown: false }} 
+          options={{ headerShown: false}} 
         /> 
         <Stack.Screen 
           name="Notifications" 
           component={Notifications}
-          options={{ headerShown: false }} 
+          options={{ headerShown: false}} 
         /> 
       </Stack.Navigator>
     </NavigationContainer>

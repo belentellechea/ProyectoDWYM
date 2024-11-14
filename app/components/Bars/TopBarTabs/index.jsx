@@ -28,6 +28,10 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
     setExitVisible(true); 
   }
 
+  function goBack(){
+    navigation.goBack()
+  }
+
   return (
     <>
       <View style={styles.bar}>
@@ -38,9 +42,14 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
           {atPage === 'Profile' ? (
             <Text style={styles.userName}>user_name</Text>
           ): null}
+          {atPage === 'FriendProfile' ? (
+              <Pressable onPress={goBack}>
+                <Icon2 name='arrow-back' size={23}/>
+              </Pressable> 
+          ) : null}
         </View>
         <View >
-          {atPage === 'Home' ? (
+          {atPage === 'Home' || atPage==='FriendProfile' ? (
             <View style={styles.buttons}>
               <Pressable onPress={goToNotifications}>
                 <Icon name='hearto' size={23}/>
