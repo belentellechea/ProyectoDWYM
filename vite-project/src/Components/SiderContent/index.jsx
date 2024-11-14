@@ -24,7 +24,7 @@ export function SiderContent({
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTabKey, setActiveTabKey] = useState(() => {
-    if (location.pathname === "/") return "HomeTab";
+    if (location.pathname === "/home") return "HomeTab";
     if (location.pathname === "/profile") return "ProfileTab";
     return "NotificationsTab";
   });
@@ -54,7 +54,7 @@ export function SiderContent({
   }
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/home") {
       setActiveTabKey("HomeTab");
     } else if (location.pathname === "/profile") {
       setActiveTabKey("ProfileTab");
@@ -64,7 +64,7 @@ export function SiderContent({
   }, [location.pathname, activeTabKey]);
 
   // This makes de tab mark the page where it was previous to Notifications when it closes.
-  let previousTab = "/";
+  let previousTab = "/home";
   function completeCloseNotifications() {
     closeNotifications();
     setActiveTabKey(previousTab);
@@ -79,7 +79,7 @@ export function SiderContent({
       completeCloseNotifications();
       openSideBar();
     } else if (key === "HomeTab") {
-      navigate("/");
+      navigate("/home");
       previousTab = "HomeTab";
       completeCloseNotifications();
       openSideBar();

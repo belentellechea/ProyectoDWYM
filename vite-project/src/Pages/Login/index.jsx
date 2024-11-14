@@ -24,12 +24,12 @@ export function Login() {
 
     console.log(account);
     const success = await loginAccount(account, updateAuth);
-    console.log(success);
+    console.log("resultado log in: ", success);
     if (!success) {
-      navigate("/login");
+      navigate("/");
     }
     if (success) {
-      navigate("/");
+      navigate("/home");
     }
   }
 

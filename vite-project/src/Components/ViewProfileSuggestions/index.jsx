@@ -9,7 +9,7 @@ export function ViewProfileSuggestions({ profiles }) {
     >
       <span className={styles.viewTitle}> View your potential friends profile </span>
       <div className={`${styles.container}`}>
-        {profiles.map((profile) => (
+        {profiles?.map((profile) => (
           <ProfilePreView
             className={`scroller-item ${styles.item}`}
             profile={profile}

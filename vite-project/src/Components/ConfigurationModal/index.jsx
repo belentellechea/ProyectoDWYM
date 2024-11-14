@@ -20,7 +20,7 @@ export function ConfigurationModal({ visible, setVisible }) {
   
     logOut();
     closeModal();
-    navigate("/login");
+    navigate("/");
   }
 
   return (
