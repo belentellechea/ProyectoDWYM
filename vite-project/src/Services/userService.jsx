@@ -91,10 +91,10 @@ export const editProfileLook = async (auth, user, newLook, updateUser) => {
     }
 }
 
-export const addFriend = async (auth, newFriend, addFriend) => {
+export const followFriend = async (auth, newFriend, addFriend) => {
   try {
-    const response = await fetch(`http://localhost:3001/api/user/remove-friend/${newFriend.id}`, {
-      method: 'PUT',
+    const response = await fetch(`http://localhost:3001/api/user/add-friend/${newFriend.id}`, {
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${auth.token}`,
         'Content-Type': 'application/json',
@@ -116,10 +116,10 @@ export const addFriend = async (auth, newFriend, addFriend) => {
   }
 }
 
-export const removeFriend = async (auth, exfriend, removeFriend) => {
+export const unfollowFriend = async (auth, exfriend, removeFriend) => {
   try {
     const response = await fetch(`http://localhost:3001/api/user/remove-friend/${exfriend.id}`, {
-      method: 'PUT',
+      method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${auth.token}`,
         'Content-Type': 'application/json',
