@@ -1,42 +1,100 @@
-import { SafeAreaView, View, Text, Alert, Modal, StyleSheet, Pressable } from "react-native";
+import { View, Text, Modal, StyleSheet, Pressable, Image } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
 import Icon2 from '@expo/vector-icons/Foundation';
-
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from "react";
+import SecondCreatePostModal from "../SecondCreatePostModal";
 
 export default function CreatePostModal ({visible, setVisible}) {
+    const [image, setImage] = useState(null); 
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [showSecondModal, setShowSecondModal] = useState(false);  
+
+    async function pickImage() {
+        let { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            setErrorMsg('Permiso para acceder al álbum denegado');
+            return;
+        }
     
-    return(
-        <Modal
-            animationType="slide"
-            transparent={true}
-            visible={visible}
-        >
-            <Pressable style={styles.centeredView} onPress={() => setVisible(!visible)}>
-                <View style={styles.modalView}>
-                    <View>
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaType.Photo,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        });
+    
+        if (!result.canceled) {
+            setImage(result.assets[0].uri); 
+            setVisible(false); 
+            setShowSecondModal(true);  
+        }
+    }
+
+    async function takePhoto() {
+        let { status } = await ImagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permiso para acceder a la cámara denegado');
+          return;
+        }
+    
+        let result = await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [4, 4],
+          quality: 1,
+        });
+    
+        if (!result.canceled) {
+          setImage(result.assets[0].uri); 
+          setVisible(false); 
+          setShowSecondModal(true); 
+        }
+    }
+
+    return (
+        <>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={visible}
+            >
+                <Pressable style={styles.centeredView} onPress={() => setVisible(!visible)}>
+                    <View style={styles.modalView}>
                         <Pressable style={styles.closeButton} onPress={() => setVisible(!visible)}>
                             <Icon name='close' size={20} />
                         </Pressable>
-                    </View>
-                    <Text style={styles.modalText}>Select an option please</Text>
-                    <View  style={styles.buttonContainer}>
-                        <View > 
-                            <Pressable style={styles.button}>
-                                <Icon name='camera' size={45} style={styles.icon}/>
-                            </Pressable>
-                            <Text style={styles.text}>Camera</Text>
+                        <Text style={styles.modalText}>Select an option please</Text>
+                        <View style={styles.buttonContainer}>
+                            <View>
+                                <Pressable style={styles.button} onPress={takePhoto}>
+                                    <Icon name='camera' size={45} style={styles.icon} />
+                                </Pressable>
+                                <Text style={styles.text}>Camera</Text>
+                            </View>
+                            <View>
+                                <Pressable style={styles.button} onPress={pickImage}>
+                                    <Icon2 name='photo' size={45} style={styles.icon} />
+                                </Pressable>
+                                <Text style={styles.text}>Gallery</Text>
+                            </View>
                         </View>
-                        <View>
-                            <Pressable style={styles.button}>
-                                <Icon2 name='photo' size={45} style={styles.icon}/>
-                            </Pressable>
-                            <Text style={styles.text}>Gallery</Text>
-                        </View>
+                        {errorMsg && 
+                            <View style={styles.errorContainer}>
+                                <Icon3 name='warning' size={25} style={styles.warning}/>
+                                <Text style={styles.errorText}>{errorMsg}</Text>
+                            </View>}
                     </View>
-                </View>
-            </Pressable>
-        </Modal>
-    )
+                </Pressable>
+            </Modal>
+            {showSecondModal && (
+                <SecondCreatePostModal
+                    visible2={showSecondModal}
+                    setVisible2={setShowSecondModal}
+                    image={image} 
+                />
+            )}
+        </>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -61,11 +119,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
     modalText: {
         textAlign: 'center',
         fontWeight: 'bold', 
@@ -75,9 +128,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end'
     }, 
     buttonContainer: {
-        display: 'flex', 
         flexDirection: 'row', 
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     }, 
     button: {
         backgroundColor: '#cae9ff',
@@ -92,5 +144,22 @@ const styles = StyleSheet.create({
     },
     icon: {
         alignSelf: 'center'
+    }, 
+    errorContainer: {
+        backgroundColor: '#ffcad4',
+        padding: 20,
+        borderRadius: 30, 
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 15
+    }, 
+    warning: {
+      color: '#9e2a2b'
+    },
+    errorText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: 'white',
+      textAlign: 'center',
     }
 })
