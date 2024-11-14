@@ -43,7 +43,7 @@ export function SiderContent({
   }, []);
 
   function openModal() {
-    setVisible(true);
+    setVisible("block");
   }
 
   function closeSideBar() {

@@ -42,16 +42,16 @@ export function FriendProfile({
     try {
       const data = await getUser(id, auth.token);
       setFriend(data);
-      console.log("data friend: ",data);
+      console.log("data friend: ", data);
     } catch (error) {
       console.error("Error fetching friend:", error);
     }
-  }
+  };
   useEffect(() => {
     setVisibleModalCreate("none");
     fetchFriend();
     setIsLoading(false);
-    console.log("print friend: ", friend );
+    console.log("print friend: ", friend);
   }, []);
 
   // useEffect(() => {
@@ -79,9 +79,7 @@ export function FriendProfile({
     setVisibleModalCreate("block");
   }
 
-  function followUnFollow() {
-
-  }
+  function followUnFollow() {}
 
   return (
     <>
@@ -152,17 +150,13 @@ export function FriendProfile({
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
-
-          {visibleModalCreate && (
-            <ParentModalCreate
-              files={files}
-              visible={visibleModalCreate}
-              setVisible={setVisibleModalCreate}
-              onFilesSelected={setFiles}
-            />
-          )}
+          <ParentModalCreate
+            files={files}
+            visible={visibleModalCreate}
+            setVisible={setVisibleModalCreate}
+            onFilesSelected={setFiles}
+          />
         </div>
-
       ) : (
         <p>Loading...</p>
       )}
