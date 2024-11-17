@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedba
 import Icon from '@expo/vector-icons/Feather';
 import Icon2 from '@expo/vector-icons/AntDesign';
 import { useState, useRef } from "react";
+import CommentSection from '../CommentSection'
 
 export default function Post() {
     const [isLiked, setIsLiked] = useState(false); 
@@ -84,11 +85,7 @@ export default function Post() {
 
                 <Text><Text style={styles.boldText}>username</Text>  post descriptionnnnn</Text>
                 {showComments && (
-                    <View style={styles.commentsSection}>
-                        <Text><Text style={styles.boldText}>friend_username</Text>  a comment </Text>
-                        <Text><Text style={styles.boldText}>friend_username</Text>  a comment</Text>
-                        <Text><Text style={styles.boldText}>friend_username</Text>  a comment</Text>
-                    </View>
+                    <CommentSection></CommentSection>
                 )}
             </View>
             
@@ -99,7 +96,6 @@ export default function Post() {
 const styles = StyleSheet.create({
     post: {
         backgroundColor: 'white',
-        //marginTop: 30,
         marginBottom: 30
     },
     topPost: {
