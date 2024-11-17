@@ -10,7 +10,12 @@ import { ParentModalCreate } from "../../../Components/ModalesCreate/ParentModal
 import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
-import { followFriend, getAllProfiles, getUser, unfollowFriend } from "../../../Services/userService.jsx";
+import {
+  followFriend,
+  getAllProfiles,
+  getUser,
+  unfollowFriend,
+} from "../../../Services/userService.jsx";
 import {
   MenuOutlined,
   SettingFilled,
@@ -20,7 +25,6 @@ import { ConfigurationModal } from "../../../Components/ConfigurationModal/index
 import { useParams } from "react-router-dom";
 import styles from "./FriendProfile.module.css";
 import stylesHome from "../../Home/Home.module.css";
-
 
 export function FriendProfile({
   openNotifications,
@@ -44,22 +48,20 @@ export function FriendProfile({
     try {
       const data = await getUser(id, auth.token);
       setFriend(data);
-      console.log("data friend: ",data);
+      console.log("data friend: ", data);
     } catch (error) {
       console.error("Error fetching friend:", error);
     }
-  }
+  };
 
   useEffect(() => {
     getUser(auth.id, auth.token, updateUser);
     setVisibleModalCreate("none");
     fetchFriend();
     setIsLoading(false);
-
     setDoIFollowThem(followUnfollow);
     console.log("doIFollowThem: ", doIFollowThem);
   }, []);
-
 
   function openModal() {
     setVisibleModalCreate("block");
@@ -122,7 +124,10 @@ export function FriendProfile({
                     {friend?.username ? friend.username : "nombre_usuario"}
                   </h1>
                   <div className={styles.buttonSettings}>
-                    <button className={styles.editButton} onClick={followUnFollow}>
+                    <button
+                      className={styles.editButton}
+                      onClick={followUnFollow}
+                    >
                       {doIFollowThem ? " unfollow " : " follow "}
                     </button>
                   </div>
@@ -143,17 +148,13 @@ export function FriendProfile({
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
-
-          {visibleModalCreate && (
-            <ParentModalCreate
-              files={files}
-              visible={visibleModalCreate}
-              setVisible={setVisibleModalCreate}
-              onFilesSelected={setFiles}
-            />
-          )}
+          <ParentModalCreate
+            files={files}
+            visible={visibleModalCreate}
+            setVisible={setVisibleModalCreate}
+            onFilesSelected={setFiles}
+          />
         </div>
-
       ) : (
         <p>Loading...</p>
       )}

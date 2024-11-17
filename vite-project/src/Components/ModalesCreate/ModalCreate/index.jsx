@@ -3,20 +3,22 @@ import foto from "../../../assets/create.png";
 import { ModalPreview } from "../ModalPreview";
 import styles from "./Modal.module.css";
 
-export function ModalCreate({ onFilesSelected, setVisible, setSiguiente }) {
+export function ModalCreate({
+  onFilesSelected,
+  visible,
+  setVisible,
+  setSiguiente,
+}) {
   const [files, setFiles] = useState([]);
 
-  function closeModal() {
-    setVisible(false);
-  }
   function cancel() {
-    setVisible(false);
+    setVisible("none");
     setFiles([]);
   }
 
   function openModalPreview() {
+    setVisible("none");
     setSiguiente("block");
-    closeModal();
   }
 
   const handleFileChange = (event) => {
@@ -49,8 +51,14 @@ export function ModalCreate({ onFilesSelected, setVisible, setSiguiente }) {
     onFilesSelected(files);
   }, [files, onFilesSelected]);
 
+  useEffect(() => {
+    if (files.length > 0) {
+      openModalPreview();
+    }
+  }, [files]);
+
   return (
-    <div className={styles.modal}>
+    <div className={styles.modal} style={{ display: visible }}>
       <div className={styles.modalContent}>
         <h1 className={`title is-5 ${styles.title}`}>
           {" "}
@@ -78,35 +86,7 @@ export function ModalCreate({ onFilesSelected, setVisible, setSiguiente }) {
           <label htmlFor="browse" className={styles.subirFoto}>
             Seleccionar del ordenador
           </label>
-          <div className="previewList">
-            {files.length > 0 && (
-              <div>
-                {files.map((file, index) => (
-                  <div className={styles.previewItem} key={index}>
-                    <p className={styles.itemName}>{file.name}</p>
-                    <div className="">
-                      <button
-                        className={`button ${styles.previewButton} is-danger is-outlined is-rounded`}
-                        onClick={() => handleRemoveFile(index)}
-                      >
-                        X
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          {files.length > 0 && (
-            <button
-              className={`button ${styles.botonSiguiente} is-link is-rounded`}
-              onClick={() => openModalPreview()}
-            >
-              {" "}
-              siguiente ➜{" "}
-            </button>
-          )}
-          <button className={styles.botonCancelar} onClick={cancel}>
+          <button className={styles.botonCancelar} onClick={() => cancel()}>
             Cancelar
           </button>
         </div>

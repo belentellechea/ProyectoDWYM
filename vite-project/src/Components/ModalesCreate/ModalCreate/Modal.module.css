@@ -1,5 +1,4 @@
 .modal {
-  display: flex;
   align-content: center;
   position: fixed;
   z-index: 1;
@@ -12,6 +11,7 @@
   align-items: center;
   justify-content: center;
   transition: 1s;
+  place-items: center !important;
 }
 
 .modalContent {
