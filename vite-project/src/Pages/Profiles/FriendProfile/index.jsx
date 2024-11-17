@@ -38,7 +38,9 @@ export function FriendProfile({
   const [friend, setFriend] = useState({});
 
   const followUnfollow = user?.friends?.some((f) => f._id == friend.id);
+  console.log("followUnfollow: ", followUnfollow);
   const [doIFollowThem, setDoIFollowThem] = useState(followUnfollow);
+  console.log("do i follow them: ", doIFollowThem);
 
   const fetchFriend = async () => {
     try {
@@ -56,8 +58,9 @@ export function FriendProfile({
     fetchFriend();
     setIsLoading(false);
 
+    console.log("do i follow them 2: ", doIFollowThem);
     setDoIFollowThem(followUnfollow);
-    console.log("doIFollowThem: ", doIFollowThem);
+    console.log("doIFollowThem 3: ", doIFollowThem);
   }, []);
 
 
