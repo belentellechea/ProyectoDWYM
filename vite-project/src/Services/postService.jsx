@@ -99,11 +99,10 @@ export const postComment = async (post, auth, content, updatePost) => {
         const response = await fetch(`http://localhost:3001/api/posts/${post._id}/comments`, {
             method: "POST",
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${auth.token}`
             },
-            body: {
-                "content": content
-            }
+            body: JSON.stringify({content}),
         });
 
         const data =  await response.json();
@@ -111,6 +110,8 @@ export const postComment = async (post, auth, content, updatePost) => {
 
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);
+
+        return data;
 
     } catch (error) {
         console.log("Error fetching posts: ", error);
@@ -139,7 +140,7 @@ export const deleteComment = async (post, comment, updatePost) => {
     }
 }
 
-export const getSpecificComment = async (comment) => {
+export const getSpecificComment = async (comment, auth) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts/comments/${comment._id}`, {
             method: "GET",

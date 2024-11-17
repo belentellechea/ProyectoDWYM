@@ -150,7 +150,7 @@ export function FriendProfile({
               </div>
             </div>
             <div className="photos">
-              <Grid photos={friend?.posts} />
+              <Grid posts={friend?.posts} />
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
