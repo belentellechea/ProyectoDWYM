@@ -12,7 +12,7 @@ export default function GalleryButton({setErrorMsg, setImage, setVisible, setSho
         }
     
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: [ImagePicker.MediaType.Images],
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
             quality: 1,
