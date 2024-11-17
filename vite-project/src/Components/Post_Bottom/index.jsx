@@ -18,6 +18,7 @@ export function PostBottom({ post }) {
 
   const doILikeThis = post.likes.includes(auth.id);
   const [heartIcon, setHeartIcon] = useState(doILikeThis);
+  const [likes, setLikes] = useState(post.likes);
   const [messageIcon, setMessageIcon] = useState(true);
   const [visible, setVisible] = useState("hidden");
   const [comment, setComment] = useState("");
@@ -25,14 +26,14 @@ export function PostBottom({ post }) {
   function likeUnLike() {
     if (heartIcon) {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => prev.filter((id) => id !== auth.id));
       unLike(post, auth, updatePost);
     } else {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => [...prev, auth.id]);
       likePost(post, auth, updatePost);
     }
   }
-
-  // guardar post e
 
   function publishComment() {
     postComment(post, auth, comment, updatePost);
@@ -41,7 +42,10 @@ export function PostBottom({ post }) {
 
   useEffect(() => {
     setHeartIcon(doILikeThis);
+    setLikes(post.likes);
   }, [post]);
+
+  useEffect(() => {}, [post?.likes]);
 
   return (
     <div className="divPostBottom">
@@ -80,9 +84,12 @@ export function PostBottom({ post }) {
       </div>
       <div className="Likes">
         <p>
-          <strong> {post?.likes.length} likes</strong>
+          <strong> {likes.length} likes</strong>
         </p>
       </div>
+
+      <span> { post.caption} </span>
+
       <div
         className="Comentarios"
         style={{
