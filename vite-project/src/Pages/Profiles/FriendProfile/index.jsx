@@ -10,7 +10,12 @@ import { ParentModalCreate } from "../../../Components/ModalesCreate/ParentModal
 import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
-import { getAllProfiles, getUser } from "../../../Services/userService.jsx";
+import {
+  followFriend,
+  getAllProfiles,
+  getUser,
+  unfollowFriend,
+} from "../../../Services/userService.jsx";
 import {
   MenuOutlined,
   SettingFilled,
@@ -21,15 +26,13 @@ import { useParams } from "react-router-dom";
 import styles from "./FriendProfile.module.css";
 import stylesHome from "../../Home/Home.module.css";
 
-const { Sider, Content } = Layout;
-
 export function FriendProfile({
   openNotifications,
   closeNotifications,
   isNotificationsActive,
 }) {
   const { auth, updateAuth } = useAuth();
-  const { user, updateUser } = useUser();
+  const { user, updateUser, addFriend, removeFriend } = useUser();
   const { id } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +40,9 @@ export function FriendProfile({
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [friend, setFriend] = useState({});
+
+  const followUnfollow = user?.friends?.some((f) => f._id == friend.id);
+  const [doIFollowThem, setDoIFollowThem] = useState(followUnfollow);
 
   const fetchFriend = async () => {
     try {
@@ -47,39 +53,29 @@ export function FriendProfile({
       console.error("Error fetching friend:", error);
     }
   };
+
   useEffect(() => {
+    getUser(auth.id, auth.token, updateUser);
     setVisibleModalCreate("none");
     fetchFriend();
     setIsLoading(false);
-    console.log("print friend: ", friend);
+    setDoIFollowThem(followUnfollow);
+    console.log("doIFollowThem: ", doIFollowThem);
   }, []);
-
-  // useEffect(() => {
-  //   getUser(auth.id, auth.token, updateUser);
-  //   setIsLoading(false);
-  // }, []);
-  // const fetchAllUsers = async () => {
-  //   try {
-  //     const data = await getAllProfiles(auth);
-  //     setAllUsers(data);
-  //   } catch (error) {
-  //     console.error("Error fetching feed:", error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchAllUsers();
-  //   setIsLoading(false);
-  // }, []);
-
-  // const friend = allUsers.find((profile) => profile._id == id);
-  // console.log("print friend: ", friend );
 
   function openModal() {
     setVisibleModalCreate("block");
   }
 
-  function followUnFollow() {}
+  function followUnFollow() {
+    if (doIFollowThem) {
+      unfollowFriend(auth, friend, removeFriend);
+      setDoIFollowThem(false);
+    } else {
+      followFriend(auth, friend, addFriend);
+      setDoIFollowThem(true);
+    }
+  }
 
   return (
     <>
@@ -128,9 +124,11 @@ export function FriendProfile({
                     {friend?.username ? friend.username : "nombre_usuario"}
                   </h1>
                   <div className={styles.buttonSettings}>
-                    <button className={styles.editButton} onClick={openModal}>
-                      {" "}
-                      follow{" "}
+                    <button
+                      className={styles.editButton}
+                      onClick={followUnFollow}
+                    >
+                      {doIFollowThem ? " unfollow " : " follow "}
                     </button>
                   </div>
                 </div>

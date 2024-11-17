@@ -6,7 +6,7 @@ import {
   RightOutlined,
   SendOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./PostBottom.css";
 import { likePost, postComment, unLike } from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
@@ -38,6 +38,10 @@ export function PostBottom({ post }) {
     postComment(post, auth, comment, updatePost);
     setComment("");
   }
+
+  useEffect(() => {
+    setHeartIcon(doILikeThis);
+  }, [post]);
 
   return (
     <div className="divPostBottom">
