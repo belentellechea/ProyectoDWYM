@@ -1,6 +1,5 @@
 import { View, Text, Modal, StyleSheet, Pressable, Image, TextInput } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
-import Icon2 from '@expo/vector-icons/Foundation';
 
 export default function SecondCreatePostModal ({visible2, setVisible2, image}) {
     return (

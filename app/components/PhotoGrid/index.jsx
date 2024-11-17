@@ -8,7 +8,7 @@ export default function PhotoGrid({photos}){
                 <FlatGrid 
                     itemDimension = {100}
                     data = {photos}
-                    spacing = {5}
+                    spacing = {2}
                     contentContainerStyle={styles.contentContainer}
                     renderItem={({ item }) => (
                         <View style={styles.grid}>
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         color: 'grey'
     }, 
     photo: {
-        width: 122,
-        height: 122
+        width: 127,
+        height: 127
     }, 
     grid: {
         justifyContent: 'center',
