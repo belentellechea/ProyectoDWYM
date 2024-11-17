@@ -8,9 +8,10 @@ import {
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./PostBottom.css";
-import { likePost, postComment, unLike } from "../../Services/postService";
+import { getSpecificComment, likePost, postComment, unLike } from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
 import { useAuth } from "../../Context/AuthContext";
+import { Commentt } from "../Commentt";
 
 export function PostBottom({ post }) {
   const { updatePost } = useUser();
@@ -18,6 +19,8 @@ export function PostBottom({ post }) {
 
   const doILikeThis = post.likes.includes(auth.id);
   const [heartIcon, setHeartIcon] = useState(doILikeThis);
+  const [likes, setLikes] = useState(post.likes);
+  const [comments, setComments] = useState(post.comments);
   const [messageIcon, setMessageIcon] = useState(true);
   const [visible, setVisible] = useState("hidden");
   const [comment, setComment] = useState("");
@@ -25,23 +28,31 @@ export function PostBottom({ post }) {
   function likeUnLike() {
     if (heartIcon) {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => prev.filter((id) => id !== auth.id));
       unLike(post, auth, updatePost);
     } else {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => [...prev, auth.id]);
       likePost(post, auth, updatePost);
     }
   }
 
-  // guardar post e
-
-  function publishComment() {
-    postComment(post, auth, comment, updatePost);
+  async function publishComment() {
+    console.log("commentt ",comment);
+    console.log("post, ", post);
+    const newComment = await postComment(post, auth, comment, updatePost);
+    setComments((prev) => [...prev, newComment]);
+    //postComment(post, auth, comment, updatePost);
     setComment("");
   }
 
   useEffect(() => {
     setHeartIcon(doILikeThis);
+    setLikes(post.likes);
+    setComments(post.comments);
   }, [post]);
+
+  useEffect(() => {}, [post?.likes]);
 
   return (
     <div className="divPostBottom">
@@ -80,9 +91,12 @@ export function PostBottom({ post }) {
       </div>
       <div className="Likes">
         <p>
-          <strong> {post?.likes.length} likes</strong>
+          <strong> {likes.length} likes</strong>
         </p>
       </div>
+
+      <span> { post.caption} </span>
+
       <div
         className="Comentarios"
         style={{
@@ -110,10 +124,13 @@ export function PostBottom({ post }) {
               padding: "5px",
             }}
           >
-            {post?.comments?.map((comment) => (
-              <Comment comment={comment} />
+            {/* {post?.comments?.map((commentt) => (
+              // <Commentt commentt={commentt} />
+            ))} */}
+            {comments.map((comment) => (
+              <Commentt comment={comment} />
             ))}
-            <p>
+            {/* <p>
               <strong> user_name </strong> hola{" "}
             </p>
             <p>
@@ -130,7 +147,7 @@ export function PostBottom({ post }) {
             </p>
             <p>
               <strong> user_name </strong> hola{" "}
-            </p>
+            </p> */}
           </div>
           <form className="commentSend">
             <input

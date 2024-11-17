@@ -20,6 +20,7 @@ export function Post({ post, users }) {
   // useEffect(() => {
   //   fetchUser();
   // }, []);
+  console.log("post comments: ", post.comments);
 
   const profile = users.find((profile) => profile._id == post.user._id);
 
