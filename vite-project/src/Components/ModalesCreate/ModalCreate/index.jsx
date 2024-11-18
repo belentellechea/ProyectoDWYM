@@ -19,7 +19,7 @@ export function ModalCreate({ setFiles, setVisibleModalCreate, setSiguiente }) {
 
   const handleFileChange = (event) => {
     const selectedFiles = event.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
+    if (selectedFiles && selectedFiles?.length > 0) {
       const newFiles = Array.from(selectedFiles);
       setThisFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
@@ -33,7 +33,7 @@ export function ModalCreate({ setFiles, setVisibleModalCreate, setSiguiente }) {
       console.log(file.name);
     });
 
-    if (droppedFiles.length > 0) {
+    if (droppedFiles?.length > 0) {
       const newFiles = Array.from(droppedFiles);
       setThisFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
@@ -44,7 +44,7 @@ export function ModalCreate({ setFiles, setVisibleModalCreate, setSiguiente }) {
   }, [thisFiles, setFiles]);
 
   useEffect(() => {
-    if (thisFiles.length > 0) openModalPreview();
+    if (thisFiles?.length > 0) openModalPreview();
   }, [thisFiles]);
 
   return (

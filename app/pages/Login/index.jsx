@@ -1,9 +1,15 @@
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useState } from 'react';
+import { loginAccount } from '../../Services/authService';
+import { useAuth } from '../../Context/AuthContext';
 
 export default function Login({navigation}) {
-    const [show, setShow] = useState(false); 
+    const [show, setShow] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
+    const { updateAuth } = useAuth();
 
     function goToHome() {
         navigation.navigate('Home'); 
@@ -11,6 +17,25 @@ export default function Login({navigation}) {
 
     function goToRegister() {
         navigation.navigate('Register')
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const account = {
+            email: email,
+            password: password
+        }
+
+        const success = await loginAccount(account, updateAuth);
+        console.log("account login:", account);
+        console.log("resultado log in: ", success);
+        if (!success) {
+            //navigate("/");
+        }
+        if (success) {
+            goToHome();
+        }
     }
 
     return (
@@ -28,6 +53,8 @@ export default function Login({navigation}) {
                     <TextInput 
                         placeholder='your.email@example.com'
                         style={styles.input}
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
                     />
                     <Text style={styles.inputText}>Password</Text>
                     <View style={styles.passwordContainer}>
@@ -35,13 +62,15 @@ export default function Login({navigation}) {
                             placeholder='*****'
                             secureTextEntry={!show}
                             style={styles.input}
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
                         />
                         <Pressable onPress={() => setShow(!show)} style={styles.iconContainer}>
                             <Icon name={show ? 'eye-slash' : 'eye'} size={20} color="gray" />
                         </Pressable>
                     </View>
                     <View style={styles.signIn}>
-                        <Pressable onPress={goToHome} style={styles.signInButton}>
+                        <Pressable onPress={handleSubmit} style={styles.signInButton}>
                             <Text style={styles.signInText}>Sign in</Text>
                         </Pressable>
                         <Text style={styles.orText}>or</Text>

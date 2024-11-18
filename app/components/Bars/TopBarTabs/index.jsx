@@ -4,10 +4,20 @@ import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Icon2 from '@expo/vector-icons/Ionicons';
 import Icon3 from '@expo/vector-icons/Entypo';
+import { getUser } from '../../../Services/userService';
+import { useUser } from '../../../Context/UserContext';
+import { useAuth } from '../../../Context/AuthContext';
 
 export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVisible = () => {}, addVisible = () => {} }) {
   const navigation = useNavigation(); 
   const [buttonAdd, setButtonAdd] = useState('add-circle'); 
+
+  const { user } = useUser();
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    getUser(auth.id, auth.token);
+  }, []);
 
   useEffect(() => {
     if (!addVisible) {
@@ -41,7 +51,7 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
             <Image source={require('../../../assets/name.png')} style={styles.name} />
           ) : null}
           {atPage === 'Profile' ? (
-            <Text style={styles.userName}>user_name</Text>
+            <Text style={styles.userName}>{ user.username ? user.username : "user_name"}</Text>
           ): null}
           {atPage === 'FriendProfile' ? (
               <Pressable onPress={goBack}>
