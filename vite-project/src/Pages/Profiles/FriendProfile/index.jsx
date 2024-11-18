@@ -41,8 +41,9 @@ export function FriendProfile({
   const [collapsed, setCollapsed] = useState(false);
   const [friend, setFriend] = useState({});
 
-  const followUnfollow = user?.friends?.some((f) => f._id == friend.id);
-  const [doIFollowThem, setDoIFollowThem] = useState(followUnfollow);
+  
+  const [doIFollowThem, setDoIFollowThem] = useState(false);
+  console.log("do i follow them: ", doIFollowThem);
 
   const fetchFriend = async () => {
     try {
@@ -59,9 +60,14 @@ export function FriendProfile({
     setVisibleModalCreate("none");
     fetchFriend();
     setIsLoading(false);
+
+    const followUnfollow = user?.friends?.some((f) => f._id == id);
+    console.log("do i follow them 2: ", doIFollowThem);
     setDoIFollowThem(followUnfollow);
-    console.log("doIFollowThem: ", doIFollowThem);
+    console.log("doIFollowThem 3: ", doIFollowThem);
   }, []);
+
+  
 
   function openModal() {
     setVisibleModalCreate("block");
@@ -144,7 +150,7 @@ export function FriendProfile({
               </div>
             </div>
             <div className="photos">
-              <Grid photos={friend?.posts} />
+              <Grid posts={friend?.posts} />
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>

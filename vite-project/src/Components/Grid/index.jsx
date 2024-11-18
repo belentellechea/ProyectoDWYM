@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostModal } from "../PostModal";
 import style from "./Style.module.css";
 import { useUser } from "../../Context/UserContext";
@@ -7,6 +7,10 @@ export function Grid({ posts }) {
   const [isPostModalActive, setIsPostModalActive] = useState(false);
   const [currentPostId, setCurrentPostId] = useState("");
   const [post, setPost] = useState();
+
+  useEffect(() => {
+    console.log("posts que recibe grid: ", posts);
+  }, []);
 
   const { user } = useUser();
 
