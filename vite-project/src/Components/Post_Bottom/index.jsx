@@ -8,7 +8,12 @@ import {
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./PostBottom.css";
-import { getSpecificComment, likePost, postComment, unLike } from "../../Services/postService";
+import {
+  getSpecificComment,
+  likePost,
+  postComment,
+  unLike,
+} from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
 import { useAuth } from "../../Context/AuthContext";
 import { Commentt } from "../Commentt";
@@ -38,7 +43,7 @@ export function PostBottom({ post }) {
   }
 
   async function publishComment() {
-    console.log("commentt ",comment);
+    console.log("commentt ", comment);
     console.log("post, ", post);
     const newComment = await postComment(post, auth, comment, updatePost);
     setComments((prev) => [...prev, newComment]);
@@ -57,9 +62,7 @@ export function PostBottom({ post }) {
   return (
     <div className="divPostBottom">
       <div className="Iconos" style={{ fontSize: 30 }} theme={theme}>
-        <div
-          onClick={likeUnLike}
-        >
+        <div onClick={likeUnLike}>
           {!heartIcon ? (
             <HeartOutlined
               className="heartIcon"
@@ -95,7 +98,7 @@ export function PostBottom({ post }) {
         </p>
       </div>
 
-      <span> { post.caption} </span>
+      <span> {post.caption} </span>
 
       <div
         className="Comentarios"
@@ -124,30 +127,9 @@ export function PostBottom({ post }) {
               padding: "5px",
             }}
           >
-            {/* {post?.comments?.map((commentt) => (
-              // <Commentt commentt={commentt} />
-            ))} */}
             {comments.map((comment) => (
-              <Commentt comment={comment} post={post}/>
+              <Commentt comment={comment} post={post} />
             ))}
-            {/* <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p> */}
           </div>
           <form className="commentSend">
             <input
@@ -157,7 +139,7 @@ export function PostBottom({ post }) {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             ></input>
-            <RightOutlined className="sendButton" onClick={publishComment}/>
+            <RightOutlined className="sendButton" onClick={publishComment} />
           </form>
         </div>
       </div>

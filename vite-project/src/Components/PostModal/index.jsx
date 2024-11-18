@@ -8,7 +8,13 @@ import { PostBottom } from "../Post_Bottom";
 import { getAllProfiles } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
 import { IoClose } from "react-icons/io5";
-import { likePost, postComment, unLike } from "../../Services/postService";
+import { Commentt } from "../Commentt";
+import {
+  getSpecificComment,
+  likePost,
+  postComment,
+  unLike,
+} from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
 
 import {
@@ -30,7 +36,10 @@ export function PostModal({
   const [allUsers, setAllUsers] = useState([]);
 
   const doILikeThis = post.likes.includes(auth.id);
+  const [likes, setLikes] = useState(post.likes);
   const [heartIcon, setHeartIcon] = useState(doILikeThis);
+  const [comments, setComments] = useState(post.comments);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     fetchAllUsers();
@@ -51,16 +60,32 @@ export function PostModal({
   function likeUnLike() {
     if (heartIcon) {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => prev.filter((id) => id !== auth.id));
       unLike(post, auth, updatePost);
     } else {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => [...prev, auth.id]);
       likePost(post, auth, updatePost);
     }
   }
 
+  async function publishComment(e) {
+    e.preventDefault();
+    console.log("commentt ", comment);
+    console.log("post, ", post);
+    const newComment = await postComment(post, auth, comment, updatePost);
+    setComments((prev) => [...prev, newComment]);
+    //postComment(post, auth, comment, updatePost);
+    setComment("");
+  }
+
   useEffect(() => {
     setHeartIcon(doILikeThis);
+    setLikes(post.likes);
+    setComments(post.comments);
   }, [post]);
+
+  useEffect(() => {}, [post?.likes]);
 
   return (
     <div className={styles.modal}>
@@ -95,29 +120,20 @@ export function PostModal({
               <MoreOutlined id="moreOutlined" style={{ fontSize: 25 }} />
             </div>
             <div className={styles.postComments}>
-              {/* <PostBottom post={post}></PostBottom> */}
+              <div className={styles.postCaption}>
+                {" "}
+                <Avatar src={user?.profilePicture} size={40} />
+                <p className={styles.userName}> {user?.username} </p>
+                <p> {post.caption} </p>{" "}
+              </div>
               <div className={styles.commentsList}>
-                {post?.comments?.map((comment) => (
-                  <p> {comment} </p>
+                {comments.map((comment) => (
+                  <Commentt
+                    className={styles.comment}
+                    comment={comment}
+                    post={post}
+                  />
                 ))}
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
               </div>
               <div className={styles.commentsAndLikes}>
                 <div className={styles.likes}>
@@ -146,21 +162,21 @@ export function PostModal({
                   </div>
                   <div className={styles.likesCount}>
                     <p>
-                      <strong> {post?.likes.length} likes</strong>
+                      <strong> {likes.length} likes</strong>
                     </p>
                   </div>
                 </div>
-                <form className={styles.commentSend}>
+                <form className={styles.commentSend} onSubmit={publishComment}>
                   <input
                     className={styles.commentInput}
                     type="text"
                     placeholder="Add a comment..."
-                    //value={comment}
-                    //   onChange={(e) => setComment(e.target.value)}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
                   ></input>
                   <RightOutlined
                     className={styles.sendButton}
-                    //   onClick={publishComment}
+                    onClick={publishComment}
                   />
                 </form>
               </div>
