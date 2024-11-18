@@ -1,25 +1,41 @@
 import { useState } from "react";
 import { PostModal } from "../PostModal";
-import "./style.css";
+import style from "./Style.module.css";
 import { useUser } from "../../Context/UserContext";
 
 export function Grid({ posts }) {
   const [isPostModalActive, setIsPostModalActive] = useState(false);
   const [currentPostId, setCurrentPostId] = useState("");
+  const [post, setPost] = useState();
 
   const { user } = useUser();
 
   return (
-    <div className="photoGrid" >
+    <div className={style.photoGrid}>
       {user.posts?.length > 0 ? (
         user.posts?.map((post, index) => (
           <>
-            <img className="photo" key={index} src={`http://localhost:3001/${post.imageUrl}`} onClick={() => {setCurrentPostId(post._id); setIsPostModalActive(true)}} />
-            <PostModal post={post} isActive={isPostModalActive} currentPost={currentPostId} closeModal={() => setIsPostModalActive(false)} />
+            <img
+              className={style.photo}
+              key={index}
+              src={`http://localhost:3001/${post.imageUrl}`}
+              onClick={() => {
+                setCurrentPostId(post._id);
+                setIsPostModalActive(true);
+                setPost(post);
+              }}
+            />
           </>
         ))
       ) : (
-        <div className="noPhotos">No posts yet</div>
+        <div className={style.noPhotos}>No posts yet</div>
+      )}
+      {isPostModalActive && (
+        <PostModal
+          post={post}
+          setIsPostModalActive={setIsPostModalActive}
+          currentPost={currentPostId}
+        />
       )}
     </div>
   );

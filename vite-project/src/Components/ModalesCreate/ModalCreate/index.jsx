@@ -3,29 +3,25 @@ import foto from "../../../assets/create.png";
 import { ModalPreview } from "../ModalPreview";
 import styles from "./Modal.module.css";
 
-export function ModalCreate({
-  onFilesSelected,
-  visible,
-  setVisible,
-  setSiguiente,
-}) {
-  const [files, setFiles] = useState([]);
+export function ModalCreate({ setFiles, setVisibleModalCreate, setSiguiente }) {
+  const [thisFiles, setThisFiles] = useState([]);
 
   function cancel() {
-    setVisible("none");
-    setFiles([]);
+    setVisibleModalCreate(false);
+    setSiguiente(false);
+    setThisFiles([]);
   }
 
   function openModalPreview() {
-    setVisible("none");
-    setSiguiente("block");
+    setVisibleModalCreate(false);
+    setSiguiente(true);
   }
 
   const handleFileChange = (event) => {
     const selectedFiles = event.target.files;
     if (selectedFiles && selectedFiles.length > 0) {
       const newFiles = Array.from(selectedFiles);
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      setThisFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
   };
 
@@ -39,42 +35,29 @@ export function ModalCreate({
 
     if (droppedFiles.length > 0) {
       const newFiles = Array.from(droppedFiles);
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      setThisFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
   };
 
-  const handleRemoveFile = (index) => {
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
+  useEffect(() => {
+    setFiles(thisFiles);
+  }, [thisFiles, setFiles]);
 
   useEffect(() => {
-    onFilesSelected(files);
-  }, [files, onFilesSelected]);
-
-  useEffect(() => {
-    if (files.length > 0) {
-      openModalPreview();
-    }
-  }, [files]);
+    if (thisFiles.length > 0) openModalPreview();
+  }, [thisFiles]);
 
   return (
-    <div className={styles.modal} style={{ display: visible }}>
+    <div className={styles.modal}>
       <div className={styles.modalContent}>
-        <h1 className={`title is-5 ${styles.title}`}>
-          {" "}
-          Crear nueva publicacion{" "}
-        </h1>
+        <h1 className={`title is-5 ${styles.title}`}> Create new post </h1>
         <div
           className={styles.divModal}
           onDrop={handleDrop}
           onDragOver={(event) => event.preventDefault()}
         >
           <img src={foto} className={styles.createFoto} alt="create foto" />
-          <p className={styles.uploadText}>
-            {" "}
-            Arrastra las fotos y los videos aqui
-          </p>
-          {/* <DragNdrop onFilesSelected={setFiles} width="300px" height="50px" /> */}
+          <p className={styles.uploadText}> Drag photos and videos here</p>
           <input
             type="file"
             hidden
@@ -84,10 +67,10 @@ export function ModalCreate({
             multiple
           />
           <label htmlFor="browse" className={styles.subirFoto}>
-            Seleccionar del ordenador
+            Select from computer
           </label>
           <button className={styles.botonCancelar} onClick={() => cancel()}>
-            Cancelar
+            Cancel
           </button>
         </div>
       </div>

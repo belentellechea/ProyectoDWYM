@@ -1,22 +1,23 @@
 import { useState } from "react";
-import "./styles.css";
+import style from "./Styles.module.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { editProfileLook } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
 import { useUser } from "../../Context/UserContext";
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
 
-export function EditModal({ visible, setVisible }) {
+export function EditModal({ setVisibleEdit }) {
   const { auth, updateAuth } = useAuth();
   const { user, updateUser } = useUser();
 
   const [formData, setFormData] = useState({
     username: user?.username,
     profilePicture: user?.profilePicture,
-    description: user?.description});
+    description: user?.description,
+  });
 
   function closeModal() {
-    setVisible("none");
+    setVisibleEdit(false);
   }
 
   function updateProfile(e) {
@@ -24,8 +25,12 @@ export function EditModal({ visible, setVisible }) {
 
     const newLook = {
       username: formData.username ? formData.username : user.username,
-      description: formData.description ? formData.description : user?.description,
-      profilePicture: formData.profilePicture ? formData.profilePicture : user?.profilePicture,
+      description: formData.description
+        ? formData.description
+        : user?.description,
+      profilePicture: formData.profilePicture
+        ? formData.profilePicture
+        : user?.profilePicture,
     };
 
     editProfileLook(auth, user, newLook, updateUser);
@@ -33,46 +38,43 @@ export function EditModal({ visible, setVisible }) {
   }
 
   return (
-    <div className="modal" style={{ display: visible }}>
-      <div className="modal-background"></div>
-      <div className="modal-content editModal">
-        <div className="editTitle">
-          <h2 className="title is-4">Edit profile</h2>
-        </div>
-
+    <div className={style.modal}>
+      <div className={style.editModal}>
+        <h2 className="title is-4">Edit profile</h2>
         <form id="taskForm" onSubmit={updateProfile}>
-          <div className="field loginLabel">
+          <div className={style.loginLabel}>
             <label className="label">Username</label>
             <div className="control">
               <input
-                className="input"
                 type="text"
                 id="user"
                 name="username"
                 defaultValue={user?.username}
-                onChange={(e) => setFormData({...formData, username: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, username: e.target.value })
+                }
               />
             </div>
           </div>
 
-          <div className="field loginLabel">
-            <label className="label">Profile picture (link)</label>
+          <div className={style.loginLabel}>
+            <label className="label"> Profile picture (link)</label>
             <div className="control">
               <input
-                className="input"
                 type="text"
                 id="picture"
                 name="profilePicture"
                 defaultValue={user?.profilePicture}
-                onChange={(e) => setFormData({...formData, profilePicture: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, profilePicture: e.target.value })
+                }
               />
             </div>
           </div>
-          <div className="field loginLabel">
+          <div className={style.loginLabel}>
             <label className="label">Description</label>
-            <div className="control">
+            <div>
               <input
-                className="input"
                 type="text"
                 id="description"
                 name="description"
@@ -83,20 +85,19 @@ export function EditModal({ visible, setVisible }) {
               />
             </div>
           </div>
-          <div className="modal-buttons">
+          <div className={style.modalButtons}>
             <button
               type="button"
               id="cancel-button"
               onClick={closeModal}
-              className="button"
+              className={style.cancel}
             >
               Cancel
             </button>
-
             <button
               type="submit"
               id="save-button"
-              className="button save"
+              className={style.save}
               onClick={updateProfile}
             >
               Save

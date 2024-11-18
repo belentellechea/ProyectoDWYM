@@ -17,7 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 export function SiderContent({
   openNotifications,
   closeNotifications,
-  setVisible,
+  setVisibleModalCreate,
   setCollapsed,
   collapsed,
 }) {
@@ -43,7 +43,7 @@ export function SiderContent({
   }, []);
 
   function openModal() {
-    setVisible("block");
+    setVisibleModalCreate(true);
   }
 
   function closeSideBar() {
@@ -89,6 +89,7 @@ export function SiderContent({
       openNotifications();
     } else if (key === "CreateTab") {
       openModal();
+      closeNotifications();
     }
   };
 
