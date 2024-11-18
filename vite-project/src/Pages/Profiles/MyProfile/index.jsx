@@ -128,7 +128,7 @@ export function MyProfile({
               </div>
             </div>
             <div className={styles.photos}>
-              <Grid photos={user?.posts} />
+              <Grid posts={user?.posts} />
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
