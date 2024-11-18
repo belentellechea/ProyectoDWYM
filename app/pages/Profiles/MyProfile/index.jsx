@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet, Text, View, Pressable, Image} from 'react-nat
 import BottomBarTabs from '../../../components/Bars/BottomBarTabs';
 import TopBarTabs from '../../../components/Bars/TopBarTabs';
 import ExitModal from '../../../components/ExitModal';
-import CreatePostModal from '../../../components/CreatePostModal';
 import { useState } from 'react';
 import PhotoGrid from '../../../components/PhotoGrid';
 import EditModal from '../../../components/EditModal';
@@ -65,10 +64,6 @@ export default function Profile() {
                 <ExitModal 
                     visible={exitVisible}
                     setVisible={setExitVisible}
-                />
-                <CreatePostModal 
-                    visible={addVisible}
-                    setVisible={setAddVisible}
                 />
                 <EditModal 
                     visible={editVisible}

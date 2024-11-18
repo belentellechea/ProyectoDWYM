@@ -7,7 +7,7 @@ import Icon3 from '@expo/vector-icons/Entypo';
 
 export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVisible = () => {}, addVisible = () => {} }) {
   const navigation = useNavigation(); 
-  const [buttonAdd, setButtonAdd] = useState('add-circle-outline'); 
+  const [buttonAdd, setButtonAdd] = useState('add-circle'); 
 
   useEffect(() => {
     if (!addVisible) {
@@ -22,6 +22,7 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
   function addButton(){
     setButtonAdd('add-circle'); 
     setAddVisible(true); 
+    navigation.navigate('AddPost'); 
   }
 
   function exitButton(){
@@ -36,7 +37,7 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
     <>
       <View style={styles.bar}>
         <View>
-          {atPage === 'Home'|| atPage === 'Notifications' ? (
+          {atPage === 'Home'|| atPage === 'Notifications' || atPage === 'AddPost' ? (
             <Image source={require('../../../assets/name.png')} style={styles.name} />
           ) : null}
           {atPage === 'Profile' ? (
@@ -49,7 +50,7 @@ export default function TopBarTabs({atPage, setAddVisible = () => {}, setExitVis
           ) : null}
         </View>
         <View >
-          {atPage === 'Home' || atPage==='FriendProfile' ? (
+          {atPage === 'Home' || atPage==='FriendProfile' || atPage==='AddPost' ? (
             <View style={styles.buttons}>
               <Pressable onPress={goToNotifications}>
                 <Icon name='hearto' size={23}/>

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import MyProfile from '../app/pages/Profiles/MyProfile';
 import FriendProfile from '../app/pages/Profiles/FriendProfile';
 import Notifications from './pages/Notifications';
+import AddPost from './pages/AddPost'
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,11 @@ export default function App() {
           component={Notifications}
           options={{ headerShown: false}} 
         /> 
+        <Stack.Screen 
+          name="AddPost" 
+          component={AddPost}
+          options={{ headerShown: false}} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

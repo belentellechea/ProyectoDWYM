@@ -15,14 +15,9 @@ export default function Home() {
         setAddVisible={setAddVisible} 
         addVisible={addVisible}
       />
-      <CreatePostModal 
-        visible={addVisible}
-        setVisible={setAddVisible}
-      />
       <View style={styles.pageContent}>
         <PostContainer></PostContainer>
       </View>
-     
       <BottomBarTabs 
         atPage='Home' 
       />

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from '@expo/vector-icons/Foundation';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function GalleryButton({setErrorMsg, setImage, setVisible, setShowSecondModal}) {
+export default function GalleryButton({setErrorMsg, setImage}) {
     
     async function pickImage() {
         let { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -19,9 +19,7 @@ export default function GalleryButton({setErrorMsg, setImage, setVisible, setSho
         });
     
         if (!result.canceled) {
-            setImage(result.assets[0].uri); 
-            setVisible(false); 
-            setShowSecondModal(true);  
+            setImage(result.assets[0].uri);  
         }
     }
     
