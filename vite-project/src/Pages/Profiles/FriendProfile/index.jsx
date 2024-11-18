@@ -10,6 +10,9 @@ import { ParentModalCreate } from "../../../Components/ModalesCreate/ParentModal
 import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
+import { ModalCreate } from "../../../Components/ModalesCreate/ModalCreate/index.jsx";
+import { ModalPreview } from "../../../Components/ModalesCreate/ModalPreview/index.jsx";
+
 import {
   followFriend,
   getAllProfiles,
@@ -36,12 +39,14 @@ export function FriendProfile({
   const { id } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [visibleModalCreate, setVisibleModalCreate] = useState("none");
+
+  const [visibleModalCreate, setVisibleModalCreate] = useState(false);
+  const [siguiente, setSiguiente] = useState(false);
+
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [friend, setFriend] = useState({});
 
-  
   const [doIFollowThem, setDoIFollowThem] = useState(false);
   console.log("do i follow them: ", doIFollowThem);
 
@@ -57,7 +62,7 @@ export function FriendProfile({
 
   useEffect(() => {
     getUser(auth.id, auth.token, updateUser);
-    setVisibleModalCreate("none");
+    setVisibleModalCreate(false);
     fetchFriend();
     setIsLoading(false);
 
@@ -66,8 +71,6 @@ export function FriendProfile({
     setDoIFollowThem(followUnfollow);
     console.log("doIFollowThem 3: ", doIFollowThem);
   }, []);
-
-  
 
   function openModal() {
     setVisibleModalCreate("block");
@@ -154,12 +157,21 @@ export function FriendProfile({
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
-          <ParentModalCreate
-            files={files}
-            visible={visibleModalCreate}
-            setVisible={setVisibleModalCreate}
-            onFilesSelected={setFiles}
-          />
+          {visibleModalCreate && (
+            <ModalCreate
+              setFiles={setFiles}
+              setVisibleModalCreate={setVisibleModalCreate}
+              setSiguiente={setSiguiente}
+            />
+          )}
+          {siguiente && (
+            <ModalPreview
+              siguiente={siguiente}
+              setSiguiente={setSiguiente}
+              files={files}
+              setFiles={setFiles}
+            />
+          )}
         </div>
       ) : (
         <p>Loading...</p>

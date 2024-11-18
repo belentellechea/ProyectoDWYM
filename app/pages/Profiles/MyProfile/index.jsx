@@ -88,10 +88,6 @@ export default function Profile() {
                     visible={exitVisible}
                     setVisible={setExitVisible}
                 />
-                <CreatePostModal 
-                    visible={addVisible}
-                    setVisible={setAddVisible}
-                />
                 <EditModal 
                     visible={editVisible}
                     setVisible={setEditVisible}

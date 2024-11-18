@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function PhotoButton({setErrorMsg, setImage, setVisible, setShowSecondModal}) {
+export default function PhotoButton({setErrorMsg, setImage}) {
     async function takePhoto() {
         let { status } = await ImagePicker.requestCameraPermissionsAsync();
         if (status !== 'granted') {
@@ -18,8 +18,6 @@ export default function PhotoButton({setErrorMsg, setImage, setVisible, setShowS
     
         if (!result.canceled) {
           setImage(result.assets[0].uri); 
-          setVisible(false); 
-          setShowSecondModal(true); 
         }
     }
     

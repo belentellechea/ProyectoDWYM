@@ -54,10 +54,6 @@ export default function FriendProfile() {
                     ]}
                 />
             </View>
-            <CreatePostModal 
-                visible={addVisible}
-                setVisible={setAddVisible}
-            />
             <BottomBarTabs atPage='FriendProfile'/>
         </SafeAreaView>
     )

@@ -31,10 +31,6 @@ export default function Notifications(){
                 <Notification></Notification>
             </ScrollView>
             <BottomBarTabs atPage='Notifications' />
-        <CreatePostModal 
-            visible={addVisible}
-            setVisible={setAddVisible}
-        />
         </SafeAreaView>
     )
 }
