@@ -1,9 +1,41 @@
 import {View, Text, Modal, StyleSheet, Pressable, TextInput } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+import { useUser } from "../../Context/UserContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../Context/AuthContext";
+import { editProfileLook, getUser } from "../../Services/userService";
 
 export default function EditModal ({visible, setVisible}) {
+    const { user, updateUser } = useUser();
+    const { auth } = useAuth();
+
     const navigation = useNavigation();
+    const [username, setUsername] = useState(user?.username ? user.username : "");
+    const [profilePicture, setProfilePicture] = useState(user.profilePicture ? user.profilePicture : "");
+    const [description, setDescription] = useState(user.description ? user.description : "");
+
+    // useEffect(() => {
+    //     getUser(auth.id, auth.token);
+    // }, []);
+
+    function closeModal() {
+        setVisibleEdit(false);
+      }
+    
+    function updateProfile(e) {
+        e.preventDefault();
+
+        const newLook = {
+            username: username,
+            description: description,
+            profilePicture: profilePicture,
+        };
+
+        editProfileLook(auth, user, newLook, updateUser);
+        //closeModal();
+        setVisible(!visible);
+    }
     
     return(
         <Modal
@@ -20,19 +52,28 @@ export default function EditModal ({visible, setVisible}) {
                     <View style={styles.inputContainer}>
                         <View>
                             <Text style={styles.inputText}>Profile photo</Text>
-                            <TextInput  style={styles.input}/>
+                            <TextInput  style={styles.input}
+                                onChangeText={(text) => setProfilePicture(text)}
+                                value={profilePicture}
+                            />
                         </View>
                         <View>
                             <Text style={styles.inputText}>Username</Text>
-                            <TextInput  style={styles.input}/>
+                            <TextInput  style={styles.input}
+                                onChangeText={(text) => setUsername(text)}
+                                value={username}
+                            />
                         </View>
                         <View>
                             <Text style={styles.inputText}>Description</Text>
-                            <TextInput  style={styles.input}/>
+                            <TextInput  style={styles.input}
+                                onChangeText={(text) => setDescription(text)}
+                                value={description}
+                            />
                         </View>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Pressable onPress={() => setVisible(!visible)} style={styles.saveButton}>
+                        <Pressable onPress={updateProfile} style={styles.saveButton}>
                             <Text style={styles.buttonText}>Save changes</Text>
                         </Pressable>
                         <Pressable onPress={() => setVisible(!visible)} style={styles.cancelButton}>

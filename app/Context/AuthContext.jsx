@@ -45,7 +45,9 @@ export const AuthProvider = ({ children }) => {
         //localStorage.removeItem('auth');
         //localStorage.clear();
         try {
+            console.log("asyncStorage1: ", AsyncStorage);
             await AsyncStorage.clear();
+            console.log("asyncStorage: ", AsyncStorage);
         } catch (error) {
             console.error('Error al cerrar sesión:', error);
         }
