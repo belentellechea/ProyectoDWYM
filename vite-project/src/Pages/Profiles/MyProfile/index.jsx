@@ -12,6 +12,8 @@ import { useAuth } from "../../../Context/AuthContext";
 import { getUser } from "../../../Services/userService.jsx";
 import stylesHome from "../../Home/Home.module.css";
 import styles from "./MyProfile.module.css";
+import { ModalCreate } from "../../../Components/ModalesCreate/ModalCreate/index.jsx";
+import { ModalPreview } from "../../../Components/ModalesCreate/ModalPreview/index.jsx";
 
 import {
   MenuOutlined,
@@ -28,10 +30,14 @@ export function MyProfile({
   const { auth, updateAuth } = useAuth();
   const { user, updateUser } = useUser();
 
-  const [visible, setVisible] = useState("none");
-  const [visibleConfiguration, setVisibleConfiguration] = useState("none");
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleEdit, setVisibleEdit] = useState(false);
+
   const [visibleModalCreate, setVisibleModalCreate] = useState(false);
+  const [siguiente, setSiguiente] = useState(false);
+
+  const [visibleConfig, setVisibleConfig] = useState(false);
+
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -44,14 +50,6 @@ export function MyProfile({
     getUser(auth.id, auth.token, updateUser);
     setIsLoading(false);
   }, [user?.post]);
-
-  function openModal() {
-    setVisible("block");
-  }
-
-  function openConfigurationModal() {
-    setVisibleConfiguration("block");
-  }
 
   return (
     <>
@@ -72,7 +70,7 @@ export function MyProfile({
               <SiderContent
                 openNotifications={openNotifications}
                 closeNotifications={closeNotifications}
-                setVisible={setVisibleModalCreate}
+                setVisibleModalCreate={setVisibleModalCreate}
                 collapsed={collapsed}
                 setCollapsed={setCollapsed}
               ></SiderContent>
@@ -100,14 +98,21 @@ export function MyProfile({
                     {user?.username ? user.username : "nombre_usuario"}
                   </h1>
                   <div className={styles.buttonSettings}>
-                    <button className={styles.editButton} onClick={openModal}>
+                    <button
+                      className={styles.editButton}
+                      onClick={() => {
+                        setVisibleEdit(true);
+                      }}
+                    >
                       {" "}
                       edit profile{" "}
                     </button>
                     <SettingOutlined
                       id={styles.settingsIcon}
                       style={{ fontSize: "26px", marginLeft: "10px" }}
-                      onClick={openConfigurationModal}
+                      onClick={() => {
+                        setVisibleConfig(true);
+                      }}
                     />
                   </div>
                 </div>
@@ -119,35 +124,46 @@ export function MyProfile({
                     <strong>{user?.friends?.length || 0}</strong> friends
                   </p>
                 </div>
-                <p>{user?.description}</p>
+                <p className={styles.userDescription}>{user?.description}</p>
               </div>
             </div>
-            <div className="photos">
-              <Grid posts={user?.posts} />
+            <div className={styles.photos}>
+              <Grid photos={user?.posts} />
             </div>
             <NotificationsModal isActive={isNotificationsActive} />
           </div>
-          <EditModal
-            visible={visible}
-            setVisible={setVisible}
-            userData={user}
-          />
-          
-          <ConfigurationModal
-          visible={visibleConfiguration}
-          setVisible={setVisibleConfiguration}
-          />
+          {visibleEdit && (
+            <EditModal setVisibleEdit={setVisibleEdit} userData={user} />
+          )}
+
+          {visibleConfig && (
+            <ConfigurationModal setVisibleConfig={setVisibleConfig} />
+          )}
 
           {visibleModalCreate && (
-            <ParentModalCreate
+            // <ParentModalCreate
+            //   files={files}
+            //   visible={visibleModalCreate}
+            //   setVisible={setVisibleModalCreate}
+            //   setFiles={setFiles}
+            // />
+
+            <ModalCreate
+              setFiles={setFiles}
+              setVisibleModalCreate={setVisibleModalCreate}
+              setSiguiente={setSiguiente}
+            />
+          )}
+
+          {siguiente && (
+            <ModalPreview
+              siguiente={siguiente}
+              setSiguiente={setSiguiente}
               files={files}
-              visible={visibleModalCreate}
-              setVisible={setVisibleModalCreate}
-              onFilesSelected={setFiles}
+              setFiles={setFiles}
             />
           )}
         </div>
-
       ) : (
         <p>Loading...</p>
       )}

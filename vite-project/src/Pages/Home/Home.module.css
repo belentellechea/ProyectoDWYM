@@ -4,6 +4,7 @@
   align-content: center;
   flex-direction: column;
   overflow: auto;
+  justify-content: flex-start;
 }
 
 .contentCollapsed {
@@ -12,6 +13,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* PARA CELULARES */
@@ -19,6 +21,11 @@
   .content {
     width: 100%;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
   }
 
   .layout {
@@ -107,12 +114,21 @@
     width: 100%;
     padding: 2rem;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
   }
 
   .contentCollapsed {
     width: 100%;
     padding: 2rem;
     display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
   }
 }
 
@@ -159,11 +175,23 @@
     width: 80%;
     padding: 4rem;
     transition: width 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-content: flex-start;
   }
 
   .contentCollapsed {
     width: 93%;
     padding: 4rem;
     transition: width 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-content: flex-start;
   }
 }

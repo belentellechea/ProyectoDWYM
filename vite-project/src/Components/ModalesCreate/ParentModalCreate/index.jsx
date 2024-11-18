@@ -2,27 +2,28 @@ import { ModalPreview } from "../ModalPreview";
 import { ModalCreate } from "../ModalCreate";
 import { useState } from "react";
 
-export function ParentModalCreate({
-  onFilesSelected,
-  visible,
-  setVisible,
-  files,
-}) {
-  const [siguiente, setSiguiente] = useState("none");
+export function ParentModalCreate({ visible, setVisible, files, setFiles }) {
+  const [siguiente, setSiguiente] = useState(false);
 
   return (
     <>
-      <ModalCreate
-        onFilesSelected={onFilesSelected}
-        visible={visible}
-        setVisible={setVisible}
-        setSiguiente={setSiguiente}
-      />
-      <ModalPreview
-        siguiente={siguiente}
-        setSiguiente={setSiguiente}
-        files={files}
-      />
+      {visible && (
+        <ModalCreate
+          setFiles={setFiles}
+          visible={visible}
+          setVisible={setVisible}
+          setSiguiente={setSiguiente}
+        />
+      )}
+      {siguiente && (
+        <ModalPreview
+          siguiente={siguiente}
+          setSiguiente={setSiguiente}
+          files={files}
+          setFiles={setFiles}
+        />
+      )}
+      ;
     </>
   );
 }

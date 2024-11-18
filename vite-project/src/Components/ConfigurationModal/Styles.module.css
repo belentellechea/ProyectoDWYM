@@ -1,5 +1,5 @@
-.modal.editModal {
-  display: none;
+.modal {
+  align-content: center;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -7,24 +7,27 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /*fondo semitransparente*/
-  place-content: center;
+  background-color: rgba(0, 0, 0, 0.738);
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  place-items: center;
+  transition: 0.5s;
 }
 
-.modal-background {
-}
-
-.modal-content.editModal {
+.editModal {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
   border-radius: 15px;
-  width: 600px;
+  width: 400px;
   padding: 3rem;
+  transition: 0.5s;
 }
 
-.modal.editModal h2 {
+.editModal h2 {
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: 800;
@@ -46,29 +49,29 @@ h2.title.is-4 {
   margin-right: 0.5rem;
 }
 
-.modal.editModal form {
+.editModal form {
   display: flex;
   flex-direction: column;
 }
 
-.modal.editModal form label {
+.editModal form label {
   margin-bottom: 10px;
 }
 
-.modal.editModal form input {
+.editModal form input {
   margin-bottom: 20px;
   padding: 10px;
   font-size: 16px;
 }
 
-.modal-buttons {
+.modalButtons {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 2rem;
 }
 
-.modal-buttons button {
+.modalButtons button {
   padding: 10px;
   border-radius: 15px;
   width: 160px;
@@ -82,8 +85,8 @@ h2.title.is-4 {
 }
 
 .save {
-  background-color: rgb(184, 211, 255);
-  color: rgb(54, 54, 54);
+  background-color: rgb(255, 94, 102);
+  color: rgb(255, 255, 255);
   transition: 0.3s;
   font-weight: 600;
 }
@@ -98,17 +101,11 @@ h2.title.is-4 {
   transition: 0.5s;
 }
 
-.modal-content.editModal h2 {
+.editModal h2 {
   display: flex;
   justify-content: center;
 }
 
-.modal-content.editModal form .columns .column .box {
+.editModal form .columns .column .box {
   background-color: #ffe5d9;
-}
-
-input.input:focus {
-  outline: none;
-  border: 3px solid pink;
-  box-shadow: none;
 }
