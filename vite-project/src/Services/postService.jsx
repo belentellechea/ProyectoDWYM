@@ -118,16 +118,13 @@ export const postComment = async (post, auth, content, updatePost) => {
     }
 }
 
-export const deleteComment = async (post, comment, updatePost) => {
+export const deleteComment = async (post, comment, updatePost, auth) => {
     try {
         const response = await fetch(`http://localhost:3001/api/posts/${post._id}/comments/${comment._id}`, {
             method: "DELETE",
             headers: {
-                'Authorization': `Bearer ${auth.token}`
+                Authorization: `Bearer ${auth.token}`
             },
-            body: {
-                "content": content
-            }
         });
 
         const data =  await response.json();

@@ -128,7 +128,7 @@ export function PostBottom({ post }) {
               // <Commentt commentt={commentt} />
             ))} */}
             {comments.map((comment) => (
-              <Commentt comment={comment} />
+              <Commentt comment={comment} post={post}/>
             ))}
             {/* <p>
               <strong> user_name </strong> hola{" "}
