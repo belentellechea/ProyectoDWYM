@@ -16,8 +16,8 @@ export function Grid({ posts }) {
 
   return (
     <div className={style.photoGrid}>
-      {user.posts?.length > 0 ? (
-        user.posts?.map((post, index) => (
+      {posts?.length > 0 ? (
+        posts?.map((post, index) => (
           <>
             <img
               className={style.photo}

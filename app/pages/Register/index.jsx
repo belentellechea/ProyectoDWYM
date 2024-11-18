@@ -1,12 +1,32 @@
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Pressable, ImageBackground, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useState } from 'react';
+import { postAccount } from '../../Services/authService'
+import { useAuth } from '../../Context/AuthContext';
 
 export default function Register({navigation}) {
     const [show, setShow] = useState(false); 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState(""); 
+    const [username, setUsername] = useState("");
+
+    const { updateAuth } = useAuth();
 
     function goToLogin() {
         navigation.navigate('Login');
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const account = {
+            email: email,
+            username: username,
+            password: password
+        }
+
+        const success = postAccount(account, updateAuth);
+        if (success) navigation.navigate("Home");
     }
 
     return (
@@ -25,11 +45,15 @@ export default function Register({navigation}) {
                         <TextInput 
                             placeholder='your.email@example.com'
                             style={styles.input}
+                            onChangeText={(text) => setEmail(text)}
+                            value={email}
                         />
                         <Text style={styles.inputText}>Username</Text>
                         <TextInput 
                             placeholder='your.username'
                             style={styles.input}
+                            onChangeText={(text) => setUsername(text)}
+                            value={username}
                         />
                         <Text style={styles.inputText}>Password</Text>
                         <View style={styles.passwordContainer}>
@@ -37,6 +61,8 @@ export default function Register({navigation}) {
                             placeholder='*****'
                             secureTextEntry={!show}
                             style={styles.input}
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
                         />
                         <Pressable onPress={() => setShow(!show)} style={styles.iconContainer}>
                             <Icon name={show ? 'eye-slash' : 'eye'} size={20} color="gray" />
@@ -45,7 +71,7 @@ export default function Register({navigation}) {
                     </View>
                     <View style={styles.buttonContainer}>
                         <Pressable style={[styles.button, styles.createButton]}>
-                            <Text style={styles.buttonText}>Create</Text>
+                            <Text style={styles.buttonText} onPress={handleSubmit}>Create</Text>
                         </Pressable>
                         <Pressable style={styles.button} onPress={goToLogin}>
                             <Text style={styles.buttonText}>Cancel</Text>
