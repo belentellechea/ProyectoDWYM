@@ -25,7 +25,6 @@ export function Commentt({ comment, post }) {
 
 
     return (
-        // <p> <strong>{comm?.user?.username}</strong>{"   "}{comm?.content} <DeleteOutlined className={styles.deleteIcon} style={{marginLeft: 20}} onClick={() => deleteComment(post, comm, updatePost, auth)}/></p>
         <p className={styles.comment}>
             <strong className={styles.username}>{comm?.user?.username}</strong>
             <span className={styles.content}>{comm?.content}</span>

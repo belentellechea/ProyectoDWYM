@@ -12,7 +12,7 @@ export default function PhotoGrid({photos}){
                     contentContainerStyle={styles.contentContainer}
                     renderItem={({ item }) => (
                         <View style={styles.grid}>
-                            <Image source={{ uri: item.uri }} style={styles.photo}/>
+                            <Image source={{ uri: "http://172.20.10.7:3001/"+item.imageUrl }} style={styles.photo}/>
                         </View>
                     )}
                 /> 

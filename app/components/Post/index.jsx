@@ -1,19 +1,61 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Animated } from "react-native";
 import Icon from '@expo/vector-icons/Feather';
 import Icon2 from '@expo/vector-icons/AntDesign';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import CommentSection from '../CommentSection'
+import { useAuth } from "../../Context/AuthContext";
 
-export default function Post() {
-    const [isLiked, setIsLiked] = useState(false); 
+export default function Post({post, profiles}) {
+    const { auth } = useAuth();
+
+    //const [isLiked, setIsLiked] = useState(false); 
     const [showComments, setShowComments] = useState(false); 
     const [tapCount, setTapCount] = useState(0); 
+
+    // Handling likes and comments
+    const doILikeThis = post?.likes?.includes(auth.id);
+    const [isLiked, setIsLiked] = useState(doILikeThis);
+    const [likes, setLikes] = useState(post?.likes);
+    const [comments, setComments] = useState(post?.comments);
+    const [comment, setComment] = useState("");
+
+    // Who is the owner of this post?
+    const profile = profiles?.find((profile) => profile._id == post.user._id);
 
     const scale = useRef(new Animated.Value(1)).current;
 
     const handleLike = () => {
         setIsLiked(prevState => !prevState); 
     }
+
+    function likeUnLike() {
+        if (isLiked) {
+          setIsLiked(!isLiked);
+          setLikes((prev) => prev.filter((id) => id !== auth.id));
+          unLike(post, auth, updatePost);
+        } else {
+          setIsLiked(!isLiked);
+          setLikes((prev) => [...prev, auth.id]);
+          likePost(post, auth, updatePost);
+        }
+    }
+
+    async function publishComment() {
+        console.log("commentt ",comment);
+        console.log("post, ", post);
+        const newComment = await postComment(post, auth, comment, updatePost);
+        setComments((prev) => [...prev, newComment]);
+        //postComment(post, auth, comment, updatePost);
+        setComment("");
+      }
+    
+      useEffect(() => {
+        setIsLiked(doILikeThis);
+        setLikes(post?.likes);
+        setComments(post?.comments);
+      }, [post]);
+    
+      useEffect(() => {}, [post?.likes]);
 
     const handleDoubleTap = () => {
         if (tapCount === 1) { //al hacer double tap
@@ -48,8 +90,8 @@ export default function Post() {
         <View style={styles.post}>
             <View style={styles.topPost}>
                 <View style={styles.imageAndUser}>
-                    <Image source={require('../../assets/user.png')} style={styles.userImage}/>
-                    <Text style={styles.username}>username</Text>
+                    <Image source={profile?.profilePicture ? {uri: profile.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
+                    <Text style={styles.username}>{profile?.username}</Text>
                 </View>
 
                 <Icon name='more-horizontal' size={25}/>
@@ -57,7 +99,7 @@ export default function Post() {
             
             <TouchableWithoutFeedback onPress={handleDoubleTap}>
                 <Image 
-                    source={{ uri: 'https://i.pinimg.com/736x/ae/62/c1/ae62c1ca9d3b17cd505ababb140e504d.jpg' }} 
+                    source={{ uri: `http://172.20.10.7:3001/${post?.imageUrl}` }} 
                     style={styles.postImage}
                 />
             </TouchableWithoutFeedback>
@@ -65,7 +107,7 @@ export default function Post() {
             <View style={styles.bottomPost}>
                 <View style={styles.likeAndComments}>
 
-                    <TouchableOpacity onPress={handleLike}>
+                    <TouchableOpacity onPress={likeUnLike}>
                         <Animated.View style={{ transform: [{ scale }] }}>
                             <Icon2 
                                 name={isLiked ? 'heart' : 'hearto'} 
@@ -81,9 +123,9 @@ export default function Post() {
 
                 </View>
 
-                <Text style={styles.boldText}>33 likes</Text>
+                <Text style={styles.boldText}>{likes?.length} likes</Text>
 
-                <Text><Text style={styles.boldText}>username</Text>  post descriptionnnnn</Text>
+                <Text><Text style={styles.boldText}>{profile?.username}</Text> {post?.caption}</Text>
                 {showComments && (
                     <CommentSection></CommentSection>
                 )}
