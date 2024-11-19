@@ -1,5 +1,5 @@
 div.postDiv {
-  width: 60%;
+  width: 50%;
   border: 1px solid rgb(255, 206, 229);
   border-radius: 20px;
   margin-bottom: 1rem;
@@ -13,7 +13,7 @@ div.postDiv {
 
 @media only screen and (min-width: 600px) {
   div.postDiv {
-    width: 70%;
+    width: 60%;
   }
 }
 
