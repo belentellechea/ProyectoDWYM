@@ -2,9 +2,20 @@ import * as React from 'react';
 import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import { Ionicons as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { getUser } from '../../../Services/userService';
+import { useUser } from '../../../Context/UserContext';
+import { useAuth } from '../../../Context/AuthContext';
+import { useEffect } from 'react';
 
 export default function BottomBarTabs({atPage}) {
   const navigation = useNavigation(); 
+
+  const { user } = useUser();
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    getUser(auth.id, auth.token);
+  }, []);
 
   function goToHome(){
     navigation.navigate('Home'); 
@@ -24,7 +35,7 @@ export default function BottomBarTabs({atPage}) {
           styles.profileContainer, 
           { borderWidth: atPage === 'Profile' ? 1 : 0 } 
         ]}>
-          <Image source={require('../../../assets/user.png')} style={styles.profile}></Image>
+          <Image source={user.profilePicture ? {uri: user?.profilePicture} : require('../../../assets/user.png')} style={styles.profile}></Image>
         </View>
         
       </Pressable>

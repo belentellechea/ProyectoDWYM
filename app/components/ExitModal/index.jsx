@@ -1,13 +1,23 @@
 import { SafeAreaView, View, Text, Alert, Modal, StyleSheet, Pressable } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from "../../Context/AuthContext";
 
 export default function ExitModal ({visible, setVisible}) {
     const navigation = useNavigation();
 
+    const { auth, logOut } = useAuth();
+
     function goToLogin(){
         setVisible(false)
         navigation.navigate('Login')
+    }
+
+    function logingOut() {
+        console.log("auth antes: ", auth);
+        logOut();
+        goToLogin();
+        console.log("auth después de log out: ", auth);
     }
     
     return(
@@ -23,7 +33,7 @@ export default function ExitModal ({visible, setVisible}) {
                     </Pressable>
                     <Text style={styles.modalText}>Do you wish to log out?</Text>
                     <View style={styles.buttonContainer}>
-                        <Pressable onPress={goToLogin} style={styles.yesButton}>
+                        <Pressable onPress={logingOut} style={styles.yesButton}>
                             <Text style={styles.buttonText}>Yes</Text>
                         </Pressable>
                         <Pressable style={styles.noButton} onPress={() => setVisible(!visible)}>
