@@ -95,7 +95,7 @@ export const editProfileLook = async (auth, user, newLook, updateUser) => {
 
 export const followFriend = async (auth, newFriend, addFriend) => {
   try {
-    const response = await fetch( url+`/api/user/add-friend/${newFriend.id}`, {
+    const response = await fetch( url+`/api/user/add-friend/${newFriend._id}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${auth.token}`,
@@ -120,7 +120,7 @@ export const followFriend = async (auth, newFriend, addFriend) => {
 
 export const unfollowFriend = async (auth, exfriend, removeFriend) => {
   try {
-    const response = await fetch( url+`/api/user/remove-friend/${exfriend.id}`, {
+    const response = await fetch( url+`/api/user/remove-friend/${exfriend._id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${auth.token}`,
