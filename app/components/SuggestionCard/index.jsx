@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Pressable, Image  } from "rea
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 
-export default function SuggestionCard(){
+export default function SuggestionCard({ profile }){
     const navigation = useNavigation();
 
     function goToFriendProfile(){
@@ -14,8 +14,8 @@ export default function SuggestionCard(){
             <Pressable style={styles.closeButton}>
                 <Icon name='close' size={15} />
             </Pressable>
-            <Image source={require('../../assets/user.png')} style={styles.userImage}/>
-            <Text style={styles.username}>username</Text>
+            <Image source={profile?.profilePicture ? {uri: profile?.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
+            <Text style={styles.username}>{profile?.username ? profile.username : "username"}</Text>
             <TouchableOpacity style={styles.viewButton} onPress={goToFriendProfile}>
                 <Text style={styles.viewText}>View</Text>
             </TouchableOpacity>
@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
         borderColor: '#adb5bd',
         borderRadius: 15,
         gap: 5, 
-        width: '20%'
+        width: '20%',
+        width: 140,
+        height: 185,
     },
     userImage: {
         width: 70,
