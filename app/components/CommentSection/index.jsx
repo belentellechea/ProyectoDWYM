@@ -1,12 +1,13 @@
 import { View, StyleSheet, Text, TextInput, Pressable} from "react-native"
 import Icon from '@expo/vector-icons/Feather';
+import Comment from "../Comment";
 
 export default function CommentSection(){
     return (
         <View style={styles.commentsSection}>
-            <Text><Text style={styles.boldText}>friend_username</Text>  a comment </Text>
-            <Text><Text style={styles.boldText}>friend_username</Text>  a comment</Text>
-            <Text><Text style={styles.boldText}>friend_username</Text>  a comment</Text>
+            <Comment></Comment>
+            <Comment></Comment>
+            <Comment></Comment>
             <View style={styles.inputContainer}>
                 <TextInput 
                     placeholder='Add a comment...'
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     commentsSection: {
         marginTop: 5,
         display: 'flex',
-        gap: 4
+        gap: 10
     }, 
     boldText: {
         fontWeight: 'bold'

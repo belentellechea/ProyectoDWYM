@@ -1,15 +1,22 @@
-import { Text, View, StyleSheet, SafeAreaView, Image, TextInput } from "react-native"
-import TopBarTabs from "../../components/Bars/TopBarTabs"
-import BottomBarTabs from "../../components/Bars/BottomBarTabs"
-import { useState } from "react"
-import PhotoButton from '../../components/PhotoButton'
-import GalleryButton from '../../components/GalleryButton'
+import { Text, View, StyleSheet, SafeAreaView, Image, TextInput, ScrollView, Pressable } from "react-native";
+import TopBarTabs from "../../components/Bars/TopBarTabs";
+import BottomBarTabs from "../../components/Bars/BottomBarTabs";
+import { useState } from "react";
+import PhotoButton from '../../components/PhotoButton';
+import GalleryButton from '../../components/GalleryButton';
 import Icon from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Notifications(){
+export default function AddPost() {
     const [addVisible, setAddVisible] = useState(true);
     const [image, setImage] = useState(null); 
     const [errorMsg, setErrorMsg] = useState(null); 
+
+    const navigation = useNavigation(); 
+
+    function goToSecondPage(){
+        navigation.navigate('AddPost2', { image });
+    }
 
     return (
         <SafeAreaView style={styles.postContainer}>
@@ -32,31 +39,31 @@ export default function Notifications(){
                         />
                     </View>
                     <View>
-                    {errorMsg === null && image && (
-                        <View>
-                            <Image 
-                            source={{ uri: image }}
-                            style={styles.image}
-                            />
-                            <TextInput 
-                                placeholder='Enter your caption'
-                                style={styles.input}
-                            />
-                        </View>
-                        
-                    )}
-                    {errorMsg !== null && (
-                        <View style={styles.errorContainer}>
-                            <Icon name='warning' size={25} style={styles.warning}/>
-                            <Text style={styles.errorText}>{errorMsg}</Text>
-                        </View>
-                    )}
+                        {errorMsg === null && image && (
+                            <View style={styles.nextContainer}>
+                                <Pressable onPress={goToSecondPage}>
+                                    <View style={styles.next}>
+                                        <Image 
+                                            source={{ uri: image }}
+                                            style={styles.image}
+                                        />
+                                        <Icon name='arrowright' size={35}/>
+                                    </View>    
+                                </Pressable>
+                            </View>
+                        )}
+                        {errorMsg !== null && (
+                            <View style={styles.errorContainer}>
+                                <Icon name='warning' size={25} style={styles.warning}/>
+                                <Text style={styles.errorText}>{errorMsg}</Text>
+                            </View>
+                        )}
                     </View>
-                </View>
+                </View>   
             </View>
             <BottomBarTabs atPage='AddPost'/>
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         alignItems: 'center', 
         justifyContent: 'center'
-    }, 
+    } ,
     buttonContainer: {
         display: 'flex', 
         flexDirection: 'row',
@@ -89,8 +96,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }, 
     image: {
-        width: 300,
-        height: 300
+        width: 80,
+        height: 80
     }, 
     errorContainer: {
         backgroundColor: '#ffe5ec',
@@ -108,15 +115,23 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
     }, 
-    input: {
-        backgroundColor: 'white',
-        borderRadius: 15, 
-        fontSize: 20,
-        padding: 10,
-        marginTop: 10,
-        marginBottom: 25,
-        fontSize: 20,
-        paddingRight: 40,
-        width: '100%'
+    next: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        alignItems: 'center',
+        gap: 10,
+        backgroundColor: '#edf2fb',
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 30,
+        paddingRight: 30,
+        borderRadius: 50,
+    },
+    nextContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%', 
+        justifyContent: 'flex-end',
+        paddingRight: 20
     }
 });
