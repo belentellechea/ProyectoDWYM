@@ -37,10 +37,8 @@ export default function PostContainer( ){
     }
 
     useEffect(() => {
-        console.log("estoy en post container");
         fetchFeed();
         fetchAllUsers();
-        console.log("feed:", feed);
     }, []);
 
     return ( 

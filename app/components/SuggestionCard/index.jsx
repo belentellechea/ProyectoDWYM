@@ -6,7 +6,7 @@ export default function SuggestionCard({ profile }){
     const navigation = useNavigation();
 
     function goToFriendProfile(){
-        navigation.navigate('FriendProfile')
+        navigation.navigate('FriendProfile', {friend: profile});
     }
 
     return (
