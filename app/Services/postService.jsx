@@ -5,7 +5,12 @@ export const uploadPost = async (imageUrl, caption, addPost, auth) => {
     console.log("image:", imageUrl);
     console.log("caption:", caption);
     const formData = new FormData();
-    formData.append("image", imageUrl);
+    //formData.append("image", imageUrl);
+    formData.append("image", {
+        uri: imageUrl,
+        name: 'photo.jpg', // Nombre que quieres darle
+        type: 'image/jpeg', // Tipo MIME
+    });
     formData.append("caption", caption);
 
     console.log("formData:", formData);
