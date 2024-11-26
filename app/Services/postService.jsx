@@ -117,6 +117,8 @@ export const postComment = async (post, auth, content, updatePost) => {
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);
 
+        console.log("data post comment 2: ", data);
+
         return data;
 
     } catch (error) {
