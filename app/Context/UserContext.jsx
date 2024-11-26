@@ -76,12 +76,16 @@ export const UserProvider = ({ children }) => {
         } 
     }
 
+    const logOutUserContext = () => {
+        setUser(initialState);
+    }
+
     useEffect(() => {
         console.log("User actualizado: ", user);
     }, [user]);
 
     return (
-        <UserContext.Provider value={{user, updateUser, updatePost, addPost, addFriend, removeFriend}}>
+        <UserContext.Provider value={{user, updateUser, updatePost, addPost, addFriend, removeFriend, logOutUserContext}}>
             {children}
         </UserContext.Provider>
     );

@@ -4,20 +4,21 @@ import Icon2 from '@expo/vector-icons/AntDesign';
 import { useState, useRef, useEffect } from "react";
 import CommentSection from '../CommentSection'
 import { useAuth } from "../../Context/AuthContext";
+import { useUser } from "../../Context/UserContext";
+import { likePost, unLike } from "../../Services/postService";
 
 export default function Post({post, profiles}) {
     const { auth } = useAuth();
+    const { updatePost } = useUser();
 
     //const [isLiked, setIsLiked] = useState(false); 
     const [showComments, setShowComments] = useState(false); 
     const [tapCount, setTapCount] = useState(0); 
 
-    // Handling likes and comments
+    // Handling likes
     const doILikeThis = post?.likes?.includes(auth.id);
     const [isLiked, setIsLiked] = useState(doILikeThis);
     const [likes, setLikes] = useState(post?.likes);
-    const [comments, setComments] = useState(post?.comments);
-    const [comment, setComment] = useState("");
 
     // Who is the owner of this post?
     const profile = profiles?.find((profile) => profile._id == post.user._id);
@@ -39,27 +40,18 @@ export default function Post({post, profiles}) {
           likePost(post, auth, updatePost);
         }
     }
-
-    async function publishComment() {
-        console.log("commentt ",comment);
-        console.log("post, ", post);
-        const newComment = await postComment(post, auth, comment, updatePost);
-        setComments((prev) => [...prev, newComment]);
-        //postComment(post, auth, comment, updatePost);
-        setComment("");
-      }
     
       useEffect(() => {
         setIsLiked(doILikeThis);
         setLikes(post?.likes);
-        setComments(post?.comments);
       }, [post]);
     
       useEffect(() => {}, [post?.likes]);
 
     const handleDoubleTap = () => {
         if (tapCount === 1) { //al hacer double tap
-            setIsLiked(prevState => !prevState); 
+            //setIsLiked(prevState => !prevState); 
+            likeUnLike();
             setTapCount(0); 
 
             //animación para el like 
@@ -90,7 +82,7 @@ export default function Post({post, profiles}) {
         <View style={styles.post}>
             <View style={styles.topPost}>
                 <View style={styles.imageAndUser}>
-                    <Image source={profile?.profilePicture ? {uri: profile.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
+                    <Image source={profile?.profilePicture !== "" ? {uri: profile.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
                     <Text style={styles.username}>{profile?.username}</Text>
                 </View>
 
@@ -127,7 +119,7 @@ export default function Post({post, profiles}) {
 
                 <Text><Text style={styles.boldText}>{profile?.username}</Text> {post?.caption}</Text>
                 {showComments && (
-                    <CommentSection></CommentSection>
+                    <CommentSection post={post}></CommentSection>
                 )}
             </View>
             

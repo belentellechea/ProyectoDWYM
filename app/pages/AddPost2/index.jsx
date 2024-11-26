@@ -5,16 +5,31 @@ import { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+import { uploadPost } from "../../Services/postService"
+import { useUser } from "../../Context/UserContext";
+import { useAuth } from "../../Context/AuthContext";
+
 
 export default function AddPost2(){
-    const [addVisible, setAddVisible] = useState(true);
     const route = useRoute();
     const { image } = route.params;
+    const { addPost } = useUser();
+    const { auth } = useAuth();
+
+    const [addVisible, setAddVisible] = useState(true);
+    const [caption, setCaption] = useState("");
 
     const navigation = useNavigation(); 
 
     function goToFeed(){
         navigation.navigate('Home');
+    }
+
+    function sharePost() {
+        console.log("estoy en sharePost 1");
+        uploadPost(image, caption, addPost, auth);
+        goToFeed();
+        console.log("estoy en sharePost 2");
     }
 
     return (
@@ -30,12 +45,14 @@ export default function AddPost2(){
                     <TextInput
                        placeholder="Type here..." 
                        style={styles.input}
+                       onChangeText={(text) => setCaption(text)}
+                       value={caption}
                     />
                     <Image 
                         source={{ uri: image }}
                         style={styles.image}
                     />
-                    <Pressable style={styles.uploadButton} onPress={goToFeed}>
+                    <Pressable style={styles.uploadButton} onPress={sharePost}>
                         <View style={styles.upload}>
                             <Icon name='arrowup' size={20}/>
                             <Text style={styles.uploadText}>Post</Text>
