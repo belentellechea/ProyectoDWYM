@@ -22,9 +22,14 @@
     cursor: pointer;
     color: #888;
     transition: color 0.3s;
+    margin-right: 20px;
   }
   
   .deleteIcon:hover {
     color: rgb(206, 68, 68);
   }
-  
+
+  .caption p, .caption strong, .caption span {
+    margin: 0;
+    padding: 0;
+  }

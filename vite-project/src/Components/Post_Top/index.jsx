@@ -2,6 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
 import "./PostTop.css";
+import image from "../../assets/user.png";
 
 export function PostTop({ user }) {
   return (
@@ -11,8 +12,8 @@ export function PostTop({ user }) {
         <Avatar
           size={40}
           className="avatarIcon"
-          src={user?.profilePicture}
-          icon={!user?.profilePicture && <UserOutlined />}
+          src={user.profilePicture ? user.profilePicture : image}
+          // icon={!user?.profilePicture && <UserOutlined />}
         />
         {/* <p className="title is-6"> Profile Name </p> */}
         <p className="title is-6">

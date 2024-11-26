@@ -19,6 +19,7 @@ export function Commentt({ comment, post }) {
 
     useEffect(() => {
         console.log("auth en comment: ", auth);
+        console.log("comment in commentt: ", comment);
         fetchComment();
     }, []);
 
@@ -26,7 +27,7 @@ export function Commentt({ comment, post }) {
 
     return (
         <p className={styles.comment}>
-            <strong className={styles.username}>{comm?.user?.username}</strong>
+            <strong className={styles.username}>@{comm?.user?.username}</strong>
             <span className={styles.content}>{comm?.content}</span>
             <DeleteOutlined
                 className={styles.deleteIcon}

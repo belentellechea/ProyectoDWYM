@@ -139,7 +139,7 @@ export const deleteComment = async (post, comment, updatePost, auth) => {
 
 export const getSpecificComment = async (comment, auth) => {
     try {
-        const response = await fetch(`http://localhost:3001/api/posts/comments/${comment._id}`, {
+        const response = await fetch(`http://localhost:3001/api/posts/comments/${comment}`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${auth.token}`
