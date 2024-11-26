@@ -35,6 +35,9 @@ export default function FriendProfile({ route }) {
         const followUnfollow = user?.friends?.some((f) => f._id == friend._id);
         console.log("doIFollow them: ", followUnfollow);
         setDoIFollowThem(followUnfollow);
+        setFollowers(friend?.friends?.length);
+        console.log("friends friends: ", followers);
+        console.log("friends.friends.length: ", friend?.friends?.length);
     }, []);
 
     async function followUnFollow() {
@@ -46,7 +49,8 @@ export default function FriendProfile({ route }) {
         } else {
           await followFriend(auth, friend, addFriend);
           setDoIFollowThem(true);
-          setFollowers(friend.friends);
+          //setFollowers(followers.length +1);
+          setFollowers(friend.friends.length);
         }
     }
 
@@ -63,14 +67,15 @@ export default function FriendProfile({ route }) {
             />
             <View style={styles.pageContent}>
             <View style={styles.profileInfo}>
-                    <Image source={friend?.profilePicture ? {uri: friend?.profilePicture} : require('../../../assets/user.png')} style={styles.userImage}/>
+                    <Image source={friend?.profilePicture !== "" ? {uri: friend?.profilePicture} : require('../../../assets/user.png')} style={styles.userImage}/>
                     <View style={styles.friendsPosts}>
                         <View>
                             <Text style={[styles.boldText, styles.centeredText]}> {friendsPosts?.length} </Text>
                             <Text style={[styles.text, styles.centeredText]}>posts</Text>
                         </View>
                         <View>
-                            <Text style={[styles.boldText, styles.centeredText]}> {followers.length || 0} </Text>
+                            <Text style={[styles.boldText, styles.centeredText]}> {followers > 0 ? followers : 0} </Text>
+                            {/* <Text style={[styles.boldText, styles.centeredText]}> {friend?.friends?.length} </Text> */}
                             <Text style={[styles.text, styles.centeredText]}>friends</Text>
                         </View>
                     </View>

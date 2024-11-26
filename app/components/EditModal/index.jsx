@@ -24,6 +24,7 @@ export default function EditModal ({visible, setVisible}) {
       }
     
     function updateProfile(e) {
+        console.log("estoy en update profile");
         e.preventDefault();
 
         const newLook = {
@@ -31,6 +32,8 @@ export default function EditModal ({visible, setVisible}) {
             description: description,
             profilePicture: profilePicture,
         };
+
+        console.log("new look: ", newLook);
 
         editProfileLook(auth, user, newLook, updateUser);
         //closeModal();

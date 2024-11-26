@@ -2,11 +2,13 @@ import { SafeAreaView, View, Text, Alert, Modal, StyleSheet, Pressable } from "r
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from "../../Context/AuthContext";
+import { useUser } from "../../Context/UserContext";
 
 export default function ExitModal ({visible, setVisible}) {
     const navigation = useNavigation();
 
     const { auth, logOut } = useAuth();
+    const { logOutUserContext } = useUser();
 
     function goToLogin(){
         setVisible(false)
@@ -16,6 +18,7 @@ export default function ExitModal ({visible, setVisible}) {
     function logingOut() {
         console.log("auth antes: ", auth);
         logOut();
+        logOutUserContext();
         goToLogin();
         console.log("auth después de log out: ", auth);
     }

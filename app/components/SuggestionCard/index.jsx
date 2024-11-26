@@ -14,7 +14,7 @@ export default function SuggestionCard({ profile }){
             <Pressable style={styles.closeButton}>
                 <Icon name='close' size={15} />
             </Pressable>
-            <Image source={profile?.profilePicture ? {uri: profile?.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
+            <Image source={profile?.profilePicture !== "" ? {uri: profile?.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
             <Text style={styles.username}>{profile?.username ? profile.username : "username"}</Text>
             <TouchableOpacity style={styles.viewButton} onPress={goToFriendProfile}>
                 <Text style={styles.viewText}>View</Text>

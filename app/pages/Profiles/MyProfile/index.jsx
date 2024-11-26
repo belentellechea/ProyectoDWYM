@@ -46,7 +46,7 @@ export default function Profile() {
             
             <View style={styles.pageContent}>
                 <View style={styles.profileInfo}>
-                    <Image source={user.profilePicture ? {uri: user?.profilePicture} : require('../../../assets/user.png')} style={styles.userImage}/>
+                    <Image source={user.profilePicture !== "" ? {uri: user?.profilePicture} : require('../../../assets/user.png')} style={styles.userImage}/>
                     <View style={styles.friendsPosts}>
                         <View>
                             <Text style={[styles.boldText, styles.centeredText]}> {user?.posts?.length || 0} </Text>
@@ -60,7 +60,7 @@ export default function Profile() {
                 </View>
                 <View style={styles.infoEdit}>
                     <Text style={styles.boldText}>{user.username ? user.username : "user_name"}</Text>
-                    <Text style={styles.text}>{user.description ? user.description : "user description"}</Text>
+                    <Text style={styles.text}>{user.description ? user.description : ""}</Text>
                     <Pressable style={styles.editButton} onPress={openEditModal}>
                         <Text style={styles.editText}>Edit profile</Text>
                     </Pressable>

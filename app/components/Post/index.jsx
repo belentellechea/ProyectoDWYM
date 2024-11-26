@@ -82,7 +82,7 @@ export default function Post({post, profiles}) {
         <View style={styles.post}>
             <View style={styles.topPost}>
                 <View style={styles.imageAndUser}>
-                    <Image source={profile?.profilePicture ? {uri: profile.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
+                    <Image source={profile?.profilePicture !== "" ? {uri: profile.profilePicture} : require('../../assets/user.png')} style={styles.userImage}/>
                     <Text style={styles.username}>{profile?.username}</Text>
                 </View>
 

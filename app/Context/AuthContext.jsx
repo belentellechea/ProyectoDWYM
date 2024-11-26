@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }) => {
         //localStorage.clear();
         try {
             console.log("asyncStorage1: ", AsyncStorage);
+            setAuth(initialState);
             await AsyncStorage.clear();
             console.log("asyncStorage: ", AsyncStorage);
         } catch (error) {
