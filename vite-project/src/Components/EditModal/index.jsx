@@ -25,17 +25,17 @@ export function EditModal({ setVisibleEdit }) {
 
     const newLook = {
       username: formData.username ? formData.username : user.username,
-      description: formData.description
-        ? formData.description
-        : user?.description,
+      description: formData.description,
       profilePicture: formData.profilePicture
-        ? formData.profilePicture
-        : user?.profilePicture,
     };
+
+    console.log("newLook: ", newLook);
 
     editProfileLook(auth, user, newLook, updateUser);
     closeModal();
   }
+  
+  
 
   return (
     <div className={style.modal}>

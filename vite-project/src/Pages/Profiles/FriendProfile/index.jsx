@@ -39,16 +39,15 @@ export function FriendProfile({
   const { id } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
-
   const [visibleModalCreate, setVisibleModalCreate] = useState(false);
   const [siguiente, setSiguiente] = useState(false);
 
   const [files, setFiles] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
-  const [friend, setFriend] = useState({});
 
+  const [friend, setFriend] = useState({});
   const [doIFollowThem, setDoIFollowThem] = useState(false);
-  console.log("do i follow them: ", doIFollowThem);
+  const [followers, setFollowers] = useState(friend?.friends?.length);
 
   const fetchFriend = async () => {
     try {
@@ -61,30 +60,40 @@ export function FriendProfile({
   };
 
   useEffect(() => {
+    fetchFriend();
     getUser(auth.id, auth.token, updateUser);
     setVisibleModalCreate(false);
-    fetchFriend();
+    
+    console.log("friend renderización after fetch: ", friend);
     setIsLoading(false);
 
     const followUnfollow = user?.friends?.some((f) => f._id == id);
     console.log("do i follow them 2: ", doIFollowThem);
     setDoIFollowThem(followUnfollow);
-    console.log("doIFollowThem 3: ", doIFollowThem);
+    setFollowers(friend?.friends?.length);
+    console.log("setFollowers renderización: ", friend?.friends?.length);
+    console.log("friend profile renderización: ", friend);
   }, []);
 
   function openModal() {
     setVisibleModalCreate("block");
   }
 
-  function followUnFollow() {
+  async function followUnFollow() {
     if (doIFollowThem) {
-      unfollowFriend(auth, friend, removeFriend);
+        setFollowers(followers -1);
+        console.log("followers unfollow: ", followers -1);
+      await unfollowFriend(auth, friend, removeFriend);
       setDoIFollowThem(false);
+      //setFollowers(friend.friends);
     } else {
-      followFriend(auth, friend, addFriend);
+      await followFriend(auth, friend, addFriend);
       setDoIFollowThem(true);
+      //setFollowers(followers.length +1);
+      setFollowers(friend.friends.length);
+      console.log("followers follow: ", friend.friends.length);
     }
-  }
+}
 
   return (
     <>
@@ -146,7 +155,7 @@ export function FriendProfile({
                     <strong>{friend?.posts?.length || 0}</strong> posts
                   </p>
                   <p>
-                    <strong>{friend?.friends?.length || 0}</strong> friends
+                    <strong>{followers > 0 ? followers : 0}</strong> friends
                   </p>
                 </div>
                 <p>{friend?.description}</p>

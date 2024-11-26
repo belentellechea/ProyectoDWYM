@@ -5,6 +5,7 @@ import "./ProfilePreView.css";
 import { Avatar } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import image from "../../assets/user.png";
 
 export function ProfilePreView({ profile }) {
 
@@ -21,7 +22,7 @@ export function ProfilePreView({ profile }) {
           <CloseOutlined />
         </div>
       </div>
-      <Avatar size={60} src={profile.profilePicture} />
+      <Avatar size={60} src={profile.profilePicture ? profile.profilePicture : image} />
       <p className="userName"> {profile.username} </p>
       <button className="button is-link button_viewProfile" onClick={viewProfile}> View </button>
     </div>

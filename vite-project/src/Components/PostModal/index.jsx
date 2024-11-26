@@ -10,6 +10,8 @@ import { useAuth } from "../../Context/AuthContext";
 import { IoClose } from "react-icons/io5";
 import { likePost, postComment, unLike } from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
+import { Commentt } from "../Commentt";
+import image from "../../assets/user.png";
 
 import {
   CommentOutlined,
@@ -31,6 +33,9 @@ export function PostModal({
 
   const doILikeThis = post.likes.includes(auth.id);
   const [heartIcon, setHeartIcon] = useState(doILikeThis);
+  const [likes, setLikes] = useState(post.likes);
+  const [comments, setComments] = useState(post.comments);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     fetchAllUsers();
@@ -51,16 +56,29 @@ export function PostModal({
   function likeUnLike() {
     if (heartIcon) {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => prev.filter((id) => id !== auth.id));
       unLike(post, auth, updatePost);
     } else {
       setHeartIcon(!heartIcon);
+      setLikes((prev) => [...prev, auth.id]);
       likePost(post, auth, updatePost);
     }
   }
 
+  async function publishComment() {
+    console.log("commentt ",comment);
+    console.log("post, ", post);
+    const newComment = await postComment(post, auth, comment, updatePost);
+    setComments((prev) => [...prev, newComment._id]);
+    setComment("");
+  }
+
+
   useEffect(() => {
     setHeartIcon(doILikeThis);
-  }, [post]);
+    setLikes(post.likes);
+    setComments(post.comments);
+  }, [post, post.comments]);
 
   return (
     <div className={styles.modal}>
@@ -79,14 +97,12 @@ export function PostModal({
           <div className={styles.rightColumn}>
             <div className={styles.rightTop}>
               <div className={styles.avatarYNombre}>
-                {/* <Avatar size="small" className="avatarIcon" icon={<UserOutlined />} /> */}
                 <Avatar
                   size={40}
                   className="avatarIcon"
-                  src={user?.profilePicture}
-                  icon={!user?.profilePicture && <UserOutlined />}
+                  src={user?.profilePicture ? user?.profilePicture : image}
                 />
-                {/* <p className="title is-6"> Profile Name </p> */}
+                
                 <p className="title is-6">
                   {" "}
                   {user?.username ? user.username : "Profile Name"}{" "}
@@ -95,29 +111,12 @@ export function PostModal({
               <MoreOutlined id="moreOutlined" style={{ fontSize: 25 }} />
             </div>
             <div className={styles.postComments}>
-              {/* <PostBottom post={post}></PostBottom> */}
+              <span className={styles.caption}> <strong> @{user?.username}  </strong> <span>{post?.caption}</span> </span>
               <div className={styles.commentsList}>
-                {post?.comments?.map((comment) => (
-                  <p> {comment} </p>
+                
+                {comments?.map((comment) => (
+                  <Commentt comment={comment} post={post} setComments={setComments} >  </Commentt>
                 ))}
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
-                <p>
-                  <strong> user_name </strong> hola{" "}
-                </p>
               </div>
               <div className={styles.commentsAndLikes}>
                 <div className={styles.likes}>
@@ -146,7 +145,7 @@ export function PostModal({
                   </div>
                   <div className={styles.likesCount}>
                     <p>
-                      <strong> {post?.likes.length} likes</strong>
+                      <strong> {likes.length} likes</strong>
                     </p>
                   </div>
                 </div>
@@ -155,12 +154,12 @@ export function PostModal({
                     className={styles.commentInput}
                     type="text"
                     placeholder="Add a comment..."
-                    //value={comment}
-                    //   onChange={(e) => setComment(e.target.value)}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
                   ></input>
                   <RightOutlined
                     className={styles.sendButton}
-                    //   onClick={publishComment}
+                    onClick={publishComment}
                   />
                 </form>
               </div>

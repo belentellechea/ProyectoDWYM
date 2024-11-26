@@ -42,7 +42,6 @@ export function PostBottom({ post }) {
     console.log("post, ", post);
     const newComment = await postComment(post, auth, comment, updatePost);
     setComments((prev) => [...prev, newComment]);
-    //postComment(post, auth, comment, updatePost);
     setComment("");
   }
 
@@ -111,10 +110,6 @@ export function PostBottom({ post }) {
             transition: "0.8s",
             overflow: "hidden",
           }} // Ajusta el valor según la altura del contenido}}
-          // style={{
-          //   maxHeight: visible === "visible" ? "200px" : "0px", // Ajusta el valor según la altura del contenido
-          //   transition: "0.5s",
-          // }}
         >
           <div
             className="listaComentarios"
@@ -124,30 +119,9 @@ export function PostBottom({ post }) {
               padding: "5px",
             }}
           >
-            {/* {post?.comments?.map((commentt) => (
-              // <Commentt commentt={commentt} />
-            ))} */}
             {comments.map((comment) => (
-              <Commentt comment={comment} post={post}/>
+              <Commentt comment={comment._id} post={post} setComments={setComments}/>
             ))}
-            {/* <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p>
-            <p>
-              <strong> user_name </strong> hola{" "}
-            </p> */}
           </div>
           <form className="commentSend">
             <input

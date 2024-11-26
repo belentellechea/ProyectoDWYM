@@ -27,6 +27,7 @@ export function Grid({ posts }) {
                 setCurrentPostId(post._id);
                 setIsPostModalActive(true);
                 setPost(post);
+                console.log("post para postModal: ", post);
               }}
             />
           </>

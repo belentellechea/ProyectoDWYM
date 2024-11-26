@@ -16,6 +16,7 @@ export default function FriendProfile({ route }) {
 
     const [addVisible, setAddVisible] = useState(false);
     const [friendsPosts, setFriendsPosts] = useState([]);
+    
     const [doIFollowThem, setDoIFollowThem] = useState(false);
     const [followers, setFollowers] = useState(friend?.friends?.length);
 
