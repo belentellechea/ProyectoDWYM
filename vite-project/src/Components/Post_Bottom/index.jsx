@@ -120,7 +120,7 @@ export function PostBottom({ post }) {
             }}
           >
             {comments.map((comment) => (
-              <Commentt comment={comment._id} post={post}/>
+              <Commentt comment={comment._id} post={post} setComments={setComments}/>
             ))}
           </div>
           <form className="commentSend">

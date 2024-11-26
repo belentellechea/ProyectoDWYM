@@ -73,11 +73,12 @@ export function PostModal({
     setComment("");
   }
 
+
   useEffect(() => {
     setHeartIcon(doILikeThis);
     setLikes(post.likes);
     setComments(post.comments);
-  }, [post]);
+  }, [post, post.comments]);
 
   return (
     <div className={styles.modal}>
@@ -114,7 +115,7 @@ export function PostModal({
               <div className={styles.commentsList}>
                 
                 {comments?.map((comment) => (
-                  <Commentt comment={comment} post={post}>  </Commentt>
+                  <Commentt comment={comment} post={post} setComments={setComments} >  </Commentt>
                 ))}
               </div>
               <div className={styles.commentsAndLikes}>
