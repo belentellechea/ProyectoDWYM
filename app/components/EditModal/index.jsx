@@ -2,29 +2,19 @@ import {View, Text, Modal, StyleSheet, Pressable, TextInput } from "react-native
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from "../../Context/UserContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
-import { editProfileLook, getUser } from "../../Services/userService";
+import { editProfileLook } from "../../Services/userService";
 
 export default function EditModal ({visible, setVisible}) {
     const { user, updateUser } = useUser();
     const { auth } = useAuth();
 
-    const navigation = useNavigation();
     const [username, setUsername] = useState(user?.username ? user.username : "");
     const [profilePicture, setProfilePicture] = useState(user.profilePicture ? user.profilePicture : "");
     const [description, setDescription] = useState(user.description ? user.description : "");
-
-    // useEffect(() => {
-    //     getUser(auth.id, auth.token);
-    // }, []);
-
-    function closeModal() {
-        setVisibleEdit(false);
-      }
     
     function updateProfile(e) {
-        console.log("estoy en update profile");
         e.preventDefault();
 
         const newLook = {
@@ -33,10 +23,7 @@ export default function EditModal ({visible, setVisible}) {
             profilePicture: profilePicture,
         };
 
-        console.log("new look: ", newLook);
-
         editProfileLook(auth, user, newLook, updateUser);
-        //closeModal();
         setVisible(!visible);
     }
     

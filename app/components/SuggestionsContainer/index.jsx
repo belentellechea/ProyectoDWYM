@@ -1,13 +1,11 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SuggestionCard from "../SuggestionCard";
 import { useAuth } from "../../Context/AuthContext";
-import { useUser } from "../../Context/UserContext";
 import { getAllProfiles } from "../../Services/userService";
 import { useEffect, useState } from "react";
 
 export default function SuggestionsContainer({profiles}){
     const { auth } = useAuth();
-    const { user } = useUser();
 
     const [allUsers, setAllUsers] = useState([]);
     

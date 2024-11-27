@@ -1,5 +1,5 @@
 import styles from "./ModalPreview.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Avatar } from "antd";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
@@ -32,7 +32,7 @@ export function ModalPreview({ setSiguiente, files, setFiles }) {
           <h1 className={styles.titleCreate}> Create new post </h1>
           <button className={styles.compartir} onClick={() => compartir()}>
             {" "}
-            Compartir
+            Share
           </button>
         </div>
         <div className={styles.columns}>

@@ -1,16 +1,11 @@
-import { useState, useEffect, createContext } from "react";
+import { useState } from "react";
 import "./App.css";
 import { Login } from "./Pages/Login";
 import { Home } from "./Pages/Home";
 import { MyProfile } from "./Pages/Profiles/MyProfile";
 import { FriendProfile } from "./Pages/Profiles/FriendProfile";
 import { CreateAccount } from "./Pages/CreateAccount";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import { UserProvider } from "./Context/UserContext.jsx";
 

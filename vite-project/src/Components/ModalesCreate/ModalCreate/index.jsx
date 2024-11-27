@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import foto from "../../../assets/create.png";
-import { ModalPreview } from "../ModalPreview";
 import styles from "./Modal.module.css";
 
 export function ModalCreate({ setFiles, setVisibleModalCreate, setSiguiente }) {

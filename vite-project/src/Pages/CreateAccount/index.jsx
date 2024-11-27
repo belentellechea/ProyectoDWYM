@@ -3,10 +3,9 @@ import { useAuth } from "../../Context/AuthContext.jsx";
 import { postAccount } from "../../Services/authService";
 import style from "./CreateAccount.module.css";
 
-const url = "http://localhost:3001/api/auth/register";
 
 export function CreateAccount() {
-  const { auth, updateAuth } = useAuth();
+  const { updateAuth } = useAuth();
 
   const navigate = useNavigate();
 
@@ -23,7 +22,6 @@ export function CreateAccount() {
       password: document.getElementById("passwordInput").value,
     };
 
-    //postAccount(account, updateAuth);
     const success = postAccount(account, updateAuth);
     if (success) navigate("/home");
   }
@@ -31,12 +29,12 @@ export function CreateAccount() {
   return (
     <div className={style.registerBackground}>
       <div className={style.formBackground}>
-        <h2 className={style.registerTitle}>Creación de cuenta</h2>
+        <h2 className={style.registerTitle}>Create account</h2>
         <form id={style.registerForm} onSubmit={handleSubmit}>
           <div className={style.inputDiv}>
             <div className={style.registerLabel}>
               <label className="label">
-                <strong>Correo electrónico</strong>
+                <strong>Email</strong>
               </label>
               <div>
                 <input className="input" type="email" id="emailInput" />
@@ -45,7 +43,7 @@ export function CreateAccount() {
 
             <div className={style.registerLabel}>
               <label className="label">
-                <strong>Nombre de usuario</strong>
+                <strong>Username</strong>
               </label>
               <div>
                 <input className="input" type="text" id="usernameInput" />
@@ -54,7 +52,7 @@ export function CreateAccount() {
 
             <div className={style.registerLabel}>
               <label className="label">
-                <strong>Contraseña</strong>
+                <strong>Password</strong>
               </label>
               <div>
                 <input className="input" type="password" id="passwordInput" />
@@ -68,14 +66,14 @@ export function CreateAccount() {
               className="button is-danger"
               type="submit"
             >
-              Crear
+              Create
             </button>
             <button
               id={style.buttonCancelAccount}
               className="button cancel-button"
               onClick={goToLogin}
             >
-              Cancelar
+              Cancel
             </button>
           </div>
         </form>

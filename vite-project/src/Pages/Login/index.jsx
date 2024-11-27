@@ -7,10 +7,9 @@ import { useAuth } from "../../Context/AuthContext.jsx";
 import { loginAccount } from "../../Services/authService";
 import style from "./Login.module.css";
 
-const url = "http://localhost:3001/api/auth/login";
 
 export function Login() {
-  const { auth, updateAuth } = useAuth();
+  const { updateAuth } = useAuth();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -37,7 +36,6 @@ export function Login() {
     <div className={style.loginBackground}>
       <div className={style.loginDiv}>
         <img src={logo} className={style.logo} alt="Logo fakestagram" />
-        {/* <h1 className="title is-1"> Fakestagram </h1> */}
 
         <form className={style.formDiv}>
           <div className={style.loginLabel}>

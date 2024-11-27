@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Text, Alert, Modal, StyleSheet, Pressable } from "react-native";
+import { View, Text, Modal, StyleSheet, Pressable } from "react-native";
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from "../../Context/AuthContext";
@@ -16,11 +16,9 @@ export default function ExitModal ({visible, setVisible}) {
     }
 
     function logingOut() {
-        console.log("auth antes: ", auth);
         logOut();
         logOutUserContext();
         goToLogin();
-        console.log("auth después de log out: ", auth);
     }
     
     return(

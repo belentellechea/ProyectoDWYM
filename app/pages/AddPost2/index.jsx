@@ -26,10 +26,8 @@ export default function AddPost2(){
     }
 
     function sharePost() {
-        console.log("estoy en sharePost 1");
         uploadPost(image, caption, addPost, auth);
         goToFeed();
-        console.log("estoy en sharePost 2");
     }
 
     return (

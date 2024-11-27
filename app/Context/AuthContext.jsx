@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthContext = createContext();
@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const [auth, setAuth] = useState(() => {
-        //const storedAuth = localStorage.getItem("auth");
         const storedAuth = loadStoredAuth();
         return storedAuth ? storedAuth : initialState;
     });
@@ -38,17 +37,12 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error('Error al guardar auth:', error);
         }
-        //localStorage.setItem('auth', JSON.stringify(newAuth));
     }
 
     const logOut = async () => {
-        //localStorage.removeItem('auth');
-        //localStorage.clear();
         try {
-            console.log("asyncStorage1: ", AsyncStorage);
             setAuth(initialState);
             await AsyncStorage.clear();
-            console.log("asyncStorage: ", AsyncStorage);
         } catch (error) {
             console.error('Error al cerrar sesión:', error);
         }

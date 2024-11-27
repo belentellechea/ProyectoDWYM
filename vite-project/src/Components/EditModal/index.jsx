@@ -4,10 +4,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { editProfileLook } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
 import { useUser } from "../../Context/UserContext";
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
 
 export function EditModal({ setVisibleEdit }) {
-  const { auth, updateAuth } = useAuth();
+  const { auth } = useAuth();
   const { user, updateUser } = useUser();
 
   const [formData, setFormData] = useState({

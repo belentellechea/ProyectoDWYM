@@ -1,11 +1,8 @@
 import React from "react";
-import { Layout } from "antd";
-import { SiderContent } from "../../Components/SiderContent";
 import { Notification } from "../../Components/Notification";
 import styles from "./NotificationsModal.module.css";
 import { CloseOutlined } from "@ant-design/icons";
 
-const { Sider, Content } = Layout;
 
 export function NotificationsModal({ isActive, closeNotifications }) {
   const hardcodedNots = [

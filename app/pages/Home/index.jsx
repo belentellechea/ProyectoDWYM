@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import BottomBarTabs from '../../components/Bars/BottomBarTabs';
 import TopBarTabs from '../../components/Bars/TopBarTabs';
-import CreatePostModal from '../../components/CreatePostModal';
 import PostContainer from '../../components/PostContainer';
 
 export default function Home() {

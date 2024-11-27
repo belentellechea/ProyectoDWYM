@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Pressable, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Icon2 from '@expo/vector-icons/Ionicons';

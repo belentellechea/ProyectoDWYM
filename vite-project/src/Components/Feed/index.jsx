@@ -13,7 +13,6 @@ export function Feed({ users }) {
     try {
       const data = await getFeed(auth);
       setFeed(data);
-      console.log("print feed: ", data);
     } catch (error) {
       console.error("Error fetching feed:", error);
     }
@@ -24,9 +23,7 @@ export function Feed({ users }) {
     console.log("print feed: ", feed);
   }, []);
 
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
+
 
   return (
     <div className={style.divFeed}>

@@ -5,15 +5,13 @@ export const uploadPost = async (imageUrl, caption, addPost, auth) => {
     console.log("image:", imageUrl);
     console.log("caption:", caption);
     const formData = new FormData();
-    //formData.append("image", imageUrl);
+
     formData.append("image", {
         uri: imageUrl,
-        name: 'photo.jpg', // Nombre que quieres darle
-        type: 'image/jpeg', // Tipo MIME
+        name: 'photo.jpg',
+        type: 'image/jpeg',
     });
     formData.append("caption", caption);
-
-    console.log("formData:", formData);
 
     try {
         const response = await fetch( url+`/api/posts/upload`, {
@@ -24,10 +22,8 @@ export const uploadPost = async (imageUrl, caption, addPost, auth) => {
             body: formData
         });
         const data = await response.json();
-        console.log("data respuesta post");
-        console.log(data);
+        console.log("data respuesta post: ", data);
 
-        //verificar que data devuelva el post!!!
         addPost(data);
 
     } catch (error) {
@@ -116,8 +112,6 @@ export const postComment = async (post, auth, content, updatePost) => {
 
         if (!response.ok) throw new Error("Error en la respuesta");
         updatePost(post, data);
-
-        console.log("data post comment 2: ", data);
 
         return data;
 
