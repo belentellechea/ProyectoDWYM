@@ -11,7 +11,6 @@ export default function Post({post, profiles}) {
     const { auth } = useAuth();
     const { updatePost } = useUser();
 
-    //const [isLiked, setIsLiked] = useState(false); 
     const [showComments, setShowComments] = useState(false); 
     const [tapCount, setTapCount] = useState(0); 
 
@@ -24,10 +23,6 @@ export default function Post({post, profiles}) {
     const profile = profiles?.find((profile) => profile._id == post.user._id);
 
     const scale = useRef(new Animated.Value(1)).current;
-
-    const handleLike = () => {
-        setIsLiked(prevState => !prevState); 
-    }
 
     function likeUnLike() {
         if (isLiked) {
@@ -50,7 +45,6 @@ export default function Post({post, profiles}) {
 
     const handleDoubleTap = () => {
         if (tapCount === 1) { //al hacer double tap
-            //setIsLiked(prevState => !prevState); 
             likeUnLike();
             setTapCount(0); 
 

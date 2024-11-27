@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { PostModal } from "../PostModal";
 import style from "./Style.module.css";
-import { useUser } from "../../Context/UserContext";
 
 export function Grid({ posts }) {
   const [isPostModalActive, setIsPostModalActive] = useState(false);
@@ -12,7 +11,6 @@ export function Grid({ posts }) {
     console.log("posts que recibe grid: ", posts);
   }, []);
 
-  const { user } = useUser();
 
   return (
     <div className={style.photoGrid}>

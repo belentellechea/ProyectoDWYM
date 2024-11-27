@@ -14,12 +14,9 @@ export function Commentt({ comment, post, setComments }) {
     const fetchComment = async () => {
         const commentt = await getSpecificComment(comment, auth);
         setComm(commentt);
-        console.log("COMM ",comm);
     }
 
     useEffect(() => {
-        console.log("auth en comment: ", auth);
-        console.log("comment in commentt: ", comment);
         fetchComment();
     }, []);
 
@@ -35,7 +32,6 @@ export function Commentt({ comment, post, setComments }) {
             <span className={styles.content}>{comm?.content}</span>
             <DeleteOutlined
                 className={styles.deleteIcon}
-                // onClick={() => deleteComment(post, comm, updatePost, auth)}
                 onClick={deleteCommentHandler}
             />
         </p>

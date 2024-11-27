@@ -1,11 +1,9 @@
 import { ProfilePhoto } from "../../../Components/ProfilePhoto";
 import { Grid } from "../../../Components/Grid";
-import { Layout } from "antd";
 import { SiderContent } from "../../../Components/SiderContent";
 import image from "../../../assets/user.png";
 import { NotificationsModal } from "../../../Components/NotificationsModal";
 import { useState, useEffect } from "react";
-import { ParentModalCreate } from "../../../Components/ModalesCreate/ParentModalCreate";
 import { EditModal } from "../../../Components/EditModal";
 import { useUser } from "../../../Context/UserContext";
 import { useAuth } from "../../../Context/AuthContext";
@@ -14,20 +12,11 @@ import stylesHome from "../../Home/Home.module.css";
 import styles from "./MyProfile.module.css";
 import { ModalCreate } from "../../../Components/ModalesCreate/ModalCreate/index.jsx";
 import { ModalPreview } from "../../../Components/ModalesCreate/ModalPreview/index.jsx";
-
-import {
-  MenuOutlined,
-  SettingFilled,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { SettingOutlined } from "@ant-design/icons";
 import { ConfigurationModal } from "../../../Components/ConfigurationModal/index.jsx";
 
-export function MyProfile({
-  openNotifications,
-  closeNotifications,
-  isNotificationsActive,
-}) {
-  const { auth, updateAuth } = useAuth();
+export function MyProfile({ openNotifications, closeNotifications, isNotificationsActive }) {
+  const { auth } = useAuth();
   const { user, updateUser } = useUser();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +84,7 @@ export function MyProfile({
               <div className={styles.rightInfo}>
                 <div className={styles.nameEdit}>
                   <h1 className={styles.profileName}>
-                    {user?.username ? user.username : "nombre_usuario"}
+                    {user?.username ? user.username : "username"}
                   </h1>
                   <div className={styles.buttonSettings}>
                     <button
@@ -141,12 +130,6 @@ export function MyProfile({
           )}
 
           {visibleModalCreate && (
-            // <ParentModalCreate
-            //   files={files}
-            //   visible={visibleModalCreate}
-            //   setVisible={setVisibleModalCreate}
-            //   setFiles={setFiles}
-            // />
 
             <ModalCreate
               setFiles={setFiles}

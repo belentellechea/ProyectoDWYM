@@ -82,9 +82,6 @@ export const editProfileLook = async (auth, user, newLook, updateUser) => {
         friends: user?.friends,
         posts: user?.posts,
       }
-    console.log("estoy en editProfileLook")
-    console.log(newLook);
-    console.log(updatedUser)
 
       updateUser(updatedUser);
 

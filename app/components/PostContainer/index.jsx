@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import Post from "../Post";
 import SuggestionsContainer from "../SuggestionsContainer";
 import { useAuth } from "../../Context/AuthContext";
@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import { getAllProfiles } from "../../Services/userService";
 
 export default function PostContainer( ){
-//se puede optimizar a FlatList para que solo se 
-//renderizen los elementos en pantalla
     const { auth } = useAuth();
     const { user } = useUser();
 

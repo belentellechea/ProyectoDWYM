@@ -1,6 +1,4 @@
 import React from "react";
-import { Card } from "primereact/card";
-import { Button } from "primereact/button";
 import "./ProfilePreView.css";
 import { Avatar } from "antd";
 import { CloseOutlined } from "@ant-design/icons";

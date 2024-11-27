@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./PostModal.module.css";
-import { Post } from "../Post";
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
-import { PostBottom } from "../Post_Bottom";
 import { getAllProfiles } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
 import { IoClose } from "react-icons/io5";
@@ -12,21 +9,10 @@ import { likePost, postComment, unLike } from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
 import { Commentt } from "../Commentt";
 import image from "../../assets/user.png";
+import { HeartFilled, HeartOutlined, RightOutlined } from "@ant-design/icons";
 
-import {
-  CommentOutlined,
-  HeartFilled,
-  HeartOutlined,
-  RightOutlined,
-  SendOutlined,
-} from "@ant-design/icons";
+export function PostModal({ post, setIsPostModalActive }) {
 
-export function PostModal({
-  post,
-  isActive,
-  currentPost,
-  setIsPostModalActive,
-}) {
   const { updatePost } = useUser();
   const { auth } = useAuth();
   const [allUsers, setAllUsers] = useState([]);
@@ -45,7 +31,6 @@ export function PostModal({
     try {
       const data = await getAllProfiles(auth);
       setAllUsers(data);
-      console.log("print users: ", allUsers);
     } catch (error) {
       console.error("Error fetching feed:", error);
     }
@@ -66,8 +51,6 @@ export function PostModal({
   }
 
   async function publishComment() {
-    console.log("commentt ",comment);
-    console.log("post, ", post);
     const newComment = await postComment(post, auth, comment, updatePost);
     setComments((prev) => [...prev, newComment._id]);
     setComment("");

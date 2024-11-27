@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, Pressable} from "react-native"
+import { View, StyleSheet, TextInput, Pressable} from "react-native"
 import Icon from '@expo/vector-icons/Feather';
 import Comment from "../Comment";
 import { useEffect, useState } from "react";
@@ -14,12 +14,8 @@ export default function CommentSection({ post }){
     const [comment, setComment] = useState("");
 
     async function publishComment() {
-        console.log("commentt ",comment);
-        console.log("post, ", post);
         const newComment = await postComment(post, auth, comment, updatePost);
-        console.log("hola, se supone que acabo de comentar");
         setComments((prev) => [...prev, newComment]);
-        //postComment(post, auth, comment, updatePost);
         setComment("");
     }
 

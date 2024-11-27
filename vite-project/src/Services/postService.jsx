@@ -1,13 +1,8 @@
 
 export const uploadPost = async (imageUrl, caption, addPost, auth) => {
-
-    console.log("image:", imageUrl);
-    console.log("caption:", caption);
     const formData = new FormData();
     formData.append("image", imageUrl);
     formData.append("caption", caption);
-
-    console.log("formData:", formData);
 
     try {
         const response = await fetch(`http://localhost:3001/api/posts/upload`, {
@@ -18,10 +13,8 @@ export const uploadPost = async (imageUrl, caption, addPost, auth) => {
             body: formData
         });
         const data = await response.json();
-        console.log("data respuesta post");
-        console.log(data);
+        console.log("data respuesta post: ", data);
 
-        //verificar que data devuelva el post!!!
         addPost(data);
 
     } catch (error) {
@@ -119,8 +112,6 @@ export const postComment = async (post, auth, content, updatePost) => {
 }
 
 export const deleteComment = async (post, comment, updatePost, auth) => {
-    console.log("comment en deleteComment: ", comment);
-    console.log("post en deleteComment: ", post);
 
     try {
         const response = await fetch(`http://localhost:3001/api/posts/${post._id}/comments/${comment._id}`, {

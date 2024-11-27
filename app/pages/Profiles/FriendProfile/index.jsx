@@ -1,7 +1,6 @@
-import { SafeAreaView, StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import TopBarTabs from '../../../components/Bars/TopBarTabs';
 import { useState, useEffect } from 'react';
-import CreatePostModal from '../../../components/CreatePostModal';
 import BottomBarTabs from '../../../components/Bars/BottomBarTabs';
 import PhotoGrid from '../../../components/PhotoGrid';
 import { followFriend, getUser, unfollowFriend } from '../../../Services/userService';
@@ -46,11 +45,9 @@ export default function FriendProfile({ route }) {
             setFollowers(followers.length -1);
           await unfollowFriend(auth, friend, removeFriend);
           setDoIFollowThem(false);
-          //setFollowers(friend.friends);
         } else {
           await followFriend(auth, friend, addFriend);
           setDoIFollowThem(true);
-          //setFollowers(followers.length +1);
           setFollowers(friend.friends.length);
         }
     }
@@ -76,7 +73,6 @@ export default function FriendProfile({ route }) {
                         </View>
                         <View>
                             <Text style={[styles.boldText, styles.centeredText]}> {followers > 0 ? followers : 0} </Text>
-                            {/* <Text style={[styles.boldText, styles.centeredText]}> {friend?.friends?.length} </Text> */}
                             <Text style={[styles.text, styles.centeredText]}>friends</Text>
                         </View>
                     </View>

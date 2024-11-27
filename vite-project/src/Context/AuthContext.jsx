@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { createContext, useContext, useReducer, useEffect } from "react";
-import {jwtDecode} from "jwt-decode";
+import { createContext, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -17,19 +16,6 @@ export const AuthProvider = ({ children }) => {
         id: ""
     }
 
-    // const decodeToken = (storedAuth) => {
-    //     //const token = JSON.parse(storedAuth).token;
-    //     try {
-    //         const parsedAuth = JSON.parse(storedAuth);
-    //         token = parsedAuth.token || storedAuth;
-    //         const decoded = jwtDecode(token);
-    //         console.log("Token decodificado:", decoded);
-    //         return decoded;
-    //     } catch (error) {
-    //         console.error("Error al decodificar el token:", error.message);
-    //     }
-    // }
-
     const [auth, setAuth] = useState(() => {
         const storedAuth = localStorage.getItem("auth");
         return storedAuth ? JSON.parse(storedAuth) : initialState;
@@ -37,13 +23,10 @@ export const AuthProvider = ({ children }) => {
 
     const updateAuth = (newAuth) => {
         setAuth(newAuth);
-        // console.log("storaged auth in context: ", newAuth);
-        // console.log(decodeToken(newAuth.token));
         localStorage.setItem('auth', JSON.stringify(newAuth));
     }
 
     const logOut = () => {
-        //localStorage.removeItem('auth');
         localStorage.clear();
     }
 

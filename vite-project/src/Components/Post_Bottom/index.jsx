@@ -1,14 +1,8 @@
 import { theme } from "antd";
-import {
-  CommentOutlined,
-  HeartFilled,
-  HeartOutlined,
-  RightOutlined,
-  SendOutlined,
-} from "@ant-design/icons";
+import { CommentOutlined, HeartFilled, HeartOutlined, RightOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./PostBottom.css";
-import { getSpecificComment, likePost, postComment, unLike } from "../../Services/postService";
+import { likePost, postComment, unLike } from "../../Services/postService";
 import { useUser } from "../../Context/UserContext";
 import { useAuth } from "../../Context/AuthContext";
 import { Commentt } from "../Commentt";
@@ -21,7 +15,6 @@ export function PostBottom({ post }) {
   const [heartIcon, setHeartIcon] = useState(doILikeThis);
   const [likes, setLikes] = useState(post.likes);
   const [comments, setComments] = useState(post.comments);
-  const [messageIcon, setMessageIcon] = useState(true);
   const [visible, setVisible] = useState("hidden");
   const [comment, setComment] = useState("");
 
@@ -38,8 +31,6 @@ export function PostBottom({ post }) {
   }
 
   async function publishComment() {
-    console.log("commentt ",comment);
-    console.log("post, ", post);
     const newComment = await postComment(post, auth, comment, updatePost);
     setComments((prev) => [...prev, newComment]);
     setComment("");

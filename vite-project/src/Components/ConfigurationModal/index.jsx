@@ -1,10 +1,6 @@
-import { useState } from "react";
 import style from "./Styles.module.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { editProfileLook } from "../../Services/userService";
 import { useAuth } from "../../Context/AuthContext";
-import { useUser } from "../../Context/UserContext";
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 export function ConfigurationModal({ setVisibleConfig }) {

@@ -1,8 +1,7 @@
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from "react-native"
+import { StyleSheet, SafeAreaView, ScrollView } from "react-native"
 import TopBarTabs from "../../components/Bars/TopBarTabs"
 import BottomBarTabs from "../../components/Bars/BottomBarTabs"
 import { useState } from "react"
-import CreatePostModal from "../../components/CreatePostModal"
 import Notification from "../../components/Notification"
 
 export default function Notifications(){

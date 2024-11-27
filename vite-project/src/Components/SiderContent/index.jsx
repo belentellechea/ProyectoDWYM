@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Tabs, Menu, ConfigProvider } from "antd";
+import { Menu, ConfigProvider } from "antd";
 import "./SiderContent.css";
 import logo from "../../assets/logoSider2.png";
 import logoColapsado from "../../assets/logo_Collapsed.png";
-
-import {
-  HomeFilled,
-  HeartOutlined,
-  PlusSquareOutlined,
-  QqOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-
+import { HomeFilled, HeartOutlined, PlusSquareOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export function SiderContent({
@@ -85,7 +77,6 @@ export function SiderContent({
       openSideBar();
     } else if (key === "NotificationsTab") {
       closeSideBar();
-      //navigate("/notifications");
       openNotifications();
     } else if (key === "CreateTab") {
       openModal();
